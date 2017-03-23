@@ -1,6 +1,6 @@
 # University
 
-Studia na Uniwersytecie Wrocławskim (2013-dziś)
+Studia na Uniwersytecie Wrocławskim (2014-dziś)
 
 ## Inżynierskie
 
