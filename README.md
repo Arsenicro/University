@@ -13,6 +13,7 @@ Lato 2015 (Semestr 2):
 Zima 2015 (Semestr 3):
 
 - Kurs WWW: Memory game (JS + HTML + CSS)
+- Systemy operacyjne: Synchronizacja procesów z użyciem semaforów (C)
 
 Lato 2016 (semestr 4):
 
