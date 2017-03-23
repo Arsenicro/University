@@ -1,4 +1,4 @@
-##  Traceroute
+##  Traceroute (C)
 
 Program traceroute napisany na zajêcia z sieci komputerowych (semestr letni 2016).
 

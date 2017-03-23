@@ -1,4 +1,4 @@
-## Serwer WWW
+## Serwer WWW (C++)
 
 Prosty server WWW napisany na zajêcia z sieci komputerowych (semestr letni 2016).
 

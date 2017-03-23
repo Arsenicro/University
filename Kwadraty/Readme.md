@@ -1,4 +1,4 @@
-## Kwadraty
+## Kwadraty (Haskell)
 
 Zadanie Kwadraty wykonane na zajêcia z metod programowania (semestr letni 2015)
 
