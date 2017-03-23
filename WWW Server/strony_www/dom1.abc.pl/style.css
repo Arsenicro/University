@@ -1,0 +1,136 @@
+body {
+  background-color: #FFFFFF;
+  color: #000000;
+  font-size: medium;
+  font-family: sans-serif;
+}
+body a {
+  color: #376298; 
+  text-decoration: none;
+}
+body a:hover {
+  text-decoration: underline;
+}
+
+#photo {
+  width: 150px;
+  float: right;
+  padding: 3px;
+  margin: 0px;
+}
+
+#main { 
+  width: 900px;
+  margin-left: auto; 
+  margin-right: auto;
+}
+#header { 
+  text-align: right; 
+  padding-right: 3px;
+}
+.hr_line {
+  background-color: #dddddd;
+  width: 900px; 
+  height: 5px;
+  clear: both;
+  line-height: 5px;
+}
+#menu {
+  padding-left: 3px;
+  float: left;
+}
+#language_select {
+  padding-right: 3px;
+  float: right;
+}
+#language_select img {
+  border: 1px solid #376298;
+  margin-top: 1px;
+  margin-bottom: -2px;
+}
+#borderless img {
+  border: 0px;
+}
+#content {
+  width: 900px;
+  padding: 3px;
+  margin-top: 2px;
+  margin-bottom: -5px;
+}
+h2 {
+  font-size: medium;
+  font-weight: bold;
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: 1em;
+  margin-top: 1.2em;
+}
+h3 {
+  font-size: medium;
+  font-weight: bold;
+  margin: 0px;
+  padding: 0px;
+}
+
+.emphasize {
+  font-size: medium;
+  font-weight: bold;
+  margin-left: 15px;
+  padding: 3px 15px 3px 15px;
+  background-color: #376298;
+  color: #fff;
+}
+.emph {
+  font-size: medium;
+  font-weight: bold;
+  padding: 2px;
+  background-color: #376298;
+  color: #fff;
+}
+.emphasize a { color: #fff; }
+.verb { font-family: courier; }
+
+p {
+  margin-top: 0px;
+  padding-left: 15px;
+  margin-bottom: 1em;
+}
+.indent { padding-left: 15px; }
+li      { list-style: square outside; }
+li.sep  { margin-top: 1em; }
+ul {
+  padding-bottom: 1em;
+  padding-left: 20px;
+  margin-left: 10px;
+}
+ul.nobspace {
+  padding-left: 20px;
+  margin-left: 10px;
+}
+ol li { list-style-type: decimal; }
+li ul {
+  padding-bottom: 0px;
+  padding-left: 20px;
+  margin-left: 10px;
+}
+table { border-collapse: collapse; }
+td {
+	border: inset 1px #000;
+	padding: 3px;
+	text-align: center;
+	margin: 0px;
+}
+td.left {
+	border: inset 1px #000;
+	padding: 3px;
+	text-align: left;
+	margin: 0px;
+}
+th {
+	border: inset 1px #000;
+	padding: 3px;
+	text-align: center;
+	font-weight: bold;
+}
+th.none { border: 0px; }
+

@@ -3,7 +3,7 @@
 /*
 Kamil Matuszewski, 272331.
 
-Program traceroute napisany na zajęcia z sieci komputerowych (semestr letni 2016). Szczegóły zadania w pliku p1 pdf.
+Program traceroute napisany na zajęcia z sieci komputerowych (semestr letni 2016). Szczegóły zadania w pliku p1.pdf.
 */
 
 /*
