@@ -1,10 +1,6 @@
 //Kamil Matuszewski 272331.
 //Funkcje InitBuffer, ReadBufferedByte, ReadLine, fragment main oraz cały plik socwarp.cpp wziety z wykładu. Nie odpowiadam za ich poprawnosc
 
-/*
-Prosty server WWW napisany na zajęcia z sieci komputerowych (semestr letni 2016). Szczegóły zadania w pliku p4.pdf
-*/
-
 #include "sockwrap.h"
 
 
