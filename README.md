@@ -19,3 +19,8 @@ Lato 2016 (semestr 4):
 
 - Sieci komputerowe: traceroute (C), WWW Server (C++)
 
+Listy zadań z zajęć na Uniwersytecie Wrocławskim
+
+Lato 2017
+-Projektowanie Obiektowe Oprogramowania (POO) (C#, Visual Paradigm)
+

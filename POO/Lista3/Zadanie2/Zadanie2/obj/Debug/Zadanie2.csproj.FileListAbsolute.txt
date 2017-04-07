@@ -1,0 +1,6 @@
+D:\Stdi\POO\Lista3\Zadanie2\Zadanie2\bin\Debug\Zadanie2.exe.config
+D:\Stdi\POO\Lista3\Zadanie2\Zadanie2\obj\Debug\Zadanie2.csprojResolveAssemblyReference.cache
+D:\Stdi\POO\Lista3\Zadanie2\Zadanie2\bin\Debug\Zadanie2.exe
+D:\Stdi\POO\Lista3\Zadanie2\Zadanie2\bin\Debug\Zadanie2.pdb
+D:\Stdi\POO\Lista3\Zadanie2\Zadanie2\obj\Debug\Zadanie2.exe
+D:\Stdi\POO\Lista3\Zadanie2\Zadanie2\obj\Debug\Zadanie2.pdb
