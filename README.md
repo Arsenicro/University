@@ -2,9 +2,13 @@
 
 Studia na Uniwersytecie Wrocławskim (2014-dziś)
 
-# Inżynierskie
+## stdi
 
-## Programy pisane przeze mnie na zajęcia podczas studiów inżynierskich na Uniwersytecie Wrocławskim.
+Listy zadań wraz z moimi rozwiązaniami wykonane podczas zajęć na Uniwersytecie Wrocławskim.
+
+## Inżynierskie
+
+Projekty pisane przeze mnie na zajęcia podczas studiów inżynierskich na Uniwersytecie Wrocławskim.
 
 Lato 2015 (Semestr 2):
 
@@ -18,9 +22,3 @@ Zima 2015 (Semestr 3):
 Lato 2016 (semestr 4):
 
 - Sieci komputerowe: traceroute (C), WWW Server (C++)
-
-## Listy zadań z zajęć na Uniwersytecie Wrocławskim.
-
-Lato 2017 (Semestr 6):
-- Projektowanie Obiektowe Oprogramowania (POO) (C#, Visual Paradigm)
-

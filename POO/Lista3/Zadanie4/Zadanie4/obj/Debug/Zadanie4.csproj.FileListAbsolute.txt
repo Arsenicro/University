@@ -1,6 +1,0 @@
-D:\Stdi\POO\Lista3\Zadanie4\Zadanie4\bin\Debug\Zadanie4.exe.config
-D:\Stdi\POO\Lista3\Zadanie4\Zadanie4\obj\Debug\Zadanie4.csprojResolveAssemblyReference.cache
-D:\Stdi\POO\Lista3\Zadanie4\Zadanie4\bin\Debug\Zadanie4.exe
-D:\Stdi\POO\Lista3\Zadanie4\Zadanie4\bin\Debug\Zadanie4.pdb
-D:\Stdi\POO\Lista3\Zadanie4\Zadanie4\obj\Debug\Zadanie4.exe
-D:\Stdi\POO\Lista3\Zadanie4\Zadanie4\obj\Debug\Zadanie4.pdb
