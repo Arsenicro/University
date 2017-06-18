@@ -22,3 +22,7 @@ Zima 2015 (Semestr 3):
 Lato 2016 (semestr 4):
 
 - Sieci komputerowe: traceroute (C), WWW Server (C++)
+
+Lato 2017 (Semestr 6):
+
+- Bazy danych: System wspomagający organizację konferencji (swok) (C#)
