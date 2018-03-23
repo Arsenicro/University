@@ -2,35 +2,37 @@
 
 Studia na Uniwersytecie Wrocławskim (2014-dziś)
 
-## stdi
+## Listy
 
 Listy zadań wraz z moimi rozwiązaniami wykonane podczas zajęć na Uniwersytecie Wrocławskim.
 
-## Inżynierskie
+## Projekty
 
-Projekty pisane przeze mnie na zajęcia podczas studiów inżynierskich na Uniwersytecie Wrocławskim.
+Małe i trochę większe projekty, pisane podczas zajęć na Uniwersytecie Wrocławskim.
 
-Lato 2015 (Semestr 2):
+## Spis treści
 
-- Metody programowania: Kwadraty (Haskell)
+Lato 2015 (Semestr 2): 
+
+- Projekt: Kwadraty (Haskell)
 
 Zima 2015 (Semestr 3):
 
-- Kurs WWW: Memory game (JS + HTML + CSS)
-- Systemy operacyjne: Synchronizacja procesów z użyciem semaforów (C)
+- Projekt: Memory (JS + HTML + CSS)
+- Projekt: Synchronizacja procesów z użyciem semaforów (C)
 
 Lato 2016 (semestr 4):
 
-- Sieci komputerowe: traceroute (C), WWW Server (C++)
+- Projekt: Traceroute (C)
+- Projekt: Serwer WWW (C++)
 
 Lato 2017 (Semestr 6):
 
-- Bazy danych: System wspomagający organizację konferencji (swok) (C#)
+- Projekt: System wspomagający organizację konferencji (swok) (C#)
+- Listy: Hans++ (C++)
+- Listy: POO (Visual Paradigm, C#)
 
-## Magisterskie
+Lato 2018 (Semestr 1 Studiów Magisterskich)
 
-Projekty pisane przeze mnie na zajęcia podczas studiów magisterskich na Uniwersytecie Wrocławskim.
+- Listy: PHPCourse (PHP)
 
-Lato 2018 (Semestr 1):
-
-- designing-and-implementing-php-apps-course: Kurs projektowania i implementacji zaawansowanych aplikacji PHP (PHP)
