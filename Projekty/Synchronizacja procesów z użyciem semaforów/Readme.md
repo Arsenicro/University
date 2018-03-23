@@ -1,7 +1,7 @@
-## Synchronizacja w箃k體 z u縴ciem semafor體 (C)
+## Synchronizacja w膮tk贸w z u偶yciem semafor贸w (C)
 
-Program napisany na zaj阠ia z system體 operacyjnych (Zima 2015).
+Program napisany na zaj臋cia z system贸w operacyjnych (Zima 2015).
 
-Problem palaczy tytoniu wykonany z u縴ciem semafor體 pod systemem linux.
+Problem palaczy tytoniu wykonany z u偶yciem semafor贸w pod systemem linux.
 
-Wi阠ej informacji w dokumentacji.
+Wi臋cej informacji w dokumentacji.
