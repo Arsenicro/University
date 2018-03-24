@@ -1,0 +1,74 @@
+-- SMV model of the simple memory for first assignment
+-- in hardware verification for CS 525V.
+
+-- Written by Kathi Fisler
+-- and modified by wch to comply with the new type system of NuSMV
+-- and to contain a frozen variable
+
+
+
+
+MODULE memory-location(load, data)
+
+VAR
+  Contents : {0, 1, 2, 3, 4, 5, 6, 7};
+
+ASSIGN
+  init(Contents) := 0;
+  next(Contents) := case
+                      load : data ;
+                      TRUE : Contents ;
+                    esac ;
+
+
+MODULE main
+ 
+VAR
+  load1 : boolean ;
+  load2 : boolean ;
+  load3 : boolean ;
+  load4 : boolean ;
+
+  input : {0, 1, 2, 3, 4, 5, 6, 7};  
+
+  loc1 : memory-location(load1, input);
+  loc2 : memory-location(load2, input);
+  loc3 : memory-location(load3, input);
+  loc4 : memory-location(load4, input);
+
+  control1 : boolean ;
+  control2 : boolean ;
+  
+FROZENVAR  value : {0, 1, 2, 3, 4, 5, 6, 7};
+
+--Correcting third case from !cotrol1 & !control2 to !cotrol1 & control2
+
+DEFINE
+  output := case
+              !control1 & !control2 : loc1.Contents;
+              control1 & !control2  : loc2.Contents;
+              !control1 & control2  : loc3.Contents;
+              TRUE   : loc4.Contents;
+            esac;
+
+FAIRNESS load1 
+FAIRNESS load2 
+FAIRNESS load3 
+FAIRNESS load4 
+
+
+--First dot - if load, then if input = value, then in next moment Contents of loc should be equal to value. Not sure if i can use value, so...
+SPEC AG ( (load1 -> (input = 0 -> AX loc1.Contents = 0) ) & (load2 -> (input = 0 -> AX loc2.Contents = 0) ) & (load3 -> (input = 0 -> AX loc3.Contents = 0) ) & (load4 -> (input = 0 -> AX loc4.Contents = 0) ) )
+SPEC AG ( (load1 -> (input = 1 -> AX loc1.Contents = 1) ) & (load2 -> (input = 1 -> AX loc2.Contents = 1) ) & (load3 -> (input = 1 -> AX loc3.Contents = 1) ) & (load4 -> (input = 1 -> AX loc4.Contents = 1) ) )
+SPEC AG ( (load1 -> (input = 2 -> AX loc1.Contents = 2) ) & (load2 -> (input = 2 -> AX loc2.Contents = 2) ) & (load3 -> (input = 2 -> AX loc3.Contents = 2) ) & (load4 -> (input = 2 -> AX loc4.Contents = 2) ) )
+SPEC AG ( (load1 -> (input = 3 -> AX loc1.Contents = 3) ) & (load2 -> (input = 3 -> AX loc2.Contents = 3) ) & (load3 -> (input = 3 -> AX loc3.Contents = 3) ) & (load4 -> (input = 3 -> AX loc4.Contents = 3) ) )
+SPEC AG ( (load1 -> (input = 4 -> AX loc1.Contents = 4) ) & (load2 -> (input = 4 -> AX loc2.Contents = 4) ) & (load3 -> (input = 4 -> AX loc3.Contents = 4) ) & (load4 -> (input = 4 -> AX loc4.Contents = 4) ) )
+SPEC AG ( (load1 -> (input = 5 -> AX loc1.Contents = 5) ) & (load2 -> (input = 5 -> AX loc2.Contents = 5) ) & (load3 -> (input = 5 -> AX loc3.Contents = 5) ) & (load4 -> (input = 5 -> AX loc4.Contents = 5) ) )
+SPEC AG ( (load1 -> (input = 6 -> AX loc1.Contents = 6) ) & (load2 -> (input = 6 -> AX loc2.Contents = 6) ) & (load3 -> (input = 6 -> AX loc3.Contents = 6) ) & (load4 -> (input = 6 -> AX loc4.Contents = 6) ) )
+SPEC AG ( (load1 -> (input = 7 -> AX loc1.Contents = 7) ) & (load2 -> (input = 7 -> AX loc2.Contents = 7) ) & (load3 -> (input = 7 -> AX loc3.Contents = 7) ) & (load4 -> (input = 7 -> AX loc4.Contents = 7) ) )
+
+--Second dot - routing content based on control signals
+SPEC AG ( ((!control1 & !control2) -> loc1.Contents = output) & ((control1 & !control2) -> loc2.Contents = output) & ((!control1 & control2) -> loc3.Contents = output) & ((control1 & control2) -> loc4.Contents = output)  )
+
+--Third dot - if load, then in next moment, if Contents in loc was value, then in every patch, Contents shouldn't change, before load signal appear again
+SPEC AG ( (load1 -> AX (loc1.Contents = value -> A [ AX loc1.Contents = value U load1 ])) & (load2 -> AX (loc2.Contents = value -> A [ loc2.Contents = value U load2 ])) & (load3 -> AX (loc3.Contents = value -> A [ loc3.Contents = value U load3 ])) & (load4 -> AX (loc4.Contents = value -> A [ loc4.Contents = value U load4 ])) )
