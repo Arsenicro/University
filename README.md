@@ -36,4 +36,5 @@ Lato 2018 (Semestr 1 Studiów Magisterskich)
 
 - Listy: PHPCourse (PHP)
 - Listy: Automated Verification (NuSMV)
+- Projekt: Parity-solver (PHP)
 

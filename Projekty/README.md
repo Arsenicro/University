@@ -26,3 +26,5 @@ Lato 2017 (Semestr 6):
 ## Magisterskie
 
 Projekty pisane przeze mnie na zajęcia podczas studiów magisterskich na Uniwersytecie Wrocławskim.
+
+- Games, Automata, Logics, and Formal Verification (GandALF): Parity Games Solver (parity-solver) (PHP)
