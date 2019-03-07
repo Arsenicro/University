@@ -38,3 +38,6 @@ Lato 2018 (Semestr 1 Studiów Magisterskich)
 - Listy: Automated Verification (NuSMV)
 - Projekt: Parity-solver (PHP)
 
+Lato 2019 (Semestr 2 Studiów Magisterskich)
+
+- Listy: Coq (coq)
