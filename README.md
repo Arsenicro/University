@@ -60,7 +60,8 @@ Małe i trochę większe projekty, pisane podczas zajęć na Uniwersytecie Wroc�
 ### Semestr V (Zima 2016):
 
 * ~~Komunikacja człowiek-komputer~~
-* ~~Kultura bezpieczeństwa komputerowego~~
+* Kultura bezpieczeństwa komputerowego
+	* Materiały: kbk
 * Praktyka optymalizacji
 	* Materiały: po
 * ~~Kurs projektowania aplikacji ASP.NET~~
