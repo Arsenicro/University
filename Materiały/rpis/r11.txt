@@ -1,0 +1,19 @@
+﻿Odpal program
+Wejdź w plik -> zmień katalog i wybierz katalog z plikiem deca2015 (ważne żeby był pobrany ode mnie, trochę zmieniłem dane)
+
+Następnie wklej
+dane <- read.table("deca2015.csv", row.names=1, header=T, sep=",", dec=",", encoding="UTF-8")
+Teraz, po wpisaniu "dane" wyświetlać się będzie tabelka.
+
+W celu zdobycia punktów wpisuj kolejne polecenia i analizuj co właśnie dostałeś/aś.
+
+1. lm1 <- lm(punkty ~ m100 + wdal + kula + wzwyż + m400 + ppł110 + dysk + tyczka + oszczep + m1500, data=dane)
+
+2. lm2 <- lm(punkty ~ -1 + m100 + wdal + kula + wzwyż + m400 + ppł110 + dysk + tyczka + oszczep + m1500, data=dane)
+
+3. średnia <- colMeans(X)
+wariancja <- apply(X,2,var)
+
+4. Z <- (X+średnia)/wariancja
+
+5. korelacja <- cor(Z)

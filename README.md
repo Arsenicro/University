@@ -1,43 +1,124 @@
 # University
 
-Studia na Uniwersytecie Wrocławskim (2014-dziś)
+Studia na Uniwersytecie Wrocławskim (2014-dziś). 
 
-## Listy
+## Materiały
 
-Listy zadań wraz z moimi rozwiązaniami wykonane podczas zajęć na Uniwersytecie Wrocławskim.
+Materiały (listy zadań, rozwiązania, dodatkowe materiały) do niektórych z przedmiotów na które uczestniczyłem podczas studiów. 
 
 ## Projekty
 
 Małe i trochę większe projekty, pisane podczas zajęć na Uniwersytecie Wrocławskim.
 
-## Spis treści
+## Studia Inżynierskie
 
-Lato 2015 (Semestr 2): 
+### Semestr I (Zima 2014):
 
-- Projekt: Kwadraty (Haskell)
+* ~~Praktyka ścisłego rozumowania matematycznego~~
+* ~~Logika dla informatyków~~
+* ~~Analiza matematyczna~~
+* ~~Kurs programowania w języku C~~
+* ~~Wstęp do informatyki~~
+* ~~Angielski B1~~
 
-Zima 2015 (Semestr 3):
+### Semestr II (Lato 2015):
 
-- Projekt: Memory (JS + HTML + CSS)
-- Projekt: Synchronizacja procesów z użyciem semaforów (C)
+* ~~Algebra~~
+* Metody Programowania
+	* Projekt: Kwadraty (Haskell)
+* ~~Architektury systemów komputerowych~~
+* ~~Programowanie obiektowe~~
+* ~~Angielski B2-I~~
 
-Lato 2016 (semestr 4):
+### Semestr III (Zima 2015):
 
-- Projekt: Traceroute (C)
-- Projekt: Serwer WWW (C++)
+* Matematyka Dyskretna M
+	* Materiały: mdm
+* Analiza Numeryczna L
+	* Materiały: anl
+* Kurs WWW
+	* Projekt: Memory (JS + HTML + CSS)
+* ~~Psychologia pozytywna~~
+* Systemy Operacyjne
+	* Materiały: so
+	* Projekt: Synchronizacja procesów z użyciem semaforów (C)
+* ~~Angielski B2-II~~
 
-Lato 2017 (Semestr 6):
+### Semestr IV (Lato 2016):
 
-- Projekt: System wspomagający organizację konferencji (swok) (C#)
-- Listy: Hans++ (C++)
-- Listy: POO (Visual Paradigm, C#)
+* Algorytmy i Struktury Danych L 
+	* Materiały: aisd
+* Rachunek prawdopodobieństwa i statystyka
+	* Materiały: rpis
+* Sieci Komputerowe
+	* Materiały: sk
+	* Projekt: Traceroute (C)
+	* Projekt: Serwer WWW (C++)
+* Kurs programowania pod Windows w technologii .NET
+	* Materiały: windows
 
-Lato 2018 (Semestr 1 Studiów Magisterskich)
+### Semestr V (Zima 2016):
 
-- Listy: PHPCourse (PHP)
-- Listy: Automated Verification (NuSMV)
-- Projekt: Parity-solver (PHP)
+* ~~Komunikacja człowiek-komputer~~
+* ~~Kultura bezpieczeństwa komputerowego~~
+* Praktyka optymalizacji
+	* Materiały: po
+* ~~Kurs projektowania aplikacji ASP.NET~~
+* Systemy Wbudowane:
+	* Materiały: wbudowane
 
-Lato 2019 (Semestr 2 Studiów Magisterskich)
+### Semestr VI (Lato 2017):
 
-- Listy: Coq (coq)
+* Języki Formalne i Złożoność Obliczeniowa
+	* Materiały: jfizo
+* Bazy Danych
+	* Materiały: bd
+	* Projekt: System wspomagający organizację konferencji (swok) (C#)
+* Projektowanie Obiektowe Oprogramowania
+	* Materiały: POO 
+* Hans++
+	* Materiały: Hans++
+* ~~Metody Optymalizacji~~
+
+### Semestr VII (Zima 2017):
+
+* ~~Tutoring Logika KSI~~
+* ~~Seminarium: Zaawansowane techniki programowania .NET~~
+
+## Studia Magisterskie
+
+### Semestr I (Lato 2018):
+
+* ~~Algorytmiczna teoria gier~~
+* Seminarium: Logiki nieklasyczne: teoria i zastosowania
+	* Materiały: slnk
+* Games, Automata, Logics, and Formal Verification
+	* Projekt: Parity-solver (PHP)
+* Automated verification (Q1)
+	* Materiały: av
+* ~~Deductive verification (Q2)~~
+* Kurs: Projektowanie i implementacja zaawansowanych aplikacji PHP
+	* Materiały: PHPCourse
+
+### Semestr II (Zima 2018):
+
+* ~~Tutoring Logika KSI~~
+* Algorytmy Tekstowe 
+	* Materiały: tekstowe
+* ~~Seminarium: Agile Software Development~~
+* ~~Seminarium: Logika i teoria typów~~
+
+## Semestr II.5 (Lato 2019):
+
+* ~~Historia Filozofii~~
+* ~~Testowanie Oprogramowania~~
+* Algorytmy probabilistyczne
+	* Materiały: probabilistyczne
+* Obliczenia i wnioskowanie w systemie Coq
+	* Materiały: coq
+
+## Semestr III (Zima 2019):
+
+* ~~Tutoring Logika KSI~~
+* Angielski B2+
+	* Prezentacja: https://docs.google.com/presentation/d/1X3ioH2vFuapB3-3_x8_OWHXI0uvOfPtIjIAqkc5f71M/edit?usp=sharing

@@ -1,0 +1,120 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\module}[1]{\left|#1\right|}
+
+\def\checkmark{\tikz\fill[scale=0.3](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 3}
+\author{Kamil Matuszewski}
+\date{27 października 2015}
+
+\begin{document}
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+
+\begin{center}
+\begin{tabular}{|c *{7}{|c} |c|}\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7\\
+\hline 
+\checkmark &\checkmark  &  &\checkmark  &\checkmark  &\checkmark  &\checkmark  \\
+\hline
+\end{tabular}\\
+\end{center}
+
+\subsection*{Zadanie 1}
+Znajdź wartości dla których obliczanie funkcji może wiązać się z utratą cyfr znaczących wyniku i zaproponuj sposób dokładniejszego obliczania funkcji.
+
+\begin{itemize}
+\item $e^{-x^2}-e^{2x^2}$
+$$e^{-x^2}-e^{2x^2}=e^{-x^2}(1-e^{3x^2})$$
+Kiedy $3x^2$ jest bliskie $0$ wtedy w nawiasie mamy odejmowanie dwóch bliskich sobie liczb.
+Żeby to naprawić, rozwińmy $e^x$ w szereg Maclaurina:
+$$e^x=\sum\limits_{n=0}^\infty \frac{x^n}{n!} = 1 + \sum\limits_{n=1}^\infty \frac{x^n}{n!}$$ 
+$$e^{3x^2} = 1 + \sum\limits_{n=1}^\infty \frac{(3x^2)^n}{n!}$$
+$$e^{-x^2}-e^{2x^2}=e^{-x^2}(1-e^{3x^2})=e^{-x^2}( 1 - (1 + \sum\limits_{n=1}^\infty \frac{(3x^2)^n}{n!}) ) = -e^{-x^2}( \sum\limits_{n=1}^\infty \frac{(3x^2)^n}{n!} )$$
+
+\item $1-\sin{(2x)}$
+Oczywiście, kiedy $\sin{(2x)}$ jest bliskie $1$ to może nastąpić utrata cyfr znaczących wyniku. Jak to naprawić?
+$$\sin{x}=\cos{(x-\pi/2)}$$
+$$\sin{x}=\sin{(x+2\pi)} $$
+$$1-\cos{x}=2sin^2{(x/2)}$$
+$$1-\sin{(2x)} = 1-\cos{(2x-\pi/2)}=2\sin^2{(x-\pi/4)}=2\sin^2{(x+7\pi/4)} $$
+\end{itemize}
+
+\subsection*{Zadanie 2}
+Podaj bezpieczny numerycznie algorytm obliczania zer równania kwadratowego $ax^2+bx+c = 0.$ Przeprowadź testy dla odpowiednio dobranych wartości a, b i c pokazujące, że Twój algorytm jest lepszy od metody szkolnej bazującej jedynie na dobrze znanych wzorach \\$x_{1,2} = (-b \pm \sqrt{b^2-4ac})/(2a)$
+
+Jeśli $ac$ jest bardzo, bardzo, bardzo małe a $b$ bardzo duże (co do modułu), wtedy mamy odejmowanie bliskich sobie liczb (w zależności od tego jaki znak ma $b$ to inny wzór będzie nieprawidłowy).
+
+Żeby to naprawić użyjemy wzorów Vietta. Mając $a$, $b$ i $x_1$ możemy obliczyć $x_2=-\frac{b}{a}-x_1$ czy coś. Zrobienie testów w swoim ulubionym języku pozostawiam jako proste ćwiczenie.
+
+\subsection*{Zadanie 4}
+Wyprowadź wzór na wskaźnik uwarunkowania zadania obliczania wartości funkcji $f$ w punkcie $x$.
+
+Względna zmiana danych:
+$$\module{\frac{(x+h)-x}{x}}=\module{\frac{h}{x}}$$
+Względna zmiana wyniku:
+$$\module{ \frac{f(x+h)-f(x)}{f(x)}}$$
+Względna zmiana wyniku/Względna zmiana danych:
+$$\module{\frac{f(x+h)-f(x)}{f(x)}} \cdot \module{\frac{x}{h}} = \module{\frac{f(x+h)-f(x)}{h}} \module{\frac{h}{f(x)} }  \module{\frac{x}{h}} = \module{\frac{f(x+h)-f(x)}{h}} \module{\frac{x}{f(x)}} = \module{f'(x)} \module{\frac{x}{f(x)}} =\module{\frac{f'(x)x}{f(x)}}$$
+
+\subsection*{Zadanie 5}
+Sprawdź dla jakich wartości $x$ zadania obliczania funkcji $f$ jest źle uwarunkowane.
+
+Korzystamy z zadania $2$, a dokładniej ze wskaźnika uwarunkowania.
+\begin{itemize}
+\item $f(x)=\sqrt{1-x^2}$
+$$\module{\frac{f'(x)x}{f(x)}} = \module{\frac{-\frac{x}{\sqrt{1-x^2}} x}{\sqrt{1-x^2}}} = \module{\frac{-x^2 x}{(\sqrt{1-x^2})^2}} = \module{\frac{-x^3}{1-x^2}} $$
+$$\lim_{x\rightarrow 1}\module{\frac{-x^3}{1-x^2}} = \infty$$
+
+\item $f(x)=x\ln{x}$
+$$\module{\frac{f'(x)x}{f(x)}} = \module{\frac{(1+\ln{x})x}{x\ln{x}}} = \module{\frac{1+\ln{x}}{\ln{x}}}$$
+$$\lim_{x\rightarrow 1} \module{\frac{1+\ln{x}}{\ln{x}}} = \infty$$
+
+\item $f(x) = \sqrt{x^4+1}-x^2$
+$$\module{\frac{f'(x)x}{f(x)}} = \module{\frac{(\frac{2x^3}{\sqrt{x^4+1}} -2x )x}{\sqrt{x^4+1}-x^2}} = \module{\frac{\frac{2x^4}{\sqrt{x^4+1}} -2x^2 }{\sqrt{x^4+1}-x^2}} \overset{wolfram}{=} \module{-\frac{2x^2}{\sqrt{x^4+1}}} = \module{\frac{2x^2}{\sqrt{x^4+1}}}$$
+Zadanie dobrze uwarunkowane
+
+\item $f(x) =  \sin(x)$
+$$\module{\frac{f'(x)x}{f(x)}} = \module{\frac{x\cos{x}}{\sin{x}}} = \module{x \cot{x}}$$
+$$\lim_{x\rightarrow k\pi} \module{x \cot{x}} = 0 $$
+\clearpage
+\subsection*{Zadanie 6}
+Musimy sprawdzić, czy algorytm jest numerycznie poprawny. To jest dosyć łatwe, choć akurat dla mnie nigdy nie było intuicyjne, ale robi się to jakoś tak:\\
+Niech $e_i=(1+\varepsilon_i)$ a $w_i=(1+\alpha_i)$\\
+$$S:=(de_1 + 1)w_1=de_1w_1 + w_1 $$
+$$S:=\frac{ce_2}{de_1w_1 + w_1}w_2 $$
+$$S:=(be_3+\frac{ce_2}{de_1w_1 + w_1}w_2)w_3 = be_3w_3+\frac{ce_2w_2w_3}{de_1w_1 + w_1} $$
+$$S:=\frac{ae_4}{ be_3w_3+\frac{ce_2w_2w_3}{de_1w_1 + w_1}}w_4 = \frac{ae_4w_4}{ be_3w_3+\frac{ce_2w_2w_3}{de_1w_1 + w_1}} $$
+$$S:=\frac{1}{\frac{ae_4w_4}{ be_3w_3+\frac{ce_2w_2w_3}{de_1w_1 + w_1}}}w_5 = w_5\cdot\frac{be_3w_3+\frac{ce_2w_2w_3}{de_1w_1 + w_1}}{ae_4w_4} = w_5 \cdot  \frac{\frac{be_3w_3(de_1w_1 + w_1)+ce_2w_2w_3}{de_1w_1 + w_1}}{ae_4w_4} =$$
+$$=\frac{be_3w_3(de_1w_1 + w_1)w_5+ce_2w_2w_3w_5}{ae_4w_4(de_1w_1 + w_1)}=\frac{be_3w_3de_1w_1w_5 + be_3w_3w_1w_5+ce_2w_2w_3w_5}{ae_4w_4(de_1w_1 + w_1)}=$$ 
+$$=\frac{be_3w_3w_1w_5+ce_2w_2w_3w_5+bde_3w_3e_1w_1w_5}{ae_4w_4(de_1w_1 + w_1)} $$
+Niech $E=max\left\{ w_1,w_2,w_3,w_4,w_5,e_1,e_2,e_3,e_4 \right\}$. Wtedy:
+$$S\leq\frac{bE^4+cE^4+bdE^5}{aE^2(dE^2 + E)}=\frac{E^4(b+c+bdE)}{E^3(a(dE + 1))}=\frac{(b+c+b\widetilde{d})}{a(\widetilde{d} + 1)}E  $$
+Mamy więc, że wynik to $\widetilde{S}(a,b,c,d)=S(a,b,c,\widetilde{d})(1+\epsilon)$, czyli lekkie zakłócenie danych i lekkie zakłócenie wyniku. Algorytm jest więc numerycznie poprawny, bo błędy zarówno danych jak i wyniku są na poziomie błędu reprezentacji (bo $E$ było na poziomie błędu reprezentacji).\\
+DYGRESJA\\
+Na wykładzie było coś takiego jak twierdzenie o kumulacji błędów. To chyba leciało jakoś tak, że jeśli mamy jakieś $|\alpha_i|\leq 2^{-t}$ dla $i=1,2,\ldots,n$ to zachodzi $\prod\limits_{i=1}^n (1+\alpha_i) = (1+\gamma_i)$, gdzie $|\gamma_i|\leq n 2^{-t}$\\
+W praktyce to oznacza, że możemy jakoś sobie pozwijać błędy. Musimy tylko określić, czy ten skumulowany błąd jest duży, a to jest jakieś machanie rękami. Zazwyczaj jak te błędy się tak skumulują to algorytm jest dobrze uwarunkowany.\\
+To była jednak jakaś dygresja, i nie jest zupełnie potrzebna przy tym zadaniu.
+
+\subsection*{Zadanie 7}
+To robimy podobnie jak poprzednie, i korzystamy z tej śmiesznej kumulacji błędów. To nie jest trudne zadanie. Kiedy liczby nie są maszynowe będzie dwa razy więcej błędów, ale to wciąż będzie numerycznie poprawne. Jeśli zapiszecie wzór i skorzystacie z twierdzenia o kumulacji błędów, oraz trochę pomachacie, że ten skumulowany błąd to w sumie nie jest duży, to raczej grzyba nie dostaniecie (ja tak robiłem i nie dostałem). Te zadanka z numeryczną poprawnością polegają właśnie na takim machaniu, i u nas to przechodziło. Ciężko jest pokazać przykład algorytmu numerycznie niepoprawnego, i raczej nie będzie takich na L.
+\end{itemize}
+\end{document}

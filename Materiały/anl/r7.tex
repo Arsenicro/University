@@ -1,0 +1,156 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 7}
+\author{Kamil Matuszewski}
+\date{\today}
+
+\newenvironment{prooff}{\paragraph{Dowód:}}{\hfill$\square$}
+
+\begin{document}
+
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+
+\begin{center}
+\begin{tabular}{|c *{8}{|c} |c|}\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
+\hline 
+X & D & X &  & X & ? & X & D \\
+\hline
+\end{tabular}\\
+Gdzie X-spisane, D-Deklarowane, N-niedeklarowane.
+\end{center}
+
+\subsection*{Zadanie 1}
+Wiemy, że wzór na pochodną $p_{n+1}$ to $\sum\limits_{i=0}^{n} (x_k-x_i)' \cdot \prod\limits_{j=0; j \neq i}^{n} (x_k-x_j) = \sum\limits_{i=0}^{n} \prod\limits_{j=0; j \neq i}^{n} (x_k-x_j)$ \\
+Uzbrojeni w tą wiedzę, możemy zapisać, że:\\
+$L_n(x) = \sum\limits_{k=0}^{n} f(x_k)\frac{p_{n+1}(x)}{(x-x_k)p'_{n+1}(x_k)} = \sum\limits_{k=0}^{n} f(x_k)\frac{(x-x_0)\cdots (x-x_{k-1})(x-x_{k+1})\cdots (x_k - x_n)}{\sum\limits_{i=0}^{n} \prod\limits_{j=0; j \neq i}^{n} (x_k-x_j)} $ \\
+Teraz zauważmy, że dolna suma, będzie niezerowa dla i=k, dla wszystkich pozostałych elementów będzie to po prostu 0, stąd możemy zapisać:\\
+$\sum\limits_{k=0}^{n} f(x_k)\frac{\prod\limits_{i=0; i \neq k}^{n} (x - x_i)}{\prod\limits_{j=0; j \neq k}^{n} (x_k-x_j)}$\\
+Teraz, nie ważne czy najpierw pomnożymy czy podzielimy, możemy więc zapisać te równanie w inny sposób:\\
+$\sum\limits_{k=0}^{n} f(x_k)\prod\limits_{i=0; i \neq k}^{n} \frac{x - x_i}{x_k-x_i}$\\
+A to już jest dokładnie definicja wielomianu interpolacyjnego Lagrange'a.
+
+\subsection*{Zadanie 2}
+a)
+\begin{tabular}{|c| *{6}{|c} |c|}\hline
+$x_k$ & -2 & -1 & 0 & 1\\
+\hline 
+$y_k$ & 1  & 0 & 1 & -2 \\
+\hline
+\end{tabular}\\
+
+\begin{tabular}{|c *{6}{|c} |c|}\hline
+$x_k$ & $f(x_k)$ &  &  & \\
+\hline 
+-2 & 1 &  &  &  \\
+\hline
+-1 & 0 & -1 &  & \\
+\hline
+0 & 1 & 1 & 1 & \\
+\hline
+1 & -2  & -3  & -2 & -1 \\
+\hline
+\end{tabular}\\
+
+$L_n(x)=1-(x+2)+(x+2)(x+1)-(x+2)(x+1)x$
+
+\clearpage
+b)
+\begin{tabular}{|c| *{7}{|c} |c|}\hline
+$x_k$ & 1 & 2 & -1 & -2 & 0\\
+\hline 
+$y_k$ & -2  & 9 & 0 & 1 & 1 \\
+\hline
+\end{tabular}\\
+
+\begin{tabular}{|c| *{7}{|c} |c|}\hline
+$x_k$ & $f(x_k)$ & & & & \\
+\hline 
+1 & -2 &  &  &  &\\
+\hline
+2 & 9 & 11 &  & &\\
+\hline
+-1 & 0 & 3 & 4 & &\\
+\hline
+-2 & 1  & -1  & 1 & 1 & \\
+\hline
+0 & 1  & 0 & 1 & 0 & 1\\
+\hline
+\end{tabular}\\
+
+$L_n(x)=-2+11(x-1)+4(x-1)(x-2)+(x-1)(x-2)(x+1)+(x-1)(x-2)(x+1)(x+2)$
+
+\subsection*{Zadanie 3}
+Z definicji rekurencyjnej:\\
+$\left\{\begin{matrix}
+f[x_i]=f(x_i)\\ 
+f[x_0\cdots x_k] = \frac{f[x_1\cdots x_k] - f[x_0\cdots x_{k-1}]}{x_k-x_0}
+\end{matrix}\right.
+$\\
+Widzimy, że jeśli znamy dwa wcześniejsze ilorazy różnicowe, potrzebujemy tylko jednego dzielenia i dwóch odejmowań (dla k>1). Wiemy też, że możemy zrobić to metodą tabelkową. Mamy wtedy:\\ 
+
+\begin{tabular}{|c *{6}{|c} |c|}\hline
+ & k=0 & k=1 & $\cdots$ & k=n\\
+\hline 
+$x_0$ & $f(x_0)$  &  &  &  \\
+\hline
+$x_1$ & $f(x_1)$ & $f[x_0,x_1]$ &  & \\
+\hline
+$\cdots$ &  &  & $\cdots$ & \\
+\hline
+$x_n$ & $f(x_n)$  & $f[x_{n-1}, x_n]$  &  & $f[x_0\cdots x_n]$ \\
+\hline
+\end{tabular}\\
+
+Teraz, obliczmy ilość dzieleń potrzebną do wypełnienia tabeli dla n:\\
+$D(0) = 0$ bo mamy 0 dzieleń dla każdej wartości.\\
+$D(1) = 1$ bo potrzebujemy tylko $f[x_0,x_1]$\\
+$D(n) = D(n-1) + n$ bo obliczamy wszystkie ilorazy różnicowe dla n-1, i doliczamy do tego nty wiersz za pomocą n ilorazów różnicowych.\\
+Rozwiązując tą zależność otrzymujemy:\\
+$D(n)=\frac{(1+n)*n}{2}$\\
+Odejmowań jest zawsze dwa razy więcej, stąd:\\
+$S(n)=2D(n)=(1+n)*n$\\
+
+
+\subsection*{Zadanie 5}
+Wiemy, że zachodzi wzór:\\
+$|f(x)-L_n(x)| \leq \frac{||f^{(n+1)}(\eta)||}{(n+1)!} \cdot max_{x \in [a,b]|p_{n+1}|}$\\
+Teraz, wiemy, że skoro naszą funkcją jest sinus, to $||f^{(n+1)}(x)|| = \pm 2^{n+1} \sin(2x)  \backslash \cos(2x)$\\
+A $\sin(2x)$ i $\cos(2x)$ są zawsze $\leq 1$. Dodatkowo, węzły są równoodległe a x jest brany z przedziału $[0,1]$, stąd $p_{n+1} \leq 1$
+$|f(x)-L_n(x)| \leq \frac{2^{n+1}}{(n+1)!}$\\
+Teraz:\\
+$\frac{2^{n+1}}{(n+1)!} \leq \frac{1}{10^4} \Leftrightarrow n\geq 10$\\
+
+\subsection*{Zadanie 6}
+$||f^{(n+1)}(x)|| \leq \frac{n!}{x^{n+1}}$\\
+Węzły losowe, x musi być z przedziału [1,2], tak samo jak $x_i$, tak więc $(x-x_i) \leq 1$, więc $p_{n+1} \leq 1$, skoro tak, to:\\
+$|f(x)-L_n(x)| \leq \frac{n!}{(n+1)!1^{n+1}} = \frac{1}{(n+1)1^{n+1}} \leq \frac{1}{10^3}$\\
+$(n+1)\cdot 1 \geq 10^3  \Leftrightarrow  n \geq 999$
+
+\subsection*{Zadanie 7}
+$||f^{(n+1)}(\pm 1)|| = e$\\
+$p_{n+1} \leq \frac{1}{2^n}$\\
+$\frac{e}{(n+1)!\cdot 2^n} \leq \frac{1}{10^5} \Leftrightarrow n \geq 6$
+
+\subsection*{Zadanie 8}
+WYMACHAJ
+
+\end{document}

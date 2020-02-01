@@ -1,0 +1,122 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 8}
+\author{Kamil Matuszewski}
+\date{\today}
+
+\newenvironment{prooff}{\paragraph{Dowód:}}{\hfill$$\square$$}
+
+\begin{document}
+
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+
+\begin{center}
+\begin{tabular}{|c *{13}{|c} |c|}\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15\\
+\hline 
+X & &  & X & X &  &  & &  &  &  & X & X & X & X\\
+\hline
+\end{tabular}\\
+\end{center}
+
+\subsection*{Zadanie 1}
+
+Z włączeń i wyłączeń:\\
+
+$$S = \sum 2^{-k} - \sum 2^{-k \cdot 2} - \sum 2^{-k \cdot 3} - \sum 2^{-k \cdot 5} - \sum 2^{-k \cdot 7} + \sum 2^{-k \cdot 2 \cdot 3} + \sum 2^{-k \cdot 2 \cdot 5} + \sum 2^{-k \cdot 2 \cdot 7} + \sum 2^{-k \cdot 3 \cdot 5} + $$ 
+$$ + \sum 2^{-k \cdot 3 \cdot 7} + \sum 2^{-k \cdot 5 \cdot 7} - \sum 2^{-k \cdot 2 \cdot 3 \cdot 5}  - \sum 2^{-k \cdot 2 \cdot 3 \cdot 7}  - \sum 2^{-k \cdot 2 \cdot 5 \cdot 7}  - \sum 2^{-k \cdot 3 \cdot 5 \cdot 7} + \sum 2^{-k \cdot 2 \cdot 3 \cdot 5 \cdot 7}$$
+Wiemy, że:
+$$\sum 2^{-k\cdot n} = \sum (2^{-n})^k = \frac 1 {1 - 2^{-n}} = \frac {2^{n}} {2^{n}-1}$$ 
+Stąd możemy policzyć:\\
+$$
+2 - \frac 4 3 - \frac 8 7 - \frac {32} {31} - \frac {128} {127} + \frac {64} {63} + \frac {1024} {1023} + \frac{2^{14}}{2^{14} -1} + \frac{2^{15}}{2^{15} -1} + \frac{2^{21}}{2^{21} -1} + \frac{2^{35}}{2^{35} -1} - \frac{2^{30}}{2^{30} -1} -$$ $$- \frac{2^{42}}{2^{42} -1} - \frac{2^{70}}{2^{70} -1} - \frac{2^{105}}{2^{105} -1} + \frac{2^{210}}{2^{210} -1}
+$$
+
+\clearpage
+\subsection*{Zadanie 4}
+Wiemy, że:\\
+$$f(x) = \sum\limits_{k=0}^\infty \frac{f^{(k)}(a)}{k!}\cdot (x-a)^k$$\\
+$$f(x)=x^a$$\\
+Rozpiszmy ze wzoru Taylora $$(x)^a$$ w punkcie 1:\\
+$$(x+1)^a = \sum\limits_{n=0}^\infty \frac{f^{(n)}(1)}{k!}\cdot (x+1-1)^n$$\\
+Wiemy, że $$f^{(n)}(1) = a\cdot (a-1)\cdot (a-2)\cdot \ldots (a-n+1)$$\\
+$$(x+1)^a = \sum\limits_{n=0}^\infty \frac{a^{\underline n}}{k!}\cdot x^n$$\\
+A to jest to co chcieliśmy pokazać.
+\clearpage
+\subsection*{Zadanie 5}
+a)\\
+$$a_0 = a_1 = a_2 = 1 $$\\
+$$a_{n+3}=a_{n+2}+a_{n+1}+a_n+1 $$
+$$A(x)=1+x+x^2 + \sum_{n=3}^{\infty} a_n x^n = 1+x+x^2 + \sum_{n=0}^{\infty} a_{n+3} x^{n+3} \stackrel{def}{=} 1+x+x^2 + \sum_{n=0}^{\infty} (a_{n+2}+a_{n+1}+a_n+1) x^{n+3} = $$
+$$= 1+x+x^2+\sum\limits_{n=0}^{\infty} x^{n+3} + \sum\limits_{n=0}^{\infty}a_n x^{n+3} + \sum\limits_{n=0}^{\infty}a_{n+1} x^{n+3} + \sum\limits_{n=0}^{\infty}a_{n+2} x^{n+3} =$$
+$$= \sum\limits_{n=0}^{\infty} x^{n} + x^3\sum\limits_{n=0}^{\infty} a_n x^{n} + x^2\sum\limits_{n=0}^{\infty}a_{n+1} x^{n+1} + x\sum\limits_{n=0}^{\infty} a_{n+2}x^{n+2} =$$
+$$= \frac{1}{1-x} + x^3A(x)+x^2(A(x)-a_0)+x(A(x)-a_0-a_1x)=\left(-x-2x^2+\frac{1}{1-x}\right) + A(x)(x+x^2+x^3)$$
+$$A(x)=\left(-x-2x^2+\frac{1}{1-x}\right) + A(x)(x+x^2+x^3)$$
+$$A(x)=\frac{-x-2x^2+\frac{1}{1-x}}{1-x-x^2-x^3}$$
+
+b)\\
+$$b_0=0, b_1=1$$
+$$b_{n+2} = b_{n+1} + b_n +\frac{1}{n+1} $$
+$$B(x)=0+x+\sum\limits_{n=0}^{\infty} b_{n+2} x^{n+2} \stackrel{def}{=}  x + \sum\limits_{n=0}^{\infty} ( b_{n+1} + b_n + \frac{1}{n+1} ) x^{n+2} = $$
+$$= x + \sum\limits_{n=0}^{\infty} b_{n+1} x^{n+2} + \sum\limits_{n=0}^{\infty} b_n x^{n+2} + \sum\limits_{n=0}^{\infty} \frac{1}{n+1} x^{n+2} = x + x(B(x)-b_0) + x^2B(x) + x \sum\limits_{n=0}^{\infty} \frac{1}{n+1} x^{n+1} =$$  
+$$= x + xB(x) + x^2B(x) + x\int \frac{1}{1-x} dx = x + xB(x) + x^2B(x) + x(-\log(1-x))$$
+$$B(x)=\frac{x\log(1-x)-x}{x^2+x-1}$$
+
+c)\\
+$$c_0=1$$ 
+$$c_{n+1}=\sum\limits_{k=0}^{\infty} \frac{c_{n-k}}{k!}$$
+$$C(x)=1+\sum\limits_{n=0}^{\infty} c_{n+1} x^{n+1} \stackrel{def}{=} x\sum\limits_{n=0}^{\infty} \left(\sum\limits_{k=0}^{\infty} \frac{c_{n-k}}{k!}\right) x^n = 1+x\left(\sum\limits_{k=0}^{\infty} c_k x^k\right)\left(\sum\limits_{k=0}^{\infty} \frac{x^n}{n!}\right)$$
+$$C(x)=1+xC(x)\cdot e^x$$
+$$C(x)=\frac{1}{1-xe^x}$$
+
+\clearpage
+
+\subsection*{Zadanie 12}
+Z wykładu wiemy, że:\\
+$$P(x) = \prod_{k=1}^{\infty} \frac 1 {1-x^k}$$\\
+$$R(x) = \prod_{k=1}^{\infty} (1+x^k)$$\\
+Teraz jest już prosto, bo:\\
+$$R(x) \cdot P(x^2) = \prod\limits_{k=1}^{\infty} \frac {1+x^k} {1-x^{2k}} = \prod\limits_{k=1}^{\infty} \frac {(1+x^k)} {(1+x^k)(1-x^k)} = \prod\limits_{k=1}^{\infty} \frac {1} {(1-x^k)} = P(x)$$
+
+
+\subsection*{Zadanie 13}
+Wiemy z algebry, że inwolucja w rozkładzie na cykle ma tylko cykle jedno i dwuelementowe. Skoro tak to można wyprowadzić prosty wzór rekurencyjny:\\
+$$a_0=a_1=1$$
+$$a_{n+1}=a_n+na_{n-1}$$
+Bo możemy albo wziąć wszystkie możliwe cykle $a_n$ i dołożyć do nich jeden cykl jednoelementowy (na 1 sposób) lub utworzyć permutację n-1 elementów i dołożyć cykl dwuelementowy (sposobów wybrania takich elementów jest $n\cdot 1$).\\
+Teraz, wykonując obliczenia analogiczne do Zadania 7:\\
+$$A'(x)=\sum\limits_{n=0}^{\infty} \frac{a_{n+1}}{n!}x^n = \sum\limits_{n=0}^{\infty} \frac{a_n}{n!} x^n + \sum\limits_{n=0}^{\infty} \frac{na_{n-1}}{n!} x^n$$\\
+Podobnie jak w zadaniu 7 możemy to zapisać, jako:\\
+$$A'(x)=A(x) +xA(x)$$
+$$\frac{A'(x)}{A(x)}=x+1$$
+$$A(x)=exp(\int 1+x dx) = e^{x+x^2/2}$$
+A to jest to co chcieliśmy pokazać. 
+
+\clearpage
+\subsection*{Zadanie 15}
+Z wiedzą, że:\\
+$$\int_0^{\infty} t^n e^{-t} \;dt = \Gamma(n+1)$$\\
+Oraz, że $$\Gamma(n+1) = n!$$ dla n naturalnych, możemy zacząć robić zadanie:\\
+$$\int_0^{\infty} G_e(zt)e^{-t} \; dt = \int_0^{\infty} (\sum_{n=0}^{\infty} a_n \frac{ z^nt^n} {n!} e^{-t}) \; dt = \sum_{n=0}^{\infty} a_n z^n \frac 1 {n!} (\int_0^{\infty} t^n e^{-t} \; dt) =$$ $$= \sum_{n=0}^{\infty} a_n z^n \frac {\Gamma(n+1)} {n!} = \sum_{n=0}^{\infty} a_n z^n \frac {n!} {n!} = \sum_{n=0}^{\infty} a_n z^n = G(z)$$\\
+
+
+
+\end{document}

@@ -1,0 +1,123 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 6}
+\author{Kamil Matuszewski}
+\date{\today}
+
+
+\begin{document}
+
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+
+\subsection*{Zadanie 1}
+Mamy algorytm w postaci:\\
+$w_n=a_n$\\
+$w_{n-1}=w_n x + a_{n-1}$\\
+Mamy więc:\\
+$a_0(1+\beta_0)+a_1 x(1+\alpha_1)(1+\beta_0)(1+\beta_1)+...+a_n x^n (1+\alpha_1)...(1+\alpha_n)(1+\beta_0)...(1+\beta_n)$\\
+$=\sum\limits_{i=0}^n x^i a_i \prod\limits_{j=0}^i(1+\beta_j) \prod\limits_{j=1}^i(1+\alpha_j) $\\
+Teraz, niech $(1+\beta)$ to będzie maksymalny błąd $(1+\beta_i)$, a $(1+\alpha)$ maksymalny błąd $(1+\alpha_i)$. Mamy wtedy:\\
+$\sum\limits_{i=0}^n x^i a_i \prod\limits_{j=0}^i(1+\beta) \prod\limits_{j=1}^i(1+\alpha) $\\
+$\sum\limits_{i=0}^n x^i a_i (1+\beta)^i (1+\alpha)^i $\\
+A teraz $(1+\epsilon)=(1+\alpha)(1+\beta)$. Ten błąd jest nadal małym błędem, wtedy mamy:\\
+\Large$\sum\limits_{i=0}^n x^i a_i ((1+\beta)(1+\alpha))^i = \sum\limits_{i=0}^n x^i a_i (1+\epsilon)^i = \sum\limits_{i=0}^n (x(1+\epsilon))^i a_i =\sum\limits_{i=0}^n \tilde{x}^i a_i $\\ \normalsize
+a to jest dokładny wynik dla lekko zaburzonych danych, czyli algorytm jest numerycznie poprawny.
+
+\clearpage
+\subsection*{Zadanie 3}
+\Large a) \normalsize
+
+$T_{0}(x)=1$\\
+$T_{1}(x)=x$\\
+$T_{2}(x)=2x\cdot T_{1}(x) - T_{0}(x)$\\
+$T_{2}(x)=2x^2 - 1$\\
+$T_{3}(x)=2x\cdot T_{2}  - T_{1}$\\
+$T_{3}(x)=2x\cdot (2x^2 - 1) - x = 4x^3-3x$\\
+$T_{4}(x)=2x\cdot T_{3}  - T_{2}$\\
+$T_{4}(x)=2x\cdot (4x^3-3x)  - 2x^2 + 1= 8x^4-6x^2-2x^2+1=8x^4-8x^2+1$\\
+$T_{5}(x)=2x\cdot T_{4}  - T_{3}$\\
+$T_{5}(x)=2x\cdot (8x^4-8x^2+1)  - 4x^3+3x = 16x^5-16x^3-4x^3+3x=16x^5-20x^3+5x$\\
+$T_{6}(x)=2x\cdot T_{5}  - T_{4}$\\
+$T_{6}(x)=2x\cdot (16x^5-20x^3+5x)  - 8x^4+8x^2-1 = 32x^6-48x^4+18x^2-1$
+
+\Large b) \normalsize
+
+Dla $n=1$ - oczywiste, z definicji.\\
+Teraz załóżmy, że $\forall_{i<n}$ działa, sprawdźmy dla n.\\
+Wiemy, że $T_{n}=2x\cdot T_{n-1} - T_{n-2}$, wiemy, że stopień n-tego wielomianu czebyszewa to n (łatwo można pokazać). Dlatego n-ta potęga powstanie przez przemnożenie 2x przez $T_{n-1}$, ale odjęcie $T_{n-2}$ nie wpłynie na współczynnik (bo jest stopnia n-2). Ale z założenia wiemy, że współczynnik przy $x^{n-1}$ w $T_{n-1}$ to $2^{n-2}$, mnożąc to przez 2, więc współczynnik to $2^{n-1}$, a to to co chcieliśmy pokazać.
+
+\Large c) \normalsize
+
+\large i)\\ \normalsize 
+Wiemy, że $T_n(x)=\cos(n\cdot \arccos(x))$, a $\cos(\alpha) \in [-1,1]$, więc to jest co co mieliśmy pokazać...
+
+\large ii)\\ \normalsize 
+Z wiedzą, że $\cos(\alpha)=1 \leftrightarrow \alpha=k\cdot \pi$, oraz, że $T_n(x)=\cos(n\cdot \arccos(x))$, wiemy, że\\
+$n\cdot \arccos(x) = k\cdot \pi$\\
+$\arccos(x) = \frac{k\cdot \pi}{n}$\\
+$x_k=\cos(\frac{k\cdot \pi}{n}), (k=0..n-1)$
+
+\large iii)\\ \normalsize 
+Chcemy, żeby $\cos((n+1)\arccos x) = 0$. $\cos(\alpha)=0$ gdy $\alpha=k\pi + \frac{\pi}{2}$. Więc:\\
+\Large $ (n+1)\arccos x = k\pi + \frac{\pi}{2}$, więc $\arccos x = \frac{k\pi + 0.5\cdot \pi}{n+1} $  \\
+$x_k=\cos(\frac{k\pi + 0.5\cdot \pi}{n+1}) $\\
+\normalsize
+Teraz wiemy, że istnieje co najwyżej n+1 zer (bo wielomian jest rzędu n+1). Weźmy $k=0...n$, jest ich n+1, więc jest ich przynajmniej n+1, skoro jest ich przynajmniej n+1 i najwyżej n+1 to jest ich dokładnie n+1.
+
+\clearpage
+\subsection*{Zadanie 4}
+Załóżmy, że istnieją dwa wielomiany stopnia n interpolujące w węzłach $x_0...x_n$ te same wartości. Nazwijmy je $W_1(x)$ i $W_2(x)$
+Weźmy teraz $W_3(x)=W_1(x)-W_2(x)$. Wiemy, z własności odejmowania wielomianów, że jest on stopnia co najwyżej n. Ale wiemy, że $W_1(x)$ i $W_2(x)$ w węzłach $x_0...x_n$ przyjmują te same wartości. Dla tych punktów mamy więc $W_3(x_k)=0$, ma on więc n+1 miejsc zerowych.\\
+Ale $W_3(x)$ jest stopnia nie większego niż n, a każdy niezerowy wielomian stopnia n ma co najwyżej n pierwiastków rzeczywistych, co oznacza, że $W_3(x)$ musi być wielomianem tożsamościowo równy zeru. A to oznacza, że$ W_3(x)=W_1(x)-W_2(x)=0 \leftrightarrow W_1(x)=W_2(x)$, a to jest sprzeczne z założeniem, że są różne.
+
+\subsection*{Zadanie 5}
+$x_0=0, x_1=2, x_2=4, x_3=7$\\
+$y_0=-1, y_1=1, y_2=3, y_3=-5$\\
+\Large
+$L_3(x)=(-1)\frac{(x-2)(x-4)(x-7)}{(0-2)(0-4)(0-7)}+(1)\frac{(x-0)(x-4)(x-7)}{(2-0)(2-4)(2-7)}+(3)\frac{(x-0)(x-2)(x-7)}{(4-0)(4-2)(4-7)}+(-5)\frac{(x-0)(x-2)(x-4)}{(7-0)(7-2)(7-4)}=$\\
+$=\frac{(x-2)(x-4)(x-7)}{56}+\frac{(x-0)(x-4)(x-7)}{10}+\frac{(x-0)(x-2)(x-7)}{8}-\frac{(x-0)(x-2)(x-4)}{21}=\frac{41x^3-456x^2+1063x-210}{120}$
+\normalsize
+
+\subsection*{Zadanie 6}
+a)\\
+Wielomian stopnia $\leq$ 6 zinterpolować funkcję stopnia 3, więc z jednoznaczności z zad 4, to ta sama funkcja, koniec.\\
+b)\\
+$x_0=-1, x_1=0, x_2=1$\\
+$y_0=1, y_1=1, y_2=5$\\
+\Large
+$L_2(x)=\frac{(x-0)(x-1)}{(-1-0)(-1-1)}+\frac{(x+1)(x-1)}{(0+1)(0-1)}+(5)\frac{(x+1)(x-0)}{(1+1)(1-0)}=\frac{(x-0)(x-1)}{2}-\frac{2(x+1)(x-1)}{2}+(5)\frac{(x+1)(x-0)}{2}=2x^2+2x+1$
+\normalsize
+ 
+\clearpage 
+\subsection*{Zadanie 7}
+Mamy:\\
+\Large$\lambda_k(x)=\prod\limits_{j=0, j \neq k}^n\frac{x-x_j}{x_k-x_j}$\\ \normalsize
+a)\\
+Wielomian interpolacyjny Lagrange'a ma postać:\\
+$L_n(x)=\sum\limits_{k=0}^n f(x_k)\lambda_k(x)$ Weźmy funkcję f(x) stale równą 1. Mamy wtedy:\\
+$L_n(x)=\sum\limits_{k=0}^n \lambda_k(x)$. Ale wiemy, że $f(x)$ jest stopnia co najwyżej n, skoro tak, to $L_n(x)=f(x)$, czyli też jest stale równe 1, czyli, że:\\
+$L_n(x)=\sum\limits_{k=0}^n \lambda_k(x) \equiv 1$, a to jest to co chcieliśmy pokazać.\\
+b)\\
+Podobnie jak w poprzednim przypadku, weźmy funkcję $f(x)=x^j$. Gdy $j=0$, $x^0=1$ - punkt 1. W przeciwnym przypadku:\\
+$f(x)$ jest stopnia co najwyżej n, więc $L_n(x)=x^j$, a skoro tak to mamy:\\
+$L_n(x)=\sum\limits_{k=0}^n x_k^j \lambda_k(x) = x^j$, weźmy teraz $L_n(0)$, mamy:\\
+$0^j=0=\sum\limits_{k=0}^n x_k^j \lambda_k(0)$, a to jest to co mieliśmy pokazać. 
+
+\end{document}

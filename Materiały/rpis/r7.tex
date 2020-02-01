@@ -1,0 +1,142 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\set{\lbrace}{\rbrace}
+\newcommand{\rpm}{\raisebox{.2ex}{$\scriptstyle\pm$}}
+
+
+\def\checkmark{\tikz\fill[scale=0.3](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 7}
+\author{Kamil Matuszewski}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+
+
+\begin{center}
+\begin{tabular}{|c *{5}{|c} |c|}\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7\\
+\hline 
+\checkmark &\checkmark &\checkmark &\checkmark &\checkmark &\checkmark &\checkmark \\
+\hline
+\end{tabular}\\
+\end{center}
+
+\subsection*{Zadanie 1}
+Mamy n-wymiarową zmienną $X=(X_1,\dots,X_n)^T$. Zmienną $Y=(Y_1,\dots,Y_n)^T$ określamy następująco:
+$$Y_1=\overline{X},\ Y_k=X_k-\overline{X}\ dla\ k=2,\dots ,n$$. Znaleźć Jakobian przekształcenia.
+
+Najpierw 
+$$X_k=Y_k+Y_1,\ dla\ k=2,\dots , n $$
+$$nY_1=\sum\limits_{k=1}^n X_k \Rightarrow nY_1=X_1 + X_2 + \dots + X_n = X_1 + (Y_2+Y_1) + (Y_3+Y_1) + \dots + (Y_n+Y_1) \Rightarrow X_1=Y_1 - Y_2 - Y_3 -\dots - Y_n$$
+
+Stąd, mamy Jakobian:
+
+$$\begin{vmatrix}
+1 & -1 & -1 & \dots & -1 \\ 
+1 & 1 &  &  &  \\
+1 &  & 1 &  &  \\ 
+1 &  & & \ddots & \\
+1 &  &  &  & 1
+\end{vmatrix} $$
+
+Którego wyznacznik już liczyliśmy.
+\clearpage
+\subsection*{Zadanie 2}
+Pokaż, że $\sum\limits_{k=1}^n (X_k - \mu)^2 = \sum\limits_{k=1}^n (X_k-\overline{X})^2 + n(\overline{X}-\mu)^2$
+\begin{proof}
+$$\sum\limits_{k=1}^n (X_k - \mu)^2 = \sum\limits_{k=1}^n (X_k - \overline{X} + \overline{X} - \mu)^2 = \sum\limits_{k=1}^n \left( (X_k - \overline{X})^2 + (\overline{X} - \mu)^2 + 2(X_k - \overline{X})(\overline{X} - \mu) \right)=$$ $$=\sum\limits_{k=1}^n (X_k - \overline{X})^2 + n(\overline{X} - \mu)^2 + 2(\overline{X} - \mu) \left( \sum_{k=1}^n (X_k - \overline{X} ) \right) = \sum\limits_{k=1}^n (X_k - \overline{X})^2 + n(\overline{X} - \mu)^2 + 2(\overline{X} - \mu) \left( \sum_{k=1}^n X_k - \sum_{k=1}^n \overline{X} \right) =$$ $$=\sum\limits_{k=1}^n (X_k - \overline{X})^2 + n(\overline{X} - \mu)^2 + 2(\overline{X} - \mu) \left(n\cdot \frac{1}{n}\cdot \sum_{k=1}^n X_k - n \overline{X} \right) = \sum\limits_{k=1}^n (X_k - \overline{X})^2 + n(\overline{X} - \mu)^2 + 2(\overline{X} - \mu) \cdot 0 =$$  $$=\sum\limits_{k=1}^n (X_k - \overline{X})^2 + n(\overline{X} - \mu)^2 $$
+
+\end{proof}
+\subsection*{Zadanie 3}
+Wyznacz rozkład zmiennych:
+\begin{enumerate}[(a)]
+\item $T_k=\left( \frac{X_k-\mu}{\sigma } \right)^2$
+
+Po kolei. $M_{X_k}(t)=e^{\mu t + \frac{1}{2}\sigma^2t^2}$, $M_{\frac{1}{\sigma}X_k}(t)=e^{\mu \frac{t}{\sigma} +\frac{1}{2}t^2}$, $M_{\frac{1}{\sigma}X_k}(t)=e^{\mu \frac{t}{\sigma} +\frac{1}{2}t^2}e^{-\frac{\mu}{\sigma} t} = e^{\frac{1}{2}t^2} \sim N(0,1)$
+Mamy więc $Z \sim N(0,1)$, więc, z wykładu $Z^2 \sim \chi^2(1)$
+
+\item Fakt z listy 5: dla rozkładu $Gamma(\frac{1}{2},\frac{1}{2})$ MGF to $(1-2t)^{-\frac{1}{2}}$.Wtedy, $M_Z(t)=(1-2t)^{-\frac{n}{2}} \sim Gamma(\frac{1}{2},n) \equiv \chi^2(n)$
+\end{enumerate}
+\subsection*{Zadanie 4}
+Znajdź rozkład zmiennej $A=\frac{n}{\sigma^2}(\overline{X}-\mu)^2=(\frac{\sqrt{n}}{\sigma}\overline{X}-\frac{\sqrt{n}}{\sigma}\mu)^2$
+
+$$M_{X_k}(t)=e^{\mu t + \frac{1}{2}\sigma^2t^2}$$
+$$M_{\sum\limits_{k=1}^n X_k}(t)=e^{n\mu t + \frac{n}{2}\sigma^2t^2}$$
+$$M_{\frac{1}{n}\sum\limits_{k=1}^n X_k}(t)=M_{\overline{X}}=e^{\mu t + \frac{1}{2n}\sigma^2t^2}$$, 
+$$M_{\frac{\sqrt{n}}{\sigma}\overline{X}} = e^{\mu \frac{\sqrt{n}}{\sigma}t + \frac{1}{2n}\sigma^2\frac{n}{\sigma^2}t^2} = e^{\mu \frac{\sqrt{n}}{\sigma}t + \frac{1}{2}t^2}$$
+$$M_{\frac{\sqrt{n}}{\sigma}\overline{X} - \frac{\sqrt{n}}{\sigma}\mu} = e^{\mu \frac{\sqrt{n}}{\sigma}t + \frac{1}{2}t^2}e^{-\frac{\sqrt{n}}{\sigma}\mu t} = e^{\frac{1}{2}t^2} \sim N(0,1)$$ 
+Ponownie, niech $\frac{\sqrt{n}}{\sigma}\overline{X} - \frac{\sqrt{n}}{\sigma}\mu = Z$, wtedy $Z\sim N(0,1) \Rightarrow Z^2 \sim \chi^2(1)$, a $Z^2=A$, więc to nasz wynik.
+
+\subsection*{Zadanie 5}
+Udowodnij, że $\frac{nS^2}{\sigma^2} \sim \chi^2(n-1)$, zakładając, że $S^2$ i $\overline{X}$ są niezależne.
+
+\begin{proof}
+Spójrzmy na równanie, które pokazaliśmy w zadaniu 2.
+$$\sum\limits_{k=1}^n (X_k - \mu)^2 = \sum\limits_{k=1}^n (X_k-\overline{X})^2 + n(\overline{X}-\mu)^2$$
+Zauważmy, że wyrażenie $\sum\limits_{k=1}^n (X_k-\overline{X})^2$ to $nS^2$, skoro tak, to podzielmy stronami przez $\sigma^2$, by otrzymać to o co nas pytają.
+$$\frac{1}{{\sigma}^2}\sum\limits_{k=1}^n \left(X_k - \mu\right)^2 = \frac{1}{\sigma^2}\sum\limits_{k=1}^n \left(X_k-\overline{X}\right)^2 + \frac{n}{\sigma^2}\left(\overline{X}-\mu\right)^2$$
+Skoro $S^2$ i $\overline{X}$ są niezależne, mogę zapisać, że:
+$$M_{\frac{1}{{\sigma}^2}\sum\limits_{k=1}^n \left(X_k - \mu\right)^2}=M_{\frac{1}{\sigma^2}\sum\limits_{k=1}^n \left(X_k-\overline{X}\right)^2}M_{\frac{n}{\sigma^2}\left(\overline{X}-\mu\right)^2} \Rightarrow M_{\frac{1}{\sigma^2}\sum\limits_{k=1}^n \left(X_k-\overline{X}\right)^2} = \frac{M_{\frac{1}{{\sigma}^2}\sum\limits_{k=1}^n \left(X_k - \mu\right)^2}}{M_{\frac{n}{\sigma^2}\left(\overline{X}-\mu\right)^2}}$$
+Albo, inaczej, z notacją z poprzednich zadań ($A$ to jest $M$ z zadania 4, zmieniłem oznaczenie żeby się nie jebało):
+
+$$M_{\frac{nS^2}{\sigma^2}} = \frac{M_Z}{M_A}$$
+
+Z poprzednich zadań, mamy:
+
+$$M_{\frac{nS^2}{\sigma^2}} = \frac{(1-2t)^{-\frac{n}{2}}}{(1-2t)^{-\frac{1}{2}}}=(1-2t)^{-\frac{n-1}{2}} \sim Gamma(\frac{1}{2},\frac{n-1}{2}) \equiv \chi^2(n-1) $$
+\end{proof}
+
+\subsection*{Zadanie 6}
+Wykaż, że $\Gamma(\frac{1}{2})=\sqrt{\pi}$
+
+\begin{proof}
+$$\Gamma\left(\frac{1}{2}\right)=\int_0^\infty \frac{e^{-x}}{\sqrt{x}} dx$$
+Niech $y=\sqrt{2x} \Rightarrow x=\frac{1}{2}y^2$
+$$\int_0^\infty \frac{e^{-x}}{\sqrt{x}} dx = \left\{\begin{matrix}
+y=\sqrt{2x} &\Rightarrow & x=\frac{1}{2}y^2 \\ 
+dy=\frac{1}{\sqrt{2x}}dx & 
+\end{matrix}\right. = \sqrt{2} \int_0^\infty e^{-\frac{1}{2}y^2}$$
+
+Teraz, trikowo zapiszmy sobie $$\Gamma\left(\frac{1}{2}\right)^2 = \Gamma\left(\frac{1}{2}\right) \Gamma\left(\frac{1}{2}\right) = \sqrt{2} \int_0^\infty e^{-\frac{1}{2}y^2}dy \sqrt{2} \int_0^\infty e^{-\frac{1}{2}z^2}dz = 2\int_0^\infty \int_0^\infty e^{-\frac{1}{2}(y^2+z^2)}\ dy\ dz$$
+
+Coś nam to przypomina, prawda? Jeśli tak, to bardzo dobrze. Jeśli nie, to bardzo źle. Robiliśmy coś podobnego tydzień temu.\\
+Podobnie jak w zadaniu 4 z listy 6 zmieniamy to na współrzędne biegunowe, i liczymy jakobian przekształcenia. To będzie praktycznie to samo, z drobną poprawką. $\theta$ będzie tym razem z przedziału $[0,\frac{1}{2}\pi]$. Jak widzimy, niewiele nam to zmieni. Okaże się, że ta podwójna całka to $\frac{1}{2}\pi$, więc: $$\Gamma\left(\frac{1}{2}\right)^2 = 2\cdot \frac{1}{2}\pi = \pi \Rightarrow \Gamma\left(\frac{1}{2}\right) = \sqrt{\pi}$$
+
+\end{proof}
+
+\subsection*{Zadanie 7}
+Rozpatrzmy niezależne zmienne losowe $X_1 \dots X_n$ z rozkładem $Poisson(\lambda)$. Jaka jest najbardziej prawdopodobna wartość $\lambda$, jeśli zanotowaliśmy, że $X_1=x_1,\dots,X_n=x_n$?
+
+Po pierwsze, mamy rozkład Poissona, więc:
+$$P(X_k = x_k) = e^{-\lambda} \frac{\lambda^{x_k}}{\lambda_k!} $$
+Zmienne są niezależne, więc:
+$$P(X_1=x_1,\dots,X_n=x_n) = P(X_1=x_1)P(X_2=x_2)\dots P(X_n=x_n)=e^{-\lambda n}\frac{\lambda^{\sum x_k}}{\prod x_k} = e^{-\lambda n}\frac{\lambda^{n\overline{x}}}{\prod x_k}=L(\lambda)$$
+Szukamy maksimum funkcji, czyli chcemy, by pierwsza pochodna się zerowała. Logarytm nie wpływa na monotoniczność funkcji, możemy więc zapisać:
+$$\log{L(\lambda)} = -\lambda n + n \overline{X} \log{\lambda} - \log{\prod x_k!}$$
+Liczymy pierwszą pochodną po $\lambda$ i przyrównujemy do 0:
+$$- n + n \overline{X} \frac{1}{\lambda} =0 \Rightarrow \frac{\overline{x}}{\lambda}=1 \Rightarrow \hat{\lambda}=\overline{x}$$
+Co jest naszą odpowiedzią.
+
+\end{document}

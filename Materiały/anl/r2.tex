@@ -1,0 +1,96 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\def\checkmark{\tikz\fill[scale=0.3](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 2}
+\author{Kamil Matuszewski}
+\date{22 października 2015}
+
+\begin{document}
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+
+\begin{center}
+\begin{tabular}{|c *{8}{|c} |c|}\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
+\hline 
+\checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark &  &  \\
+\hline
+\end{tabular}\\
+\end{center}
+
+
+\subsection*{Zadanie 1}
+Pokaż, że każda niezerowa liczba $x$ ma jednoznaczne przedstawienie w postaci znormalizowanej.
+
+\begin{proof}
+Najpierw pokażemy, że każdą liczbę $x$ można zapisać w postaci $sm2^c$. $s$ to oczywiście znak. Teraz, $x=m2^c$ ( z dokładnością do modułu, ale to nie jest istotne). Skoro tak, to $m=\frac{x}{2^c}$, innymi słowy przesuwamy binarną reprezentację $x$ o $c$ miejsc w lewo. $c$ możemy dobrać tak, żeby nasze $m$ było z przedziału $[\frac{1}{2},1)$. Oczywiście jest to możliwe, trzeba się tylko trochę zastanowić (przesuwamy przecinek tak, by przed przecinkiem było $0$, za przecinkiem będzie $1$ i dalej coś, czyli liczba z zakresu $[\frac{1}{2},1)$). Wtedy $m$ mamy już obliczone. Czyli każdego $x$ możemy przedstawić w tej postaci.\\ \\
+
+Teraz jednoznaczność.\\
+Załóżmy nie wprost, że istnieją dwie różne reprezentacje $x$ w postaci $sm2^c$. Oczywiście, znak jest stały. Mamy więc, że:
+$$x=sm_12^{c_1}=sm_22^{c_2} \Rightarrow m_12^{c_1}=m_22^{c_2} \Rightarrow \log{m_1}+c_1=\log{m_2}+c_2 \Rightarrow \log{\frac{m_1}{m_2}}=c_2-c_1$$
+\begin{itemize}
+\item $c_1=c_2$
+$$\log{\frac{m_1}{m_2}}=0 \Rightarrow \frac{m_1}{m_2}=1 \Rightarrow m_1=m_2$$
+Sprzeczność.
+\item $c_1>c_2$
+$$\log{\frac{m_1}{m_2}}=c_2-c_1 \Rightarrow \log{\frac{m_1}{m_2}}\leq -1 \Rightarrow \frac{m_1}{m_2} \leq \frac{1}{2} \Rightarrow m_1 \leq \frac{1}{2}m_2$$
+Teraz musimy skorzystać z tego, że $m_1, m_2 \in [\frac{1}{2},1)$. Widać już, że mamy sprzeczność, bo żeby $m_1$ było w dobrym przedziale, to $m_2$ musiałoby być większe(bądź równe) $1$, co jest niemożliwe.
+\item $c_1<c_2$
+$$\log{\frac{m_1}{m_2}}=c_2-c_1 \Rightarrow \log{\frac{m_1}{m_2}} \geq 1 \Rightarrow \frac{m_1}{m_2}\geq 2 \Rightarrow m_1 \geq 2m_2$$
+Ponownie korzystamy z tego, że $m_1, m_2 \in [\frac{1}{2},1)$. Żeby $m_1$ było w dobrym przedziale $m_2$ musiałoby być mniejsze od $\frac{1}{2}$, co jest niemożliwe.
+\end{itemize}
+\end{proof}
+
+\subsection*{Zadanie 2}
+To jest jakieś proste, sprawdzamy wszystkie opcje, pamiętamy o ujemnych, wyjdzie pewnie z 24 liczby, przedział jakoś $[-1.75,1.75]$ no i im bliżej zera tym mniej wartości wpada. Zostawiam jako zadanie do pobawienia się.
+
+\subsection*{Zadanie 3}
+Pokaż, że 
+$$\frac{|rd(x)-x|}{|x|}\leq 2^{-t}$$
+
+\begin{proof}
+$$\frac{|rd(x)-x|}{|x|} = \frac{|sm_t2^c-sm2^c|}{|sm2^c|} = \frac{|(s2^c)(m_t-m)|}{|s2^cm|} = \frac{|m_t-m|}{|m|} \overset{(1)}{\leq} \frac{2^{-t}}{2m} \overset{(2)}{\leq} 2^{-t}$$
+
+Gdzie:\\
+$(1)$ bo w treści mamy, że $|m_t-m|\leq \frac{1}{2} 2^{-t}$\\
+$(2)$ bo maksymalizujemy ułamek. Skoro maksymalizujemy ułamek to minimalizujemy licznik. $m\in [\frac{1}{2},1)$. Czyli $2m$ może minimalnie wynieść $1$. Jeśli ułamek byłby mniejszy, działałoby tym bardziej.  
+\end{proof}
+
+\subsection*{Zadanie 4}
+Wikipedia + \href{http://lucc.pl/inf/architektura_komputerow_2/egzamin/materia%B3y/zmiennoprzecinkowe.pdf}{to (click)}
+
+\subsection*{Zadanie 5}
+Załóżmy, że maksymalna wartość $X_{fl}=2^{64}$ i weźmy $x=y=2^{60}$. 
+$$\sqrt{x^2+y^2}=\sqrt{(2^{60})^2+(2^{60})^2}=\sqrt{2^{120}+2^{120}}=\sqrt{2^{120}(1+1)}=2^{60}\sqrt{2}$$
+$2^{60}\sqrt{2} \in X_{fl}$. No ale $2^{120}$ już się nie mieści. Jak moglibyśmy to naprawić?\\
+Załóżmy, że $x\geq y$, jeśli nie to możemy podmienić. 
+$$\sqrt{x^2+y^2}=\sqrt{x^2(1+\frac{y^2}{x^2})}=|x|\sqrt{1+(\frac{y}{x})^2} $$ 
+Skoro $x\geq y$ to pod pierwiastkiem mamy maksymalnie dwójkę, więc nie grozi nam nadmiar (bo $\sqrt{2}max(x,y) \in X_{fl})$. Przerabiamy to na algorytm, co zostawiam jako proste ćwiczenie.\\ \\
+Co do długości euklidesowej, to jeśli wiemy, że zapisuje się ją wzorem $$||x_n|| = \sqrt{x_1^2+x_2^2+\ldots + x_n^2}$$
+To już możemy łatwo znaleźć analogię do tego co robiliśmy przed chwilą. Wyciągamy największego $x$ przed pierwiastek. Jeśli $\sqrt{n}\cdot max(|x_1|,|x_2|,/ldots,|x_n|) \in X_{fl}$
+
+\subsection*{Zadanie 6}
+Wikipedia
+
+
+
+\end{document}

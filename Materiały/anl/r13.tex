@@ -1,0 +1,134 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\def\checkmark{\tikz\fill[scale=0.3](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 13}
+\author{Kamil Matuszewski}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+\newcommand{\R}{\mathbb{R}}
+
+\begin{center}
+\begin{tabular}{|c *{8}{|c} |c|}\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
+\hline 
+\checkmark &\checkmark &\checkmark &\checkmark & &\checkmark &\checkmark & \checkmark\\
+\hline
+\end{tabular}\\
+\end{center}
+
+\subsection*{Zadanie 1}
+Sprawdź zbieżność metody trapezów.
+\begin{proof}
+
+Wiemy z wykładu, że reszta w metodzie trapezów to:
+$$R=\frac{-1}{12n^2}(b-a)^3 f''(\epsilon)$$
+Teraz, możemy sprawdzić, że:
+$$|R|=|\frac{-1}{12n^2}(b-a)^3 f''(\epsilon)|\leq |\frac{C}{12n^2}|$$
+Gdzie $C$ jest jakąś stałą (dokładniej $(b-a)^3\cdot f''(\epsilon)$).
+Można zauważyć, że gdy $n\leftarrow \infty$ to $R=0$. Skoro tak, to metoda jest zbieżna.
+
+\end{proof}
+
+\subsection*{Zadanie 2}
+Opracuj algorytm liczenia wartości całki $\int_a^b f(x) dx$  z zadaną dokładnością, jeśli dla dowolnego $x\in [a,b]$ znamy dokładną wartość $f(x)$.
+
+Stosujemy jakąś metodę. U mnie to będzie trapezów. Zauważamy, że skoro reszta w tym wzorze to $R=\frac{-1}{12n^2}(b-a)^3 f''(\epsilon)$ a $f''(\epsilon)<1$, to możemy zapisać, że $n>\sqrt{\frac{(b-a)^3}{12\epsilon}}$\\
+1. Niech $T=0$ $n=\ceil{\sqrt{\frac{(b-a)^3}{12\epsilon}}}$\\
+2. Niech $h=\frac{(b-a)}{n}$\\
+3. Policz $T=\sum\limits_{i=0}^{n}{}^{''} f(a+ih)$ \\
+4. Zakończ
+\clearpage
+\subsection*{Zadanie 3}
+Jak dobrać n by policzyć $\int_1^2 \ln(2x+1) dx$ z błędem $10^{-7}$ za pomocą złożonego wzoru Simpsona?
+
+Wiemy, że wartość dokładna $\int_1^2 ln(2x+1)$ wynosi $1,3757$. Wiemy też, że reszta we wzorze Simpsona to $\frac{(b-a)h^4}{180}f^{(4)}(\epsilon)$  \\
+Reszta, to już obliczenia.
+
+$$|\frac{\frac{\frac{(2-1)^5}{n^4}}{180}f^{(4)}(\epsilon)}{1,3757}| = |\frac{\frac{\frac{1}{n^4}}{180}f^{(4)}(\epsilon)}{1,3757}| = |\frac{\frac{1}{180n^4}f^{(4)}(\epsilon)}{1,3757}| $$
+$f^{(4)}(x)=-\frac{96}{16x^4+32x^3 + 24x^2 + 8x+1}$. Moduł z tego możemy to ograniczyć na przedziale $(1,2)$ przez $1,2$. Skoro tak, to kontynuując:
+$$|\frac{\frac{1}{180n^4}f^{(4)}(\epsilon)}{1,3757}|=|\frac{1,2}{180n^4 \cdot 1,3757}| = |\frac{1,2}{180 \cdot 1,3757} \frac{1}{n^4}|$$
+$$|\frac{1,2}{180 \cdot 1,3757} \frac{1}{n^4}| \leq \frac{1}{10^7} $$
+$$|n^4| \geq 48460	$$
+$$n \geq 15 $$
+
+\subsection*{Zadanie 4}
+Pokaż, że $T_{2n} = \frac{1}{2}(T_n+M_n)$, gdzie $M_n=h_n\sum\limits_1^n f(a+\frac{1}{2}(2i-1)h_n)$\\
+\begin{proof}
+Najpierw, rozpiszmy sobie $M_n$.\\
+$$M_n=h_nf(a+\frac{1}{2}h_n) + h_nf(a+\frac{3}{2}h_n) + h_nf(a+\frac{5}{2}h_n) + \dots + h_nf(a+\frac{2n-1}{2}h_n) $$
+Teraz, $T_n$
+$$T_n=\frac{1}{2}h_nf(a+\frac{0}{2}h_n)+h_nf(a+\frac{2}{2}h_n)+h_nf(a+\frac{4}{2}h_n)+\dots + h_nf(a+\frac{2n-2}{2}h_n)+\frac{1}{2}h_nf(a+\frac{2n}{2}h_n) $$
+Łatwo poprzecinać ciąg $T_n$ ciągiem $M_n$, i otrzymamy:
+$$T_n+M_n=\frac{1}{2}h_nf(a+\frac{0}{2}h_n) +  h_nf(a+\frac{1}{2}h_n) + h_nf(a+\frac{2}{2}h_n) +\dots + h_nf(a+\frac{2n-1}{2}h_n) + \frac{1}{2}h_nf(a+\frac{2n}{2}h_n)=$$
+$$=h_n\left( \frac{1}{2}f(a) + \frac{1}{2}f(b) + \sum\limits_{i=1}^{2n}f(a+\frac{i}{2}h_n) \right) = h_n\left( \frac{1}{2}f(a) + \frac{1}{2}f(b) + \sum\limits_{i=1}^{2n}f(a+ih_{2n}) \right) $$
+Pomnóżmy przez $\frac{1}{2}$:
+$$\frac{1}{2}(T_n+M_n) = \frac{1}{2}h_n\left( \frac{1}{2}f(a) + \frac{1}{2}f(b) + \sum\limits_{i=1}^{2n}f(a+ih_{2n}) \right) = \frac{1}{2}h_{2n}\left( f(a) + f(b) + 2\sum\limits_{i=1}^{2n}f(a+ih_{2n}) \right)=T_{2n} $$
+\end{proof}
+
+Mając $T_{2}=T_{0,1}$ możemy w prosty sposób policzyć $T_4=T_{0,2}, T_8=T_{0,3}, T_{16}=T_{0,4}, \dots$.
+
+\subsection*{Zadanie 6}
+W ilu i w jakich punktach przedziału $[-1,3]$ musimy znać wartość funkcji, by policzyć $T_{10,0}$ dla całki $\int\limits_{-1}^3 f(x) dx$?
+
+Wystarczy obliczyć pierwszą kolumnę, resztę możemy wyznaczyć rekurencyjnie. Żeby policzyć pierwszą kolumnę, musimy w ostatnim kroku policzyć $T_{0,10}$. $T_{0,i}$ odpowiada wzorowi trapezów $R_{0,2^i}$. Stąd, nasze $i=10$. Nasz przedział dzielimy równoodlegle w punktach $x_0, x_1, \dots , x_{2^i}$, stąd musimy podzielić przedział na 1024 przedziały. Potem rekurencyjne policzenie kolejnych kolumn nie wymaga znajomości punktów funkcji. Łatwo policzyć, że nasze $h=\frac{1}{256}$, stąd łatwo sprawdzić, że i-ty punkt to $-1+\frac{i}{256}$ (jest ich 1025).
+
+\subsection*{Zadanie 7}
+Pokaż, że dla
+$$\left\{ \begin{matrix}
+ T_{0,n}=T_{2^n}\\
+ T_{m,n}=\frac{4^m T_{m-1,n+1}}{4^m-1}-\frac{T_{m-1,n}}{4^m-1}
+\end{matrix}\right.$$
+Jest zbieżny do $I=\int_a^n f(x) dx$
+
+\begin{proof}
+
+To, że pierwsza kolumna zbiega do całki, jest udowodnione w zadaniu pierwszym - w końcu pierwsza kolumna to wzór trapezu. To nasza podstawa indukcji\\
+Teraz, załóżmy indukcyjnie, że dla $m_0<m$ rzeczywiście zbiega do całki. Sprawdzając dla m skorzystamy ze wzoru rekurencyjnego:
+$$T_{m,n}=\frac{4^m T_{m-1,n+1}}{4^m-1}-\frac{T_{m-1,n}}{4^m-1} $$
+Ale wiemy, że dla m-1 metoda zbieżna, stąd:
+$$T_{m,n}=\frac{4^m}{4^m-1}I-\frac{1}{4^m-1}I=\frac{4^m-1}{4^m-1}I=I $$
+A to jest to co chciałem pokazać.
+\end{proof}
+\clearpage
+\subsection*{Zadanie 8}
+Chcemy policzyć całkę $\int_{-2}^3 f(x) dx = Q_2(f)$ tak, żeby działało dla wielomianów stopnia $<6$.
+
+Wiemy, że kwadratura Gaussa–Legendrea ma rząd 2n+2, czyli działa dla n=2, działa dla wielomianów stopnia $<6$.\\
+Można policzyć/sprawdzić w internecie, że współczynniki $A_k$ i punkty $x_k$ w tej metodzie to:\\
+$$x_0=\frac{-\sqrt{15}}{5}, A_0=\frac{5}{9}$$
+$$x_1=0, A_1=\frac{8}{9}$$
+$$x_2=\frac{\sqrt{15}}{5}, A_2=\frac{5}{9}$$
+Niestety, działa ona tylko dla całek na przedziale [-1,1]. Musimy więc sprowadzić nasze f(x) do całki na tym przedziale.
+$$\int_{-2}^3f(x) dx = \begin{Bmatrix}
+y=\frac{2(x+2)}{5}-1\\
+dy=\frac{2}{5} dx
+\end{Bmatrix} =\int_{-1}^1 g(y) \frac{5}{2} dy$$
+$$g(x)=f((x+1)\frac{5}{2}-2) $$
+
+$$\int_{-1}^1 g(x) dx = \frac{5}{9}g(\frac{-\sqrt{15}}{5}) + \frac{8}{9}g(0) + \frac{5}{9}g(\frac{\sqrt{15}}{5}) $$
+$$\int_{-1}^1 g(x) dx = \int_{-1}^1 f((x+1)\frac{5}{2}-2) dx = \frac{5}{9}f(\frac{1}{2}-\frac{\sqrt{15}}{2}) + \frac{8}{9}f(\frac{1}{2}) + \frac{5}{9}f(\frac{1}{2}+\frac{\sqrt{15}}{2}) $$
+$$\int_{-2}^3 f(x) dx = \frac{5}{2}\int_{-1}^1 f((x+1)\frac{5}{2}-2) dx = \frac{25}{18}f(\frac{1}{2}-\frac{\sqrt{15}}{2}) + \frac{20}{9}f(\frac{1}{2}) + \frac{25}{18}f(\frac{1}{2}+\frac{\sqrt{15}}{2}) $$
+
+\end{document}

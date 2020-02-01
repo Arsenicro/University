@@ -1,0 +1,22 @@
+{
+    "name": "Ex 5",
+    "description": "Ex 5 from PHPCourse",
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=7.2",
+        "moneyphp/money": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "src\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    },
+    "scripts": {
+    }
+}

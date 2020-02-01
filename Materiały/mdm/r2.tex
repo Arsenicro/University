@@ -1,0 +1,204 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\def\checkmark{\tikz\fill[scale=0.3](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 2}
+\author{Kamil Matuszewski}
+\date{22 października 2015}
+
+\begin{document}
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+
+\begin{center}
+\begin{tabular}{|c *{16}{|c} |c|}\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15\\
+\hline 
+\checkmark &\checkmark &\checkmark  &\checkmark  &\checkmark  &\checkmark  &  &  &  &\checkmark & & &\checkmark  &  & \\
+\hline
+\end{tabular}\\
+\end{center}
+
+\subsection*{Zadanie 1}
+Niech $a$ będzie liczbą niewymierną i $n$ liczbą całkowitą dodatnią. Pokaż, że $\floor{an}+\floor{(1-a)n}=n-1$. Jak wygląda analogiczna równość dla powały?
+
+\begin{itemize}
+\item  $\floor{an}+\floor{(1-a)n}=n-1$
+\begin{proof}
+Najpierw, skoro $n$ jest całkowite i $a$ niewymierne, to $an$ nie może być całkowite. Skoro tak, to $\floor{an}=\ceil{an}-1$ Mając tą wiedzę możemy przystąpić do rozwiązywania zadania.
+$$\floor{an}+\floor{(1-a)n}=\floor{an}+\floor{n-an} \overset{(1)}{=}\floor{an} + n + \floor{-an}  \overset{(2)}{=} \floor{an} - \ceil{an}  + n \overset{(3)}{=} n-1$$
+$(1)$ Skoro $n$ jest całkowite, to możemy wyciągnąć je przed podłogę.\\
+$(2)$ $\floor{-x}=-\ceil{x}$, było na wykładzie.\\
+$(3)$ Z spostrzeżenia wyżej.\\
+\end{proof}
+
+\item $\ceil{an}+\ceil{(1-a)n}=n+1$
+\begin{proof}
+$$\ceil{an}+\ceil{(1-a)n}=\ceil{an}+\ceil{n-an} = \ceil{an} + n + \ceil{-an}  = \ceil{an} - \floor{an}  + n = n+1$$
+Przejścia analogiczne do tych wyżej. Warto wspomnieć, że działają tylko i wyłącznie dlatego, że $an$ nie jest liczbą całkowitą.
+\end{proof}
+\end{itemize}
+\clearpage
+\subsection*{Zadanie 2}
+Dla dowolnych $x\in \mathbb{R}$ i $m \in \mathbb{N}$ oblicz $\floor{x/m}+\floor{(x+1)/m}+\ldots+\floor{(x+(m-1))/m}$.
+
+\begin{proof}
+Niech $x=km+r$, gdzie $k\in \mathbb{N}$ i $r \in [0,m)$, czyli innymi słowy $x$ jest jakąś wielokrotnością liczby $m$ z ewentualną resztą z przedziału $[0,m)$. Niech $x_i=\floor{\frac{x+i}{m}}$. Można łatwo sprawdzić, czemu równe są kolejne $x_i$.
+$$x_i=\floor{\frac{km+r+i}{m}}=\floor{k + \frac{r+i}{m}} $$
+Skoro $i\in \lbrace 0,\ldots,m-1 \rbrace$ a $k \in \mathbb{N}$ to $\floor{k + \frac{r+i}{m}}$ może wynieść albo $k$ albo $k+1$, w zależności od tego jak duże będzie $r+i$ w stosunku do $m$.\\
+Jeśli $r+i\geq m$ to wyrażenie będzie równe $k+1$. W przeciwnym przypadku wyrażenie będzie równe $k$. Mamy więc:
+$$x_i = \left\{\begin{matrix}
+k & i < m-r\\
+k+1 & i \geq m-r 
+\end{matrix}\right.
+$$
+Skoro wiemy już ile wynoszą kolejne wyrazy, to możemy łatwo policzyć sumę, która jest równa $mk+\floor{r}=\floor{x}$
+\end{proof}
+
+
+\subsection*{Zadanie 3}
+Dla każdej nierówności rekurencyjnej określ (najmniejszą) liczbę warunków początkowych niezbędnych do jednoznacznego określenia wartości elementów ciągu dla wszystkich $n \in \mathbb{N}$
+\begin{itemize}
+
+\item $a_n=na_{n-2}$, potrzebujemy przynajmniej $a_0$ i $a_1$ żeby obliczyć $a_2$. Żeby policzyć $a_1$ potrzebowalibyśmy wyrazu $a_{-1}$, który nie istnieje ($n \in \mathbb{N}$). Odpowiedź: $2$.
+\item $a_n=a_{n-1}+a_{n-3}$, potrzebujemy przynajmniej $a_2$ i $a_0$ żeby policzyć $a_3$. Żeby policzyć $a_2$ potrzebowalibyśmy $a_{-1}$, z tej samej przyczyny co w pierwszym ten wyraz nie istnieje. Potrzebujemy więc wyrazów $a_0$, $a_1$, $a_2$. Odpowiedź: $3$.
+\item $a_n=2a_{\floor{n/2}}+n$, zwróćmy uwagę, że $a_0=2a_0+0 \Rightarrow a_0=0$. Nie potrzebujemy więc żadnych warunków początkowych. Odpowiedź: 0.
+\end{itemize}
+
+\subsection*{Zadanie 4}
+Rozwiąż zależności:
+
+\begin{itemize}
+\item $f_n = f_{n-1}+3^n$ dla $n>1$ i $f_1=3$
+
+$$f_n=3^n+f_{n-1} = 3^n + 3^{n-1} + \ldots + 3 = \sum_{k=1}^n 3^k = 3*\frac{1-3^n}{1-3} = - \frac{3 - 3^{n+1}}{2} = \frac{3^{n+1}-3}{2} = \frac{1}{2}(3^{n+1}-3)$$
+
+\item $h_n = h_{n-1} + (-1)^{n+1}n$ dla $n>1$ i $h_1=1$\\
+Robimy to metodą "Wolfram + dowód indukcyjny", lub oficjalnie "zgadnij i udowodnij". Później pojawią się jakieś metody rozwiązywania takich rekurencji, ale póki co to musi nam starczyć.\\
+Hipoteza: $h_n=(-1)^{n+1}(\floor{\frac{n+1}{2}})$
+\begin{proof}
+Podstawa indukcji: $h_1=1$, $h_2=-1$, działa.\\
+Załóżmy, że $\forall_{n_0<n}$ zachodzi $h_{n_0}=(-1)^{n_0+1}(\floor{\frac{n_0+1}{2}})$. Sprawdźmy dla $n$. Rozpatrzymy dwa przypadki:
+\begin{enumerate}[(1)]
+\item $n$ parzyste.
+
+$$h_n=h_{n-1}+\left(-1\right)^{n+1}n \overset{zal}{=} \left(-1\right)^n\left(\floor{\frac{n}{2}}\right)+\left(-1\right)^{n+1}n=\left(-1\right)^n \left(\floor{\frac{n}{2}} - n\right) \overset{*}{=} $$ 
+$$\overset{*}{=} \left(-1\right)^n \left(\frac{n}{2} - n\right) = \left(-1\right)^n \left( - \frac{n}{2}\right) = \left(-1\right)^{n+1} \left(\frac{n}{2}\right) \overset{*}{=}\left(-1\right)^{n+1} \left(\floor{\frac{n}{2}}\right) \overset{*}{=}\left(-1\right)^{n+1} \left(\floor{\frac{n+1}{2}}\right)$$
+
+$*$ - korzystamy z parzystości $n$, w szczególności z tego, że $\frac{n}{2}$ jest całkowite oraz, że $\frac{n}{2}=\floor{\frac{n}{2}}=\floor{\frac{n+1}{2}}$
+
+\item $n$ nieparzyste.
+
+$$h_n=h_{n-1}+(-1)^{n+1}n = h_{n-2}+(-1)^n(n-1)+(-1)^{n+1}n \overset{zal}{=}$$ $$ \overset{zal}{=} (-1)^{n-1}\left( \floor{\frac{n-1}{2}} \right) + (-1)^n(n-1)+(-1)^{n+1}n = (-1)^{n-1}\left( \floor{\frac{n-1}{2}} - (n-1) + n \right) \overset{*}{=} $$ $$ \overset{*}{=} (-1)^{n-1}\left(\frac{n-1}{2} + 1\right)= (-1)^{n-1}\cdot(-1)^2 \left( \frac{n+1}{2} \right) \overset{*}{=} (-1)^{n+1} \left( \floor{\frac{n+1}{2}} \right) $$
+
+$*$ - korzystamy z nieparzystości $n$, w szczególności z tego, że $\frac{n+1}{2}=\floor{\frac{n+1}{2}}$ bo $\frac{n+1}{2}$ jest całkowite.
+\end{enumerate}
+\end{proof}
+
+\item $l_n=l_{n-1}l_{n-2}$ dla $n>2$ i $l_1=l_2=2$
+
+$$l_n=l_{n-1}l_{n-2}=l_{n-2}l_{n-3}l_{n-2} = (l_{n-2})^2 l_{n-3} = (l_{n-3}l_{n-4})^2 l_{n-3}=(l_{n-4})^2 (l_{n-3})^3 =$$ $$=\ldots = (l_{n-(n-2)})^{F_{n-1}}(l_{n-(n-1)})^{F_{n-2}} = 2^{F_{n-1}}2^{F_{n-2}}=2^{F_n}$$
+\end{itemize}
+
+\subsection*{Zadanie 5}
+Rozwiąż zależności rekurencyjne:
+
+\begin{itemize}
+\item $a_0=1$, $a_n=\frac{2}{a_{n-1}}$\\
+Zauważmy, że $a_n=n \mod{2} + 1$. 
+\begin{proof}
+Żeby to udowodnić użyjemy indukcji. Dla $a_0$ oczywiście działa. Załóżmy więc, że $\forall_{n_0<n}$ zachodzi wzór $a_{n_0}=n_0 \mod{2} + 1$. Sprawdzimy dla n.\\
+$$a_n=\frac{2}{(n-1) \mod{2} + 1}$$
+Jeśli $n$ parzyste, to $(n-1) \mod{2} + 1 = 2$, więc $a_n=1=0 + 1 = n \mod{2} + 1$.\\
+Jeśli $n$ nieparzyste, to $(n-1) \mod{2} + 1 = 1$, więc $a_n=2=1+1=n \mod{2} + 1$.
+\end{proof}
+
+\item $b_0=0$, $b_n=\frac{1}{1+b_{n-1}}$\\
+Zauważmy (np wolframem), że $b_n=\frac{F_n}{F_{n+1}}$.
+\begin{proof}
+Dla $b_0$ oczywiście działa. Załóżmy więc, że $\forall_{n_0<n}$ zachodzi wzór $b_{n_0}=\frac{F_{n_0}}{F_{n_0+1}}$. Sprawdzimy dla n.\\
+$$b_n=\frac{1}{1+b_{n-1}} = \frac{1}{1+\frac{F_{n-1}}{F_{n}}}= \frac{1}{\frac{F_n+F_{n-1}}{F_{n}}} = \frac{1}{\frac{F_{n+1}}{F_{n}}}=\frac{F_{n}}{F_{n+1}}$$
+\end{proof}
+\clearpage
+\item $c_0=1$, $c_n=\sum_{i=0}^{n-1}c_i$\\
+Zauważmy (np wolframem), że $c_n=2^{n-1}$ dla $n>0$.
+\begin{proof}
+$c_1=1$ i więc działa. Załóżmy więc, że $\forall_{n_0<n}$ zachodzi wzór $c_{n_0}=2^{n_0-1}$. Sprawdzimy dla n.\\
+$$c_n=\sum\limits_{i=0}^{n-1}c_i = c_{n-1} + \sum_{i=0}^{n-2} c_i \overset{def}{=}c_{n-1}+c_{n-1}=2c_{n-1} \overset{zal}{=} 2*2^{n-2}=2^{n-1}$$
+\end{proof}
+
+\item $d_0=1$, $d_1=2$, $d_n=\frac{(d_{n-1})^2}{d_{n-2}}$\\
+Zauważmy (np wolframem), że $d_n=2^n$.
+\begin{proof}
+$d_0=1$, $d_1=2$ więc działa. Załóżmy więc, że $\forall_{n_0<n}$ zachodzi wzór $d_{n_0}=2^{n_0}$. Sprawdźmy dla n.\\
+$$d_n=\frac{(d_{n-1})^2}{d_{n-2}}\overset{zal}{=}\frac{(2^{n-1})^2}{2^{n-2}}=\frac{2^{2n-2}}{2^{n-2}}=2^{2n-2-n+2}=2^{n}$$
+\end{proof}
+\end{itemize}
+
+\subsection*{Zadanie 6}
+Rozwiąż zależności rekurencyjne
+
+\begin{itemize}
+\item $y_0=y_1=1$, $y_n=\frac{(y_{n-1})^2+y_{n-2}}{y_{n-1}+{y_{n-2}}}$\\
+Zauważmy, że $y_n=1$.
+\begin{proof}
+Dla $y_0, y_1$ oczywiście działa. Załóżmy więc, że $\forall_{n_0<n}$ zachodzi wzór $y_{n_0}=1$. Sprawdźmy dla n.
+$$y_n=\frac{(y_{n-1})^2+y_{n-2}}{y_{n-1}+{y_{n-2}}} \overset{zal}{=} \frac{1^2+1}{1+1}=\frac{2}{2}=1 $$
+\end{proof}
+
+\item $z_0=1$, $z_1=2$, $z_n=\frac{(z_{n-1})^2-1}{z_{n-2}}$\\
+Zauważmy, że $z_n=n+1$. 
+\begin{proof}
+Dla $z_0$ oczywiście działa. Załóżmy więc, że $\forall_{n_0<n}$ zachodzi wzór $z_{n_0}=n_0+1$. Sprawdźmy dla n.
+$$z_n=\frac{(z_{n-1})^2 - 1}{z_{n-2}} \overset{zal}{=} \frac{((n-1)+1)^2 - 1}{(n-2)+1} = \frac{n^2-1}{n-1}=\frac{(n-1)(n+1)}{n-1}=n+1$$
+\end{proof}
+
+\item $t_0=0, t_1=1, t_n=\frac{(t_{n-1}-t_{n-2}+3)^2}{4}$\\
+Zauważmy, że $t_n=n^2$
+\begin{proof}
+Dla $t_0$ oczywiście działa.  Załóżmy więc, że $\forall_{n_0<n}$ zachodzi wzór $t_{n_0}=n_0^2$. Sprawdźmy dla n.
+$$t_n=\frac{(t_{n-1}-t_{n-2}+3)^2}{4} \overset{zal}{=} \frac{((n-1)^2-(n-2)^2+3)^2}{4}=\frac{(n^2-2n+1- n^2+4n-4+3)^2}{4} = $$ $$= \frac{(2n)^2}{4} = \frac{4n^2}{4}=n^2 $$
+\end{proof}
+
+\end{itemize}
+
+\subsection*{Zadanie 10}
+Podwójna wieża Hanoi składa się z $2n$ krążków $n$ różnych rozmiarów, po $2$ krążki każdego rozmiaru. W jednym kroku przenosimy dokładnie jeden krążek i nie możemy kłaść większego na mniejszym. Ile kroków jest potrzebnych by przenieść wieżę z pręta A na B, gdy krążki równej wielkości nie są rozróżnialne?
+
+To samo co pojedyncza wieża Hanoi, tylko że rekurencja to $H(n)=H(n-1)+2+H(n-1)$, bo przenosimy wieżę z $2(n-1)$ klocków na pręt C, potem przenosimy dwa krążki na pręt $B$ (dwa tych samych rozmiarów są nierozróżnialne) i znów wieżę z $2(n-1)$ klocków na pręt B. W ten sposób przenieśliśmy wieżę o $2n$ klockach z A na B. Można pokazać, że rozwiązanie tej rekurencji to $2^{n+1}-2$.
+\begin{proof}
+Dla $n=1$ wzór zachodzi, bo potrzebujemy przenieść dwa klocki na pręt B, co daje nam $2$ ruchy. Załóżmy więc, że dla każdego $n_0<n$ wzór zachodzi, i sprawdźmy dla $n$.
+$$H(n)=H(n-1)+2+H(n-1) \overset{zal}{=} 2^{n}-2 + 2 + 2^{n}-2  = 2\cdot 2^n - 2 = 2^{n+1}-2$$
+\end{proof}
+
+
+\subsection*{Zadanie 13}
+Sprawdź, że liczby harmoniczne $H_n = \frac{1}{1} + \frac{1}{2} + \ldots + \frac{1}{n}$ spełniają zależność rekurencyjną $$H_n = 1 + \frac{1}{n} \cdot \sum_{i=1}^{n-1} H_i$$ dla $n > 1$.
+
+\begin{proof}
+Wiemy, że 
+$$H_n=1+\frac{1}{n} \sum\limits_{i=1}^{n-1} H_i \Leftrightarrow nH_n-n=\sum\limits_{i=1}^{n-1} H_i $$
+Pokażę ten wzór indukcyjnie. Dla $n=2$ oczywiście działa, bo
+$$nH_n-n=2H_n-2=2(1+\frac{1}{2})-2=1=H_1=\sum\limits_{i=1}^{1} H_i $$
+Załóżmy, że $\forall_{n_0<n}$ zachodzi wzór $n_0H_{n_0}-n_0=\sum\limits_{i=1}^{n_0-1} H_i $. Sprawdzę dla $n$.
+$$\sum\limits_{i=1}^{n-1} H_i = H_{n-1} + \sum\limits_{i=1}^{n-2} H_i \overset{zal}{=} H_{n-1} + (n-1)H_{n-1}-(n-1) = nH_{n-1}-(n-1) = $$ $$= n(H_{n-1} + \frac{1}{n}-\frac{1}{n})-(n-1) = nH_n  - 1 - (n-1) = nH_n - n$$
+\end{proof}
+\end{document}

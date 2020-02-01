@@ -1,0 +1,59 @@
+https://webcache.googleusercontent.com/search?q=cache:B_aAsfuqmscJ:https://www.wfos.krakow.pl/wfosfiles/upload/SIWZalacznik%2520-opis%2520przedmiotu%2520zamowienia.pdf+&cd=1&hl=pl&ct=clnk&gl=pl
+
+WO-1 Functionality-Localisation - Polska wersja językowa
+WO-3 Functionality-Security - Szyfrowanie połączeń, jaki sposób szyfrowania?
+WT-02 Functionality-Licensing - System Windows XP/7
+WT-25 Usability-Aesthetics - Wymagania dotyczące interfejsu
+WR-34 Usability-Consistency - Integracja z systemami płatności
+WO-27 Usability-Accessibility - Wprowadzanie danych z różnych lokacji
+WT-20 Reliability-Recoverability - Kopie zapasowe
+WT-21 Reliability-Accuracy - Spójność danych
+WT-37 Supportability-Scalability - Liczba użytkowników
+WT-14 Performance-Response time - W czasie rzeczywistym
+
+Skonkretyzowany
+Mierzalny 
+Osiągalny 
+Realny
+Określony w czasie 
+
+
+
+
+
+
+
+Problem. Wypożyczenie książki w bibliotece. Opis skrócony:
+Klient wchodzi do biblioteki i czeka na swoją kolej. Podaje bibliotekarce swoją kartę czytelnika i wybiara książkę, którą chciałby wypożyczyć. Bibliotekarka sprawdza czy czytelnik ma już jakieś wypożyczone książki, jeśli ich liczba jest równa maksymalnej liczbie wypożyczonych ksiązek, to bibliotekarka oddaje mu kartę, i wypożyczenie nie dochodzi do skutku. Jeśli z kartą wszystko jest w porządku, to bibliotekarka podaje odpowiednią książkę, nabija ją na kartę i podaje czytelnikowi.
+
+
+Problem. Wypożyczenie książki w bibliotece. Opis pełny:
+
+Nazwa: Wypożyczenie książki w bibliotece
+
+Twórca: Ktoś
+
+Typ przypadku zastosowania: Ogólny
+
+Aktorzy: Czytelnik
+
+Warunki wstępne: Czytelnik musi mieć ważną kartę biblioteczną
+				 Czytelnik nie może mieć wypożyczonych więcej książek niż pozwala na to limit
+
+Warunki końcowe: Wypożyczenie książki i nabicie jej na kartę czytelnika. W przypadku niepowodzenia, odmowa.
+
+Główny scenariusz sukcesu:
+1. Czytelnik wchodzi do biblioteki, ustawia się w kolejce
+2. Kiedy nadchodzi jego kolej, podaje bibliotekarce kartę czytelnika, i wybiera sobie książkę
+3. Biblotekarka podaje książkę
+4. Bibliotekarka nabija książkę na kartę czytelnika
+5. Bibliotekarka oddaje kartę czytelnika, kończąc czynność wypożyczenia
+
+Alternatywne przepływy zdarzeń:
+2b. W przypadku gdy klient ma więcej książek niż pozwala na to limit, transakcja zostaje odrzucona a karta czytelnika oddana
+2c. Jeśli klient jest na czarnej liście, karta czytelnika zostaje mu zwrócona
+4b. W przypadku błędu nabijania, transakcja zostaje anumowana
+
+Dodatkowe wymagania: Brak
+
+Notatki i kwestie: Brak

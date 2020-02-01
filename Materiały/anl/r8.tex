@@ -1,0 +1,71 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 8}
+\author{Kamil Matuszewski}
+\date{\today}
+
+\begin{document}
+
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+
+\subsection*{Zadanie 4}
+
+$$q_0 = u_0 = 0\\$$
+
+$$\left.\begin{matrix}
+p_k=\lambda_k q_{k-1} + 2\\ 
+q_k = \frac{(\lambda_k - 1)}{p_k}\\ 
+u_k=\frac{(d_k - \lambda_k u_{k-1})}{p_k}
+\end{matrix}\right\} k=(0\cdots n-1)$$
+
+$$M_{n-1} = u_{n-1}$$
+$$M_k = u_k + q_k M_{k+1} $$
+
+$$p_1=2$$
+$$u_1=\frac{d_1}{p_1}$$
+$$q_1=\frac{\lambda_1 - 1}{p_1} $$
+
+Z (*) wiemy:\\
+$$2M_1 + (1+\lambda_1)M_2 = d_1$$
+Podzielmy równanie przez $p_1=2$\\
+$$M_1 + \frac{1+\lambda_1}{p_1}M_2 = \frac{d_1}{p_1} $$
+$$M_1 - \frac{\lambda_1 - 1}{p_1}M_2 = \frac{d_1}{p_1} $$
+$$M_1 = \frac{d_1}{p_1} + \frac{\lambda_1 - 1}{p_1}M_2 $$
+$$M_1 = u_1 + q_1 M_2$$
+Więc się zgadza.
+
+Teraz, dla $k+1$, z układu (*):\\
+$$(i)\lambda_{k+1} M_k + 2M_{k+1} + (1-\lambda_{k+1})M_{k+2} = d_{k+1}$$
+Dla k, z algorytmu:\\
+$$M_k = u_k + q_k M_{k+1}$$
+Pomnóżmy to przez $\lambda_{k+1}$ i odejmijmy od otrzymanego równania równianie (i):\\
+$$\lambda_{k+1}M_k - \lambda_{k+1} q_k M_{k+1} = \lambda_{k+1} u_k$$
+$$- \lambda_{k+1} M_k + 2M_{k+1} + (1-\lambda_{k+1})M_{k+2} = d_{k+1}$$
+
+$$-(\lambda_{k+1} q_k + 2) M_{k+1} - (1-\lambda_{k+1})M_{k+2}=  \lambda_{k+1} u_k - d_{k+1}$$
+$$(\lambda_{k+1} q_k + 2) M_{k+1} - (\lambda_{k+1} - 1)M_{k+2}= d_{k+1} - \lambda_{k+1} u_k$$
+Teraz, $(\lambda_{k+1} q_k + 2) = p_{k+1}$ więc podzielmy przez $p_{k+1}$
+$$M_{k+1} - \frac{(\lambda_{k+1} - 1)}{p_{k+1}}M_{k+2} = \frac{d_{k+1} - \lambda_{k+1} u_k}{p_{k+1}} $$
+$$M_{k+1} - q_{k+1}M_{k+2} = u_{k+1} $$
+Stąd, obliczając te równanie dla $k=1\cdots n-1$ obliczymy wszystkie wartości $M_k$, więc algorytm działa.
+
+
+\end{document}

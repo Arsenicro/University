@@ -1,0 +1,108 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage[boxed]{algorithm2e}
+\renewcommand{\algorithmcfname}{Algorytm}
+\newcommand{\dime}[2]{${#1} \times {#2}$}
+\SetKwInput{KwData}{\textbf{Dane}}
+\SetKwInput{KwResult}{\textbf{Wynik}}
+\SetAlgoSkip{smallskip}
+\SetAlgoInsideSkip{medskip} 
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\set{\lbrace}{\rbrace}
+\newcommand{\rpm}{\raisebox{.2ex}{$\scriptstyle\pm$}}
+
+
+\def\checkmark{\tikz\fill[scale=0.3](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 6}
+\author{Kamil Matuszewski}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+
+
+\begin{center}
+\begin{tabular}{|c *{8}{|c} |c|}\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\hline 
+ & & & & & & & & &\\
+\hline
+\end{tabular}\\
+\end{center}
+
+\subsection*{Zadanie 1}
+Znajdź estymator $Geom(p)$ parametru $p$.
+
+$$f(x;p)=(1-p)^{x-1}p$$
+$$f(x_1,x_2,\dots ,x_n, p)=p^n(1-p)^{\sum_1^n x_i - n} = L(p)$$
+$$\log{L(p)} = n\log{p} + \left( \sum\limits_1^n x_i - n\right) \log{(1-p)} $$
+$$ \frac{d[\log{L(p)}]}{p} = \frac{n}{p} + \frac{\sum_1^n x_i - n}{1-p} = 0 \Rightarrow p=\frac{n}{\sum_i^n x_i}$$
+
+\subsection*{Zadanie 2,3}
+Znajdź estymator $Pareto(x;a,k)$ zmiennej $a$ oraz zmiennej $k$.
+
+$$f(x;a,k)=\frac{ka^k}{x^{k+1}}$$
+$$L(a,k)=f(x_1,\dots ,x_n;a,k)=\prod\limits_{i=1}^n \frac{ka^k}{x_i^{k+1}}$$
+$$\log{L(k,a)}=\sum\limits_{i=1}^n \log{\frac{k a^k}{x_i^{k + 1}}}=n\log{k} + k n \log{a} - (k+1)  \sum\limits_{i=1}^n \log{x_i}$$
+
+
+Zmienna a:\\
+Zastanówmy się najpierw, z jakiego przedziału jest $a$ a raczej jakie maksymalne $a$ możemy podać. Maksymalnym $a$ jakie możemy podać jest $min(x_k)$, bo $x\in (a,\infty)$.\\
+Mamy:
+$$\log{L(k,a)}= n\log{k} + k n \log{a} - (k+1)  \sum\limits_{i=1}^n \log{x_i}$$
+Chcemy to z maksymalizować za pomocą $a$, kiedy $k,n,x_i$ są dane. Żeby to zrobić, możemy tylko zmaksymalizować $\log{a}$. W takmi razie musimy wziąć największą możliwą wartość $a$ którą jest $min(x_i)$, co jest naszym estymatorem.
+
+Zmienna k:
+$$\frac{d[\log{L(k,a)]}}{k} = \frac{n}{k} + n\log{a} - \sum\limits_{i=1}^n \log{x_i} = 0 $$
+$$\frac{n}{k} -  \sum\limits_{i=1}^n \log{\frac{x_i}{a}} \Rightarrow k=\frac{n}{ \sum\limits_{i=1}^n \log{\frac{x_i}{a}}}$$
+
+
+\subsection*{Zadanie 4}
+Znajdź estymator rozkładu wykładniczego $f(x;\lambda)$ parametru $\lambda$.
+
+$$f(x;\lambda)=\lambda e^{-\lambda x}$$
+$$f(x_1,\dots ,x_n;\lambda)=\lambda^n e^{- \lambda \sum x}=L(\lambda)$$
+$$\log{L(\lambda)} = n log(\lambda) - \lambda \sum x$$
+$$\frac{d[\log{L(\lambda)}]}{\lambda} = \frac{n}{\lambda} - \sum x  = 0 \Rightarrow \lambda = \frac{n}{\sum x} $$
+
+\subsection*{Zadanie 5}
+Znajdź estymator rozkładu Weibulla $f(x;k,\lambda)$ parametru $\lambda$.
+
+$$f(x;k,\lambda) = \frac{k}{\lambda} \left( \frac{x}{\lambda} \right)^{k-1}e^{-\left( \frac{x}{\lambda}\right )^k} $$
+$$f(x_1,x_2,\dots ,x_n;k,\lambda) = \frac{k^n}{\lambda^{nk}}e^{-\sum_1^n \left( \frac{x_i}{\lambda} \right)^k  } \prod\limits_{i=1}^n x_i^{k-1} = L(\lambda)  $$
+$$\log{L(\lambda)} = n\log{k} - nk\log{\lambda} - \sum_{i=1}^n \left( \frac{x_i}{\lambda} \right)^k + (k-1)\sum_{i=1}^n x_i  $$
+$$\frac{\log{L(\lambda)}}{\lambda} = \frac{-nk}{\lambda} + k \sum_{i=1}^n \frac{x_i^k}{\lambda^{k+1}}=0$$
+$$\frac{-nk}{\lambda} + k \sum_{i=1}^n \frac{x_i^k}{\lambda^{k+1}}=0 $$
+$$\frac{-nk}{\lambda} + \frac{k}{\lambda} \sum_{i=1}^n \frac{x_i^k}{\lambda^{k}}=0 \ \ \ \ \ \backslash : \frac{-nk}{\lambda} $$
+$$-1 + \frac{1}{n} \sum_{i=1}^n \frac{x_i^k}{\lambda^{k}}=0$$
+$$\frac{1}{n} \frac{1}{\lambda^{k}} \sum_{i=1}^n x_i^k=1$$
+$$\frac{1}{n} \sum_{i=1}^n x_i^k=\lambda^k \Rightarrow \lambda = \left( \frac{\sum_1^n x_i^k}{n} \right)^{-k}$$
+
+\subsection*{Zadanie 6}
+Mamy $X\sim \chi^2(n)$ i $Y\sim \chi^2(k)$ - niezależne. Znajdź gęstość $(X,Y)$
+
+$$f_X(x)=\frac{\left( \frac{1}{2} \right)^\frac{n}{2}}{\Gamma(\frac{n}{2})} x^{\frac{n}{2}-1}e^{\frac{-x}{2}} $$
+$$f_Y(y)=\frac{\left( \frac{1}{2} \right)^\frac{k}{2}}{\Gamma(\frac{k}{2})} y^{\frac{k}{2}-1}e^{\frac{-y}{2}} $$
+$$f_{(X,Y)}(x,y) = \frac{\left( \frac{1}{2} \right)^\frac{n}{2}}{\Gamma(\frac{n}{2})} x^{\frac{n}{2}-1}e^{\frac{-x}{2}} \cdot  \frac{\left( \frac{1}{2} \right)^\frac{k}{2}}{\Gamma(\frac{k}{2})} y^{\frac{k}{2}-1}e^{\frac{-y}{2}}$$
+
+\end{document}

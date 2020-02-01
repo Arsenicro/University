@@ -1,0 +1,123 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\set{\lbrace}{\rbrace}
+
+
+\def\checkmark{\tikz\fill[scale=0.3](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 4}
+\author{Kamil Matuszewski}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+
+
+\begin{center}
+\begin{tabular}{|c *{10}{|c} |c|}\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
+\hline 
+ & & & & & & & & & & & \\
+\hline
+\end{tabular}\\
+\end{center}
+
+\subsection*{Zadanie 1}
+Zmienna losowa X ma gęstość o wzorze $f(x)=a+bx^2$ dla $0\leq x\leq 1$. Wiadomo też, że $E(X)=0,6$. Znajdź $a$ i $b$.
+
+Wiemy, że $\int\limits_{-\infty}^\infty f(x) = 1 dx$ oraz, że $\int\limits_{-\infty}^\infty xf(x) dx = 0,6$. Pozostają więc tylko obliczenia:
+
+$$\int\limits_0^1 a+bx^2 dx = a + \frac{b}{3} = 1 \Rightarrow a=1-\frac{b}{3}$$.
+$$\int\limits_0^1 (1-\frac{b}{3})x+bx^3 dx = \int\limits_0^1 x-b(\frac{x}{3}+x^3) dx = \frac{1}{2}-b\int\limits_0^1 \frac{x}{3}+x^3 dx = \frac{1}{2}-b(\frac{1}{6}+\frac{1}{4} )$$
+$$\frac{1}{2}-\frac{5}{12}b = \frac{3}{5} \Rightarrow b=-\frac{6}{25}; a=\frac{27}{25}$$
+$$f(x)=\frac{27}{25}-\frac{6}{25}x^2 $$
+Dodatnie na przedziale $[0,1]$, więc chyba działa.
+
+\subsection*{Zadanie 2}
+Oblicz wartość oczekiwaną rozkładu $Exp(\lambda)$ tzn takiego, gdzie $f(x)=\lambda e^{-\lambda x}$.
+
+$$\int\limits_0^\infty x \lambda e^{-\lambda x} dx = \lambda \int\limits_0^\infty x e^{-\lambda x} dx = \lambda \int\limits_0^\infty x \left( \frac{-e^{-\lambda x}}{\lambda}\right)' dx = \lambda \left( \left[ x\frac{-e^{-\lambda x}}{\lambda} \right]_0^\infty - \int\limits_0^\infty \frac{-e^{-\lambda x}}{\lambda} dx \right)$$
+$$= \lambda \left( 0 + \frac{1}{\lambda} \int\limits_0^\infty e^{-\lambda x} dx \right)= \int\limits_0^\infty e^{-\lambda x} dx = \left[ -\frac{e^{-\lambda x}}{\lambda}\right]_0^\infty = \frac{1}{\lambda}$$
+
+\subsection*{Zadanie 3}
+Oblicz wariancje rozkładu $Exp(\lambda)$ tzn takiego, gdzie $f(x)=\lambda e^{-\lambda x}$.
+
+$Var(X)=E(X^2)-(E(X))^2$
+Policzmy więc $E(X^2)$. W sumie liczyliśmy to w zadaniu poprzednim, z tą różnicą, że tym razem mamy $x^2$. Stąd niektóre przejścia są nierozpisane - są analogicze do tych z zad. 2.
+
+$$\int\limits_0^\infty x^2 \lambda e^{-\lambda x} dx = \lambda \int\limits_0^\infty x^2 e^{-\lambda x} dx = \lambda \left( \left[ x^2\frac{-e^{-\lambda x}}{\lambda} \right]_0^\infty - \int\limits_0^\infty 2x \frac{-e^{-\lambda x}}{\lambda} dx \right)=$$
+$$=2\int\limits_0^\infty x (e^{-\lambda x}) dx = \frac{2}{\lambda^2}$$
+
+Ostatnie przejście wynika z zad 2 - liczymy to samo, tylko tym razem nie skróci się nam $\frac{1}{\lambda}$
+
+$E(X)$ mamy już policzone, wystarczy podnieść do kwadratu. Stąd:
+
+$$Var(X)=E(X^2)-(E(X))^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda^2}$$
+
+\subsection*{Zadanie 4}
+Oblicz wartość oczekiwaną zmiennej X, o gęstości $f(x)=xe^{-x} $
+
+$$\int\limits_0^\infty x^2 e^{-x} = \int\limits_0^\infty x^2 (-e^{-x})' = \left[ x^2(-e^{-x}) \right]_0^\infty + 2\int\limits_0^\infty x e^{-x} = 2\int\limits_0^\infty x (-e^{-x})'$$ 
+$$=2\left( \left[ x(-e^{-x}) \right]_0^\infty + \int\limits_0^\infty e^{-x} \right) = 2$$
+
+\subsection*{Zadanie 5}
+Oblicz wartość oczekiwaną zmiennej X, o gęstości
+$$f(x)=\left\{\begin{matrix}
+x & dla  & 0\leq x\leq 1 \\ 
+2-x & dla  & 1\leq x\leq 2 \\ 
+0 & w.p.p  & 
+\end{matrix}\right.$$
+
+$$\int\limits_0^1 x^2 dx + \int\limits_1^2 2x-x^2 dx = \int\limits_0^1 x^2 dx + 2\int\limits_1^2 x dx - \int\limits_1^2 x^2 dx = \frac{1}{3} + 3 - \frac{7}{3} = 1$$
+
+\subsection*{Zadanie 6}
+Oblicz wartość oczekiwaną zmiennej X, o dystrybuancie
+$$F(x)=\left\{\begin{matrix}
+0 & dla  & 0\leq x\leq 1 \\ 
+2-\frac{2}{x} & dla  & 1\leq x\leq a \\ 
+1 & dla  & x>a 
+\end{matrix}\right.$$
+
+Najpierw, gęstość. W tym celu liczymy pochodne.
+$$f(x)=\left\{\begin{matrix}
+0 & dla  & 0\leq x\leq 1 \\ 
+\frac{2}{x^2} & dla  & 1\leq x\leq a \\ 
+0 & dla  & x>a 
+\end{matrix}\right.$$
+
+Teraz, liczymy a:
+
+$$\int\limits_1^a \frac{2}{x^2} dx = 2\int\limits_1^a \frac{1}{x^2} dx = \left[-\frac{2}{x}\right]_0^a $$
+$$\left[-\frac{2}{x}\right]_0^a = 1 \Rightarrow a=2$$
+
+Więc nasza gęstość to $\frac{2}{x^2}$ dla $x\in [1,2]$. Wartość oczekiwana to już tylko formalność:
+
+$$\int\limits_1^2 \frac{2}{x} dx = \left[2log(x)\right]_1^2 = log(4)$$
+
+\subsection*{Zadanie 7}
+Oblicz wartość oczekiwaną zmiennej X o gęstości $f(x)=3x^2$ dla $x\in [0,1]$
+
+$$\int_0^1 3x^3 dx = \frac{3}{4} $$
+
+
+\end{document}

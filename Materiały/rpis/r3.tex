@@ -1,0 +1,137 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\set{\lbrace}{\rbrace}
+
+
+\def\checkmark{\tikz\fill[scale=0.3](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 3}
+\author{Kamil Matuszewski}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+
+
+\begin{center}
+\begin{tabular}{|c *{8}{|c} |c|}\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\hline 
+\checkmark &\checkmark &\checkmark &\checkmark & \checkmark &\checkmark &\checkmark & \checkmark & \checkmark &\\
+\hline
+\end{tabular}
+\end{center}
+
+
+\subsection*{Zadanie 1}
+Mamy funkcję $f(x,y) = C(x+y)exp\set{-(x+y)}$, dla $x>0, y>0$.
+\begin{enumerate}[(a)]
+\item Wyznacz stałą C taką, aby podana wyżej funkcja była gęstością zmiennej (X,Y).
+$$\int_0^\infty \int_0^\infty C(x+y)exp\set{-(x+y)} dx dy = 1 $$ 
+$$\int_0^\infty \int_0^\infty C(x+y)exp\set{-(x+y)} dx dy= C\int_0^\infty \int_0^\infty (x+y)exp\set{-(x+y)} dx dy=$$  $$=C\int_0^\infty \int_0^\infty (x+y)e^{-x}e^{-y} dx dy =C \int_0^\infty e^{-y} \int_0^\infty (x+y)(-e^{-x})' dx dy =$$
+$$=C \int_0^\infty e^{-y} \left( \left[(x+y)(-e^{-x})\right]_0^\infty - \int_0^\infty(-e^{-x}) dx  \right)  dy = $$ 
+$$= C \int_0^\infty e^{-y} \left( 0-(-y) + 1 \right) dy = C \int_0^\infty e^{-y}(y+1) dy = $$ 
+$$=C \left( \left[(-e^{-y})(y+1)\right]_0^\infty - \int_0^\infty(-e^{-y}) dy\right) = C \left(1 - (-1)\right) = 2C$$
+$$2C=1 \Rightarrow C=\frac{1}{2} $$
+
+\item Czy zmienne losowe X,Y są niezależne?
+
+$$f(x)=\int_0^\infty \frac{1}{2}(x+y)e^{-x}e^{-y} dy = \frac{1}{2}e^{-x} \int_0^\infty (x+y)e^{-y} dy = \frac{1}{2}e^{-x}(x+1)$$
+$$f(y)=\int_0^\infty \frac{1}{2}(x+y)e^{-x}e^{-y} dx = \frac{1}{2}e^{-y}(y+1)  $$
+$$f(x)f(y)\neq f(x,y) \Rightarrow nie $$.
+
+\item Policz $m_{10} m_{01}$ i $m_{11}$
+$$m_{pq}=\int_{-\infty}^\infty \int_{-\infty}^\infty x^p y^q f(x,y) dy dx  $$
+$$m_{10}=\frac{1}{2} \int_0^\infty \int_0^\infty x (x+y)e^{-x}e^{-y} dy dx = \frac{1}{2} \int_0^\infty xe^{-x}(1+x) dx=\frac{1}{2} \int_0^\infty (-e^{-x})'(x+x^2) dx = $$
+$$=\frac{1}{2} \left( \left[-e^{-x}(x+x^2) \right]_0^\infty -  \int_0^\infty -e^{-x}(1+2x)dx \right) = \frac{1}{2} \left(\int_0^\infty e^{-x}(1+2x)dx \right) =$$ $$=\frac{1}{2} \left( \left[ -e^{-x}(1+2x) \right]_0^\infty - \int_0^\infty -2e^{-x}dx \right) =\frac{1}{2}\cdot 3  = \frac{3}{2}$$
+
+Zmienne są symetryczne, więc takimi samymi działaniami mamy $m_{01}=m{10}=\frac{3}{2}$.\\
+
+$$m_{11}= \frac{1}{2} \int_0^\infty \int_0^\infty x y (x+y)e^{-x}e^{-y} dy dx = \frac{1}{2} \int_0^\infty xe^{-x} \int_0^\infty (xy+y^2)e^{-y} dy dx = $$ $$=\frac{1}{2} \int_0^\infty xe^{-x}\left( \left[ -e^{-y}(xy+y^2) \right]_0^\infty - \int_0^\infty -e^{-y} (x+2y) dy\right) dx =\frac{1}{2} \int_0^\infty xe^{-x}\left(\int_0^\infty e^{-y} (x+2y) dy\right) dx =$$
+$$=\frac{1}{2} \int_0^\infty xe^{-x}\left( \left[ -e^{-y}(x+2y) \right]_0^\infty - \int_0^\infty -2e^{-y} dy\right) dx = \frac{1}{2} \int_0^\infty xe^{-x}\left(x-2\int_0^\infty -e^{-y} dy\right) dx=$$ $$=\frac{1}{2} \int_0^\infty xe^{-x}(x+2) dx = \frac{1}{2} \int_0^\infty e^{-x}(x^2+2x) dx =\frac{1}{2} \left( \left[ -e^{-x}(x^2+2x) \right]_0^\infty - \int_0^\infty -e^{-x}(2x+2) dx \right) $$ 
+$$=\frac{1}{2} \left(\int_0^\infty e^{-x}(2x+2) dx \right) = \frac{1}{2} \left(\left[ -e^{-x}(2x+2) \right]_0^\infty - \int_0^\infty -2e^{-x} dx \right) = 1+1 = 2  $$
+
+\subsection*{Zadanie 2}
+Czy można dobrać stałą $C$ tak, że funkcja $f(x,y)=Cxy+x+y$, dla $0\leq x \leq 3$, $1\leq y \leq 2$ była gęstością?
+
+$$\int_0^3 \int_1^2 Cxy+x+y dy dx = 1$$
+$$\int_0^3 \int_1^2 Cxy+x+y dy dx = \int_0^3 \left( \int_1^2 Cxy dy + \int_1^2x dy + \int_1^2 y dy \right) dx =  \int_0^3 \left( Cx\frac{3}{2} + x + \frac{3}{2} \right) dx =$$ $$=C\frac{3}{2}\cdot \frac{9}{2} +\frac{9}{2} + \frac{9}{2} = C\frac{27}{4} +9=1 \Rightarrow C=\frac{-32}{27} $$
+
+Więc $f(x,y)=\frac{-32}{27}xy+x+y$. Czyli, że tak?\\
+OTUSZ NJE!\\
+$f(x,y)\geq 0$ - warunek na bycie gęstością. Teraz:\\
+$f(3,2)=\frac{-32}{27}3*2+3+2=\frac{-19}{9}<0$, czyli nie.
+
+\subsection*{Zadanie 3}
+Mamy funkcję $f(x,y)=-xy+x$ dla $0\leq x\leq 2$, $0\leq y \leq 1$. Sprawdzić, czy XY są niezależne.\\
+Robiliśmy podobne w 1.
+$$f(x)=\int_0^1 (-xy+x)dy = \int_0^1xdy - \int_0^1 xydy = \left[ xy\right]_0^1 - \left[\frac{xy^2}{2}\right]_0^1=x-\frac{x}{2}=\frac{x}{2} $$
+$$f(y)=\int_0^2(-xy + x)dx = \int_0^2(-y+1)x dx = (-y+1)\int_0^2x dx   =-2y+2$$
+$$f(x,y)=f(x)f(y)\Rightarrow tak $$
+
+\subsection*{Zadanie 4}
+Mamy funkcję $f(x,y)=-xy+x$ dla $0\leq x\leq 2$, $0\leq y \leq 1$. Oblicz ppb $P(1\leq X\leq 3,$ $0\leq Y\leq 0,5)$.
+$$P(1\leq X\leq 3,0\leq Y\leq 0,5) = \int_1^2 \int_0^{\frac{1}{2}} (-xy+x) dy dx = \int_1^2 x \int_0^{\frac{1}{2}} (1-y) dy dx =$$ 
+$$= \int_1^2 x \left( \int_0^{\frac{1}{2}} 1 dy - \int_0^{\frac{1}{2}} y dy \right) = \int_1^2 \frac{3}{8}x =  \frac{9}{16}$$
+
+\subsection*{Zadanie 5}
+Załóżmy, że $X \sim U[0,1]$ i niech $Y=X^n$. Udowodnij, że $f_Y(y)=\frac{y^{\frac{1}{n}-1}}{n}$ dla $y\in [0,1]$.
+
+Zwróćmy uwagę, że y jest dodatnie - nie musimy się więc przejmować parzystością n'a.
+
+$$F_Y(y)=P(Y<y)=P(X^n<y)=P(X<\sqrt[n]{y})=F_X(\sqrt[n]{y})$$
+$$f_Y(y)=(F_X(\sqrt[n]{y}))'= \frac{y^{\frac{1}{n}-1}}{n}$$
+Czyli to co chcieliśmy pokazać.
+ 
+\subsection*{Zadanie 6}
+Niech $G(y), F(x)$ oznaczają dystrybuantę zmiennych losowych Y,X a $g(y),f(x)$ ich gęstość. Mamy:
+$$G(y)=P(Y<y)=P(X^2<y)=P(-\sqrt{y}<y<\sqrt{y})=P(\sqrt{y}) - P(-\sqrt{y}<y)=F(\sqrt{y})-F(-\sqrt{y})$$
+Gęstość to pochodna dystrybuanty:
+$$g(y)=\left(F(\sqrt{y})-F(-\sqrt{y})\right)'=\left(F(\sqrt{y})\right)'-\left(F(-\sqrt{y})\right)'=\frac{1}{2\sqrt{y}}f(\sqrt{y})+\frac{1}{2\sqrt{y}}f(-\sqrt{y})=$$
+$$=\frac{f(\sqrt{y}) + f(-\sqrt{y})}{2\sqrt{y}} $$
+A to jest to co mieliśmy pokazać. 
+ 
+\subsection*{Zadanie 7}
+Zmienna losowa X ma gęstość $f(x)=xe^{-x}$ dla $x\geq 0$. Znajdź gęstość zmiennej losowej $Y=X^2$
+
+Korzystając z poprzedniego:
+$$g(y)=\frac{f(\sqrt{y}) + f(-\sqrt{y})}{2\sqrt{y}}= \frac{1}{2}\frac{\sqrt{y}e^{-\sqrt{y}} - \sqrt{y}e^{-\sqrt{y}}}{\sqrt{y}}=\frac{1}{2}\left(e^{-\sqrt{y}} - e^{-\sqrt{y}} \right)$$
+\end{enumerate}
+
+\subsection*{Zadanie 8}
+Zmienna losowa $X \sim U[-1,1]$. Znaleźć gęstość $Y=|X|$
+
+Podobnie jak poprzednio? Wygląda jak coś co działa...
+$$F_Y(y)=P(Y<y)=P(|X|<y)=P(-x>y>x)=P(x<-y)+P(x<y)=F_X(-y)+F_X(y)$$
+$$f_Y(y)=(F_X(-y)+F_X(y))'=(F_X(-y))'+(F_X(y))'=\frac{1}{2}+\frac{1}{2} = 1$$ Zważywszy na to, że $Y\in [0,1]$, to $Y\sim U[0,1]$, więc ma jakiś sens.
+
+\subsection*{Zadanie 9}
+X jest zmienną losową i $Y=F_X(X)$. Udowodnić, że $Y \sim U[0,1]$.
+
+Nie jestem pewien, ale... No zobaczmy. Dystrybuanta jest zawsze z przedziału $[0,1]$, więc $Y\in [0,1]$. Teraz, dla takiego Y, gęstość powinna wynieść 1. No sprawdźmy:\\
+$$F_Y(y)=P(Y<y)=P(F_X(X)<y)=P(X<F^{-1}_X(y))=F_X(F_X^{-1}(y))=y$$
+$$f_Y(y)=(F_Y(y))'=1$$
+No i działa...
+
+
+\end{document}

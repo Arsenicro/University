@@ -1,0 +1,146 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\def\checkmark{\tikz\fill[scale=0.3](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 10}
+\author{Kamil Matuszewski}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+\newcommand{\R}{\mathbb{R}}
+
+\begin{center}
+\begin{tabular}{|c *{7}{|c} |c|}\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7\\
+\hline 
+\checkmark & \checkmark & \checkmark &  & \checkmark &  &  \\
+\hline
+\end{tabular}\\
+\end{center}
+
+\subsection*{Zadanie 1}
+Musimy sprawdzić trzy warunki:\\
+
+\begin{itemize}
+  \item $|| f || = 0 \Rightarrow f=0$
+  $$|| f || = \sqrt{\sum\limits_{k=0}^{N}p(x_k)f(x_k)^2} $$
+\begin{center}
+	Wiemy, że $p(x_k) > 0$ $\forall x_k \in X$, oraz, że $f(x_k)^2 \geq 0$ i $f(x_k)^2=0 \Rightarrow f(x_k) = 0$ (bo to kwadrat).\\
+	Suma jest nieujemna, więc jest zerem tylko wtedy, kiedy każdy jej składnik jest zerem. Skoro tak to $f=0$.
+\end{center}
+	\item $||\alpha x|| = | \alpha |\cdot ||x|| $
+	 $$|| \alpha f || = \sqrt{\sum\limits_{k=0}^{N}p(x_k)(\alpha f(x_k))^2} $$
+	 $$|| \alpha f || = \sqrt{\sum\limits_{k=0}^{N}p(x_k)\alpha^2 f(x_k)^2} $$
+	 $$|| \alpha f || = \sqrt{\alpha^2 \sum\limits_{k=0}^{N}p(x_k) f(x_k)^2} $$
+     $$|| \alpha f || = | \alpha | \cdot \sqrt{\sum\limits_{k=0}^{N}p(x_k) f(x_k)^2} $$
+     $$|| \alpha f || = | \alpha | \cdot || f || $$
+
+	\item $ ||x+y||\leq ||x|| + ||y|| $
+	$$\sqrt{\sum\limits_{k=0}^{N}p(w_k)(x_k+y_k)^2} \leq \sqrt{\sum\limits_{k=0}^{N}p(w_k)x_k^2} + \sqrt{\sum\limits_{k=0}^{N}p(w_k)y_k^2}$$
+	$$\sqrt{\sum\limits_{k=0}^{N}p(w_k)(x_k^2+2x_ky_k+y_k^2)} \leq \sqrt{\sum\limits_{k=0}^{N}p(w_k)x_k^2} + \sqrt{\sum\limits_{k=0}^{N}p(w_k)y_k^2}$$
+	$$ \sqrt{\sum\limits_{k=0}^{N}p(w_k)x_k^2 + 2\sum\limits_{k=0}^{N}p(w_k)x_ky_k + \sum\limits_{k=0}^{N}p(w_k)y_k^2} \leq \sqrt{\sum\limits_{k=0}^{N}p(w_k)x_k^2} + \sqrt{\sum\limits_{k=0}^{N}p(w_k)y_k^2}$$ 
+	Obie strony są nieujemne więc można podnieść obie strony do kwadratu:
+	$$ \sum\limits_{k=0}^{N}p(w_k)x_k^2 + 2\sum\limits_{k=0}^{N}p(w_k)x_ky_k + \sum\limits_{k=0}^{N}p(w_k)y_k^2 \leq \sum\limits_{k=0}^{N}p(w_k)x_k^2 + \sum\limits_{k=0}^{N}p(w_k)y_k^2 + 2\sqrt{\sum\limits_{k=0}^{N}p(w_k)x_k^2}\cdot \sqrt{\sum\limits_{k=0}^{N}p(w_k)y_k^2}$$ 
+	$$ \sum\limits_{k=0}^{N}p(w_k)x_ky_k \leq \sqrt{\sum\limits_{k=0}^{N}p(w_k)x_k^2 \cdot \sum\limits_{k=0}^{N}p(w_k)y_k^2}$$ 
+Musimy to sprawdzić. W tym celu pokażę, że:
+$$\left( \sum\limits_{k=0}^{N}p(w_k)x_ky_k \right)^2 \leq  \sum\limits_{k=0}^{N}p(w_k)x_k^2 \cdot \sum\limits_{k=0}^{N}p(w_k)y_k^2$$
+$$\sum\limits_{k=0}^{N}p(w_k)x_k^2 \cdot \sum\limits_{k=0}^{N}p(w_k)y_k^2 - \left( \sum\limits_{k=0}^{N}p(w_k)x_ky_k \right)^2 \geq 0$$
+$$\sum\limits_{0\leq i,j \leq N}p(w_i)p(w_j) x_i^2 y_j^2 - \sum\limits_{0 \leq i \leq N} p(w_i)^2 x_i^2 y_i^2 - \sum\limits_{0\leq i < j \leq N} 2p(w_i)p(w_j)x_ix_jy_iy_j =$$ 
+$$= \sum\limits_{0\leq i\neq j \leq N}p(w_i)p(w_j) x_i^2 y_j^2 - \sum\limits_{0\leq i < j \leq N} 2p(w_i)p(w_j)x_ix_jy_iy_j =$$ 
+$$=\sum\limits_{0 \leq i < j \leq N}p(w_i)p(w_j)x_i^2y_j^2 + p(w_j)p(w_i)x_j^2y_i^2 - \sum\limits_{0\leq i < j \leq N} 2p(w_i)p(w_j)x_ix_jy_iy_j =$$
+$$=\sum\limits_{0 \leq i < j \leq N}p(w_i)p(w_j)(x_i^2 y_j^2 + x_j^2 y_i^2 - 2x_i x_j y_i y_j) =\sum\limits_{0 \leq i < j \leq N}p(w_i)p(w_j)(x_iy_j - x_jy_i)^2$$
+Wiemy, że $p(w)>0$ $\forall w \in X$. Skoro tak, to każdy składnik tej sumy jest $\geq$ 0, czyli:
+$\sum\limits_{0 \leq i < j \leq N}p(w_i)p(w_j)(x_iy_j - x_jy_i)^2 \geq 0$ więc:
+$$\sum\limits_{k=0}^{N}p(w_k)x_k^2 \cdot \sum\limits_{k=0}^{N}p(w_k)y_k^2 \geq \left( \sum\limits_{k=0}^{N}p(w_k)x_ky_k \right)^2$$
+$$\sqrt{\sum\limits_{k=0}^{N}p(w_k)x_k^2 \cdot \sum\limits_{k=0}^{N}p(w_k)y_k^2} \geq \sqrt{\left( \sum\limits_{k=0}^{N}p(w_k)x_ky_k \right)^2}\geq \sum\limits_{k=0}^{N}p(w_k)x_ky_k$$
+A to jest to co chcieliśmy pokazać.
+\end{itemize}
+
+\subsection*{Zadanie 2}
+Mamy model:
+$$y(x)=ax+2015$$
+$y \in Y$ : $|| f-y ||_2^2 = \sum\limits_{k=0}^n (f(x_k) - y(x_k))^2 = \sum\limits_{k=0}^n (f(x_k) - ax_k - 2015)^2 = \sum\limits_{k=0}^n (f(x_k) - 2015 - ax_k)^2 = E(a)$
+$$y^*(x)=a^* : ||f-y^*||_2 = \min\limits_{y \in Y}||f-y||_2=\min\limits_{a \in \R}\sqrt{E(a)}$$
+Pierwiastek nie wpływa na monotoniczność, stąd wystarczy policzyć pochodną funkcji $E(a)$
+$$E'(a) =  \left( \sum\limits_{k=0}^n (f(x_k) - 2015 - ax_k)^2 \right)' = \left( \sum\limits_{k=0}^n (f(x_k) - 2015)^2 - 2ax_k(f(x_k) - 2015) + (ax_k)^2 \right)' = $$ $$ = -2 \sum\limits_{k=0}^n x_k(f(x_k) - 2015 - ax_k) $$
+$$-2 \sum\limits_{k=0}^n x_k(f(x_k) - 2015 - ax_k) = 0$$
+$$ \sum\limits_{k=0}^n f(x_k)x_k - 2015x_k -  \sum\limits_{k=0}^n ax_k^2 = 0 $$
+$$ \sum\limits_{k=0}^n f(x_k)x_k - 2015x_k =  \sum\limits_{k=0}^n ax_k^2 $$
+$$ \sum\limits_{k=0}^n f(x_k)x_k - 2015x_k =  a\sum\limits_{k=0}^n x_k^2 $$
+$$ \frac{\sum\limits_{k=0}^n x_k(f(x_k) - 2015)}{\sum\limits_{k=0}^n x_k^2} =  a$$
+
+
+\subsection*{Zadanie 3}
+Wystarczy znaleźć ekstremum funkcji:
+$$\sum\limits_{k=0}^r \frac{1}{\log{(1+x_k^2)}}(y_k-a\sin{x_k})^2 $$
+Łatwo sprawdzić, że pochodną jest:\\
+$$-2 \sum\limits_{k=0}^{r} \frac{\sin{x_k}}{\log{(1+x_k^2)}}\cdot (y_k-a\sin{x_k})$$
+Teraz przyrównujemy do 0:
+$$-2 \sum\limits_{k=0}^{r} \frac{\sin{x_k}y_k}{\log{(1+x_k^2)}} - \frac{a\sin^2{x_k}}{\log{(1+x_k^2)}}= 0$$
+$$ \sum\limits_{k=0}^{r} \frac{\sin{x_k}\cdot y_k}{\log{(1+x_k^2)}} - \sum\limits_{k=0}^{r} \frac{a\sin^2{x_k}}{\log{(1+x_k^2)}} = 0$$
+$$ \sum\limits_{k=0}^{r} \frac{\sin{x_k}\cdot y_k}{\log{(1+x_k^2)}} = a\cdot \sum\limits_{k=0}^{r} \frac{\sin^2{x_k}}{\log{(1+x_k^2)}} $$
+$$ a = \frac{\sum\limits_{k=0}^{r} \frac{\sin{x_k}\cdot y_k}{\log{(1+x_k^2)}}}{\sum\limits_{k=0}^{r} \frac{\sin^2{x_k}}{\log{(1+x_k^2)}}}$$
+
+\subsection*{Zadanie 4}
+Wystarczy zaproksymować funkcję odwrotną (trywialne)
+
+\subsection*{Zadanie 5}
+Na wykładzie, pokazaliśmy, że dla modelu $$Y=ax+b$$ Rozwiązaniem jest $$a=\frac{(n+1)S_4 - S_1S_3}{(n+1)S_2 - S_1^2} $$ $$b=\frac{S_2S_3-S_1S_4}{(n+1)S_2 - S_1^2} $$
+Gdzie:
+$$\begin{matrix*}[l]
+S_i = \sum\limits_{k=0}^n x_k^i &&&& i=1,2\\
+S_3 = \sum\limits_{k=0}^n f(x_k)\\
+S_4 = \sum\limits_{k=0}^n x_k f(x_k)
+\end{matrix*}$$
+Co można pokazać poprzez pochodną dwóch zmiennych i regresję liniową.
+$$
+\begin{matrix*}[l]
+n=7\\
+S_1=10+20+30+40+80+90+95=365\\
+S_2=100+400+900+1600+6400+8100+9025=26525\\
+S_3=514,5\\
+S_4=671+1328+1968+2584+4944+5490+5700=22685\\
+\end{matrix*}
+$$
+Stąd:\\
+$$
+\begin{matrix*}[l]
+a=-0,08\\
+b=67,96\\
+\end{matrix*}
+$$
+Więc:\\
+$$ 
+S=-0,08\cdot T + 67,96
+$$
+Co jest zgodne z podaną tabelką(z jakąś dokładnością).
+
+\subsection*{Zadanie 6}
+
+
+\subsection*{Zadanie 7}
+Liczymy pochodną wyrażenia, i porządkujemy.
+Oznaczmy sobie:
+$$ $$
+
+\end{document}

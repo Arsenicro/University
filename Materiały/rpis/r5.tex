@@ -1,0 +1,131 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\set{\lbrace}{\rbrace}
+
+
+\def\checkmark{\tikz\fill[scale=0.3](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 5}
+\author{Kamil Matuszewski}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+
+
+\begin{center}
+\begin{tabular}{|c *{9}{|c} |c|}\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11\\
+\hline 
+\checkmark &\checkmark &\checkmark &\checkmark &\checkmark &\checkmark &&&&\checkmark &\checkmark \\
+\hline
+\end{tabular}\\
+\end{center}
+
+\subsection*{Zadanie 1}
+Znajdź MGF dla zmiennej $X \sim B(n,p)$.
+
+Po pierwsze gęstość $X \sim B(n,p)$ to ${n \choose k}p^k q^{n-k}$. Po drugie, MFG $M(t)=E(e^{tX})$. Podstawiamy i mamy:
+$$E(e^{tX}) = \sum\limits_{k=0}^n e^{tk}{n \choose k}p^k q^{n-k} = \sum\limits_{k=0}^n {n \choose k}(pe^t)^k q^{n-k} = (pe^t + q)^n = (pe^t + 1-p)^n$$
+
+
+\subsection*{Zadanie 2}
+Znajdź MFG dla zmiennej $X \sim Poisson(\lambda)$.
+
+To samo co wyżej. Gęstość $X \sim Poisson(\lambda)$ to $f(x) = \frac{\lambda^x e^{-\lambda}}{x!}$. Podstawiamy i mamy:
+$$M(t)=\sum_{k=0}^{\infty} e^{tk}\frac{\lambda^k e^{-\lambda}}{k!} = e^{-\lambda}\sum_{k=0}^{\infty} \frac{(e^t\lambda)^k}{k!} = e^{-\lambda+\lambda e^t} =e^{\lambda(e^t-1)}$$
+
+\subsection*{Zadanie 3}
+Znajdź MGF dla zmiennej $X \sim Gamma(b,p)$
+
+To samo. Gęstość $X \sim Gamma(b,p)$ to $f(x)=\frac{b^p}{\Gamma(p)}x^{p-1}e^{-bx}$. Podstawiamy, i mamy:
+$$M(t)=\int_0^\infty e^{tx} \frac{b^p}{\Gamma(p)}x^{p-1}e^{-b x} dx = \int_0^\infty \frac{b^p}{\Gamma(p)}x^{p-1}e^{(t-b) x} dx =\left\{\begin{matrix}
+y=(b-t)x & x=\frac{y}{b-t} \\ 
+dx=\frac{1}{b - t}dy & 
+\end{matrix}\right.$$
+$$ M(t)=\int_0^\infty \frac{b^p}{\Gamma(p)}x^{p-1}e^{-y}\frac{1}{\lambda - t} dy = \frac{b^p}{\Gamma(p)(b-t)^p}\int_0^\infty y^{p-1}e^{-y} dy = \frac{b^p}{\Gamma(p)(b-t)^p} \Gamma(p) = \left(\frac{b}{b-t}\right)^p$$
+
+\subsection*{Zadanie 4}
+Mamy zmienną $Z=\sum\limits_{k=1}^\infty X_k$. Podać rozkład Z dla $X_k \sim N(\mu_k, \sigma_k^2)$\\
+
+Po pierwsze, wyznaczmy MFG rozkładu normalnego. Gęstość rozkładu normalnego to $\frac{1}{\sqrt{2\pi \sigma^2 }} e^{-\frac{1}{2}(x-\mu)^2/\sigma^2}$
+$$M(t)=\int e^{xt} \frac{1}{\sqrt{2\pi \sigma^2 }} e^{-\frac{1}{2}(x-\mu)^2/\sigma^2} dx = \left\{\begin{matrix}
+z=\frac{x-\mu}{\sigma} & x=z\sigma + \mu \\ 
+dx=\sigma dz & 
+\end{matrix}\right.$$
+
+$$M(t)=e^{\mu t}\int e^{z\sigma t} \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}z^2} \sigma dz = e^{\mu t}\int e^{z\sigma t} \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}z^2} dz = *$$
+Teraz:
+$$\int e^{z t} \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}z^2} dz $$
+$$e^{zt}e^{-\frac{1}{2}z^2} = e^{-\frac{1}{2}z^2 +zt} = e^{-\frac{1}{2}(z-t)^2}e^{\frac{1}{2}t^2}$$
+$$e^{\frac{1}{2}t^2} \int \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}(z-t)^2} dz = e^{\frac{1}{2}t^2} \int_\R N(t,1) = e^{\frac{1}{2}t^2} $$
+Ostatnia równość stąd, że to całka po gęstości która zawsze jest 1 (z definicji).
+$$*=e^{\mu t}e^{\frac{1}{2}\sigma^2 t^2} $$
+
+Wróćmy do zadania. Wiemy, że dla  $Z=X_1 + X_2 + \dots + X_n $ jeśli zmienne są niezależne, to zachodzi $M_Z(t)=M_{X_1}(t)M_{X_2}(t)\dots M_{X_n}(t)$. Stąd, mamy:
+$$M_Z(t)=M_{X_1}(t)M_{X_2}(t)\dots M_{X_n}(t) = e^{\mu_1 t}e^{\frac{1}{2}\sigma_1^2 t^2} e^{\mu_2 t}e^{\frac{1}{2}\sigma_2^2 t^2}\dots e^{\mu_n t}e^{\frac{1}{2}\sigma_n^2 t^2} = exp \set{t \sum\limits_{k=1}^n \mu_k} \set{\frac{1}{2} t^2 \sum\limits_{k=1}^n \sigma_n^2 }$$
+Oznaczając $a=\sum\limits_{k=1}^n \mu_k$ i $b= \sum\limits_{k=1}^n \sigma_n^2$ otrzymujemy funkcję generującą momenty dla rozkładu $N(a,b)$
+
+\subsection*{Zadanie 5}
+Mamy zmienną $Z=\sum\limits_{k=1}^\infty X_k$. Podać rozkład Z dla $X_k \sim Gamma(b, p_k)$\\
+
+Tu już mamy funkcję generującą momenty. Liczyliśmy ją z w zadaniu 3. Podobnie jak w poprzednim:
+$$M_Z(t)=M_{X_1}(t)M_{X_2}(t)\dots M_{X_n}(t) = \left(\frac{b}{b-t}\right)^p_1 \left(\frac{b}{b-t}\right)^p_2 \dots \left(\frac{b}{b-t}\right)^p_k$$
+Więc, dla $a=\sum_{k=1}^n p_k$ mamy:
+$$M_Z(t) = \left(\frac{b}{b-t}\right)^a $$
+Stąd otrzymujemy funkcję generującą momenty dla rozkładu $Gamma(b,a)$
+
+\subsection*{Zadanie 6}
+Mamy zmienną $Z=\sum\limits_{k=1}^\infty X_k$. Podać rozkład Z dla $X_k \sim B(m_k, p)$\\
+
+Mamy już funkcję generującą momenty z zad 1. Podobnie jak w poprzednich:\\
+$$M_Z(t)=M_{X_1}(t)M_{X_2}(t)\dots M_{X_n}(t) = (pe^t + 1-p)^{m_1} (pe^t + 1-p)^{m_2} \dots (pe^t + 1-p)^{m_n}$$
+Więc, dla $a=\sum_{k=1}^n m_k$ mamy:
+$$M_Z(t)=(pe^t + 1-p)^a$$
+Stąd otrzymujemy funkcję generującą momenty dla rozkładu $B(a,p)$.
+
+\subsection*{Zadanie 10}
+Mamy MGF $M_U(t) = \frac{2}{2-3t}$. Wyznacz:
+\begin{enumerate}[a)]
+\item Wartość oczekiwaną:\\
+To po prostu pochodna - $M'_U(t)=\left(\frac{2}{2-3t}\right)' = \frac{6}{(2-3t)^2}$, $M'_U(0)=\frac{6}{4}$.
+\item Wariancje:\\
+Druga pochodna w punkcie 0 - $E(X^2)=\frac{36}{8}$ odjąć $(E(X))^2 = \frac{36}{16}$, stąd $V(X)=\frac{36}{8} - \frac{36}{16} = \frac{9}{4}$
+\item MGF podatku od zysku, przy założeniu stopy podatkowej liniowej, $90\%$\\
+Niech $Y=0,9U$. Wiemy, że $M_{aX}(t)=M_X(at)$. Stąd, wynik to $\frac{2}{2-2,7t}$
+\end{enumerate}
+\subsection*{Zadanie 11}
+Mamy MFG zmiennej losowej X. Co można powiedzieć o Y, gdy:
+
+\begin{enumerate}[a)]
+\item $M_Y(t)=M(2t)M(4t)$\\
+$M_{2X_1 + 4X_2}(t) = M_{2X_1}(t)M_{4X_2}(t) = M(2t)M(4t)$ jeśli $X_1$ i $X_2$ są niezależne.
+\item $M_Y(t)=e^{2t}M(t)$\\
+$M_{X+2}=E(e^{(X+2)t}) = E(e^{Xt}e^{2t}) = \int e^{xt}e^{2t} f(x) = e^{2t}\int e^{xt}f(x)=e^{2t}E(e^{Xt})=e^{2t}M(t)$
+\item $M_Y(t)=4M(t)$\\
+Tu można coś pomachać, że dla dowolnej funkcji $M(0)=1$, więc $4M(0)=4$
+\end{enumerate}
+
+
+
+\end{document}

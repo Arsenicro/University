@@ -1,0 +1,185 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\set{\lbrace}{\rbrace}
+\newcommand{\rpm}{\raisebox{.2ex}{$\scriptstyle\pm$}}
+
+
+\def\checkmark{\tikz\fill[scale=0.3](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 9}
+\author{Kamil Matuszewski}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+
+
+\begin{center}
+\begin{tabular}{|c *{9}{|c} |c|}\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11\\
+\hline 
+\checkmark & &\checkmark &\checkmark &\checkmark &\checkmark &\checkmark &\checkmark &\checkmark &\checkmark &\checkmark \\
+\hline
+\end{tabular}\\
+\end{center}
+
+\subsection*{Zadanie 1}
+Zmienna losowa $(X,Y)$ ma rozkład o gęstości $f(x,y)=1$. $0<x,y\leq 1$ Znajdź gęstość zmiennej $Z=\frac{X}{Y}$.
+
+Znajdźmy gęstość zmiennej $(Z,V)$ gdzie $V$ jest dowolne (dla ustalenia uwagi $V=Y$). Następnie policzymy całkę po V, otrzymując w ten sposób gęstość $Z$. Zwróćmy uwagę, że skoro $y\in (0,1]$, to $V\in (0,1]$.
+
+$$\left\{\begin{matrix}
+V=Y & \Rightarrow & Y=V\\
+Z=\frac{X}{Y} & \Rightarrow & X=ZV
+\end{matrix}\right.$$
+$$J=\begin{vmatrix}
+\frac{\partial X}{\partial Z} & \frac{\partial X}{\partial V}\\
+\frac{\partial Y}{\partial Z} & \frac{\partial Y}{\partial V}
+\end{vmatrix}=\begin{vmatrix}
+V & Z\\
+0 & 1
+\end{vmatrix}=V $$
+$$f(z,v)=f(x,y)J=V$$
+
+Teraz, żeby policzyć jakim wzorem wyraża się $Z$ należy scałkować po $V$. W tym celu określmy przedziały. Mamy punkt $(z,v)=\left( \frac{x}{y},y\right)$, gdzie $y\in(0,1]$ a $x\in[0,1]$. Łatwo zauważyć, że $z\in [0,\infty)$, a dokładniej $z\in [0,\frac{1}{v})$. Dla $z\in[0,1]$, $v\in (0,1]$. Natomiast dla $z\in(1,\infty)$, $v\in (0,\frac{1}{z})$, co łatwo odczytać z wykresu funkcji $y=\frac{1}{x}$. W takim razie mamy dwa przedziały (dwie całki). Dla $z\in [0,1]$ mamy:
+$$\int_0^1 v \ dv = \frac{1}{2}$$
+Natomiast dla $z\in (1,\infty)$ mamy:
+$$\int_0^{\frac{1}{z}} v \ dv = \frac{1}{2z^2}$$
+Stąd:
+$$F_Z(z)=\left\lbrace \begin{matrix}
+\frac{1}{2} & dla & z\in[0,1]\\ \\
+\frac{1}{2z^2} & dla & z>1
+\end{matrix}\right. $$
+\subsection*{Do zadań 3-6}
+Zakładamy, że zmienne $X_1$, $X_2$, $X_3$ są niezależne i mają ten sam rozkład ciągły o dystrybuancie $F(x)$ i gęstości $f(x)$. Tworzymy zmienne $X_{(1)}=min\set{X_1,X_2,X_3}$, $X_{(2)}$ to druga co do wielkości wartość, $X_{(3)}=max\set{X_1,X_2,X_3}$. Dodatkowo w zadaniach $5-6$ zakładamy, że $X_k \sim U[0,a]$.
+\clearpage
+\subsection*{Zadanie 3}
+Znajdź gęstości $f_{(1)}(x)$ oraz $f_{(3)}(x)$.
+
+Policzmy najpierw dystrybuanty.
+$$F_{(1)}(x)=P(X_{(1)}<X)=P(min\set{X_1,X_2,X_3}<X)=1-P(min\set{X_1,X_2,X_3} > X)=$$ $$=1-P(X_1>X, X_2>X, X_3>X)=1-P(X_1>X)P(X_2>X)P(X_3>X)=$$ $$=1-\left[ (1-P(X_1<X))(1-P(X_2<X))(1-P(X_3<X)) \right] =$$ $$= 1-\left( (1-F(X))(1-F(X))(1-F(X)) \right)=1-(1-F(x))^3 $$ 
+
+$$F_{(3)}(x)=P(X_{(3)}<X)= P(max\set{X_1,X_2,X_3}<X)=P(X_1<X,X_2<X,X_3<X)=$$ $$=P(X_1<X)P(X_2<X)P(X_3<X)=(F(x))^3$$
+Gęstość to pochodna z dystrybuanty:
+$$f_{(1)}(x)= (1-(1-F(x))^3)' = 3(1-F(x))^2f(x) $$
+$$f_{(3)}(x) = ((F(x))^3)' = 3(F(x))^2 f(x) $$
+\subsection*{Zadanie 4}
+Znajdź gęstość $f_{(2)}(x)$.
+
+Ciekawostka - zadania 3 i 4 da się łatwo uogólnić na dowolne $n$ i $k$. Wychodzi, że dla zmiennych $X_1,\dots ,X_n$ $f_{(k)}(x)=\frac{n!}{(k-1)!(n-k)!}F(x)^{k-1}(1-F(x))^{n-k}f(x)$. Możecie sobie sprawdzić, że działa. Może kiedyś będzie mi się chciało spisać ten dowód.
+
+Przejdźmy jednak do zadania. Jak obliczyć $P(X_{(2)}<x)$? Zastanówmy się kiedy środkowa wartość będzie mniejsza od x. No wtedy, kiedy przynajmniej dwie z wartości $X_1,X_2,X_3$ będą mniejsze od x. Mamy więc:
+$$F_{(2)}(x)=P(X_{(2)}<x)=P(X_1<x)P(X_2<x)P(X_3>x)+P(X_1<x)P(X_3<x)P(X_2>x)+$$ $$+P(X_2<x)P(X_3<x)P(X_1>x)+P(X_1<x)P(X_2<x)P(X_3<x)=3F^2(x)(1-F(x))+F^3(x) $$
+
+$$(3F^2(x)(1-F(x))+F^3(x))'=6F(x)f(x)(1-F(x)) + 3F^2(x)(-f(x)) + 3F^2(x) f(x)=$$
+$$=3f(x)F(x)(2(1-F(x))-F(x)+F(x))=6f(x)F(x)(1-F(x))$$
+A to już nasza odpowiedź.
+
+\subsection*{Zadanie 5, 6}
+Niech $Y_1=\frac{X_1+X_2+X_3}{3}$, $Y_2=X_{(2)}$, $Y_3=\frac{X_{(1)}+X_{(3)}}{2}$. Udowodnij, że:
+\begin{itemize}
+\item $E(Y_1)=\frac{a}{2}$.
+\begin{proof}
+$$E(Y_1)=E(\frac{X_1+X_2+X_3}{3})=\frac{E(X_1)+E(X_2)+E(X_3)}{3}=\frac{3\frac{a}{2}}{3}=\frac{a}{2}$$
+\end{proof}
+\item $E(Y_2)=\frac{a}{2}$
+\begin{proof}
+$$f_{2}(x)=6F(x)(1-F(x))f(x)$$
+Mamy rozkład jednostajny, więc $f(x)=\frac{1}{a}$, $F(x)=\frac{x}{a}$.
+$$f_{2}(x)=\frac{6x}{a}(1-\frac{x}{a})\frac{1}{a}=\frac{6x(1-\frac{x}{a})}{a^2} $$
+$$E(x)=\int_0^a \frac{6x^2(1-\frac{x}{a})}{a^2} \ dx = \frac{a}{2}$$
+\end{proof}
+\item $E(Y_3)=\frac{a}{2}$
+\begin{proof}
+$$E(Y_3)=E(\frac{X_{(1)}+X_{(3)}}{2})\stackrel{*}{=}E(\frac{3Y_1-Y_2}{2})=\frac{3E(Y_1)-E(Y_2)}{2}=\frac{2\frac{a}{2}}{2}=\frac{a}{2}$$
+* - Spójrzmy, że dodanie maksymalnej i minimalnej wartości to to samo co wzięcie sumy wszystkich i odjęcie wartości środkowej ($X_{(2)}=Y_2$). Suma wszystkich to $3Y_1$.
+\end{proof}
+\item $V(Y_1)=\frac{a^2}{36}$
+\begin{proof}
+$$V(Y_1)=V(\frac{X_1+X_2+X_3}{3})=\frac{V(X_1)+V(X_2)+V(X_3)}{9}=\frac{a^2}{36} $$
+Bo $V(X_k)=\frac{a^2}{12}$ (rozkład jednostajny).
+\end{proof}
+\item $V(Y_2)=\frac{a^2}{20}$
+\begin{proof}
+$$V(Y_2)=E(Y_2^2)-(E(Y_2))^2=\int_0^a \frac{6x^3(1-\frac{x}{a})}{a^2} \ dx - \frac{a^2}{4} = \frac{3a^2}{10} - \frac{a^2}{4} = \frac{a^2}{20} $$
+\end{proof}
+\end{itemize} 
+
+\subsection*{Zadanie 7}
+Mamy niezależne zmienne losowe $X,Y\sim N(0,1)$. Znajdź gęstość zmiennej $(R,\Theta)$, gdzie $R$ i $\Theta$ są współrzędnymi biegunowymi $(X,Y)$.
+
+Najpierw, $f_X(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}$, $f_Y(y)=\frac{1}{\sqrt{2\pi}}e^{-\frac{y^2}{2}}$. 
+Zmienne są niezależne, więc $f_{X,Y}(x,y)=\frac{1}{2\pi}e^{-\frac{x^2+y^2}{2}}$.
+Podstawmy $X = R \cos{\Theta}, Y = R \sin{\Theta}$.
+$$J=\begin{vmatrix}
+\cos{\Theta} & -R\sin{\Theta}\\
+\sin{\Theta} & R\cos{\Theta}
+\end{vmatrix}=r\cos^2{\Theta}+r\sin^2{\Theta} = R $$
+$$f(R,\Theta)(r,\theta)= r\frac{1}{2\pi} \exp{-\frac{r^2(\sin^2\theta+\cos^2\theta)}{2}}= r\frac{1}{2\pi} e^{-\frac{r^2}{2}} $$
+
+\subsection*{Zadanie 8}
+Zadanie jak poprzednie, tylko szukamy gęstości zmiennej $(D,\Theta)$, gdzie $D=R^2$. Mamy też sprawdzić czy $D$ i $\Theta$ są niezależne, oraz jaki rozkład ma $\Theta$.
+
+Podobnie jak poprzednio. $f_{X,Y}(x,y)=\frac{1}{2\pi}e^{-\frac{x^2+y^2}{2}}$.
+Podstawiam $X=\sqrt{D}\cos{\Theta}$, $Y=\sqrt{D}\sin{\Theta}$ (bo jedyna różnica z poprzednim zadaniem to to, że $R=\sqrt{D}$).
+$$J=\begin{vmatrix}
+\frac{\cos{\Theta}}{2\sqrt{D}} & -\sqrt{D}\sin{\Theta}\\
+\frac{\sin{\Theta}}{2\sqrt{D}} & \sqrt{D}\cos{\Theta}
+\end{vmatrix}=\frac{\cos^2{\Theta}+\sin^2{\Theta}}{2} = \frac{1}{2} $$
+$$f(D,\Theta)(d,\theta)= \frac{1}{2}\frac{1}{2\pi} \exp{-\frac{d(\sin^2\theta+\cos^2\theta)}{2}}= \frac{1}{4\pi} e^{-\frac{d}{2}}  $$
+Sprawdźmy rozkład zmiennej $D$. W tym celu policzmy całkę po $\Theta$.
+$$f_D(d)=\int_0^{2\pi} \frac{1}{4\pi} e^{-\frac{d}{2}} \ d\Theta  = \frac{1}{4\pi} e^{-\frac{d}{2}} \int_0^{2\pi} 1 \ d\Theta = \frac{1}{2}e^{-\frac{d}{2}}$$
+Łatwo zauważyć, że rozkład zmiennej $D$ to rozkład wykładniczy z parametrem $\frac{1}{2}$. Co do zmiennej $\Theta$:
+$$\int_0^\infty \frac{1}{4\pi} e^{-\frac{d}{2}} \ dd = \frac{1}{4\pi} \int_0^\infty e^{-\frac{d}{2}} \ dd = \frac{1}{2\pi}$$
+Teraz: 
+$$\frac{1}{2\pi} \cdot \frac{1}{2}e^{-\frac{d}{2}}=\frac{1}{4\pi}e^{-\frac{d}{2}}$$
+Czyli zmienne są niezależne.
+
+\subsection*{Zadanie 9}
+Pokaż w pizde nudnych rzeczy.
+
+Typowe zadanie w którym nic się nie dzieje oprócz liczenia. Obliczenia zacznij od podpunktu b w którym wykorzystaj MGF sumy niezależnych zmiennych losowych. Przejdź do podpunktu c gdzie prostym iloczynem wyznacz gęstość zmiennej $(X,Y)$. Podstaw $U=X+Y$ $V=\frac{X}{X+Y}$ czyli $ X = UV, Y = U(1-V)$. Teraz jakobian to $U$. Podstawiając w tym ogromnym wzorze wszystkie $x$ i $y$ i mnożąc przez $u$ otrzymaj gęstość $(U,V)$. Zcałkuj to po $U$ i otrzymaj gęstość $V$. Obliczenia nie będą trudne ale długie i nużące. Zabij się przy przepisywaniu tego na tablicę. Zauważ coś sprytnie i dojdź do wzoru z zadania. W podpunkcie a skorzystaj z b i c tj wymóż i sprawdź równość $Gamma(b,p+q)+Beta(p,q)=$ to coś co ci wyszło w gęstości $(U,V)$.
+
+\subsection*{Zadanie 10}
+Niech zmienne $X_1,\dots , X_n$ będą niezależne i mają rozkład $Exp(\lambda)$. Niech $Y_i=X_1+\dots+X_i$ dla $i=1,\dots , n$. Znajdź gęstość $f_{Y_1, \dots , Y_n}(y_1, \dots ,y_n)$.
+
+Zacznijmy od znalezienia $f_{X_1, \dots ,X_n}(x_1, \dots , x_n)$. Długo szukać nie musimy, zmienne są niezależne więc gęstość ta wynosi $$\lambda^n e^{-\lambda \sum_i^n x_i}$$
+Teraz policzmy jakobian przekształcenia. W tym celu spójrzmy jak wyglądają kolejne $X_k$. 
+$$X_1=Y_1$$ 
+$$X_2+X_1=Y_2 \Rightarrow X_2+Y_1=Y_2 \Rightarrow X_2=Y_2-Y_1$$ 
+$$X_3+X_2+X_1=Y_3 \Rightarrow X_3+Y_2=Y_3 \Rightarrow X_3=Y_3-Y_1$$ 
+$$X_4+X_3+X_2+X_1=Y_4 \Rightarrow X_4+Y_3=Y_4 \Rightarrow X_4=Y_3-Y_2$$
+$$\vdots $$
+$$X_n+\dots +X_1 = Y_n \Rightarrow X_n+Y_{n-1} = Y_n \Rightarrow X_n=Y_n-Y_{n-1}$$
+Jakobian przekształcenia to taka śmieszna macierz z $1$ na przekątnej, $-1$ pod przekątną, i zerami wszędzie indziej.
+Skoro tak, to jakobian wynosi 1, więc $$f_{Y_1, \dots , Y_n}(y_1, \dots ,y_n)=f_{X_1, \dots ,X_n}(x_1, \dots , x_n) = \lambda^n e^{-\lambda \sum_i^n x_i}$$
+Teraz spójrzmy na sumę po $x_i$. Patrząc wyżej łatwo zauważyć, że suma ta wynosi $y_n$. Mamy więc:
+$$f_{Y_1, \dots , Y_n}(y_1, \dots ,y_n) = \lambda^n e^{-\lambda y_n} $$
+\subsection*{Zadanie 11}
+Znajdź $f_{Y_n}(y_n)$ dla gęstości z poprzedniego zadania.
+
+Możemy to zrobić trikowo. Skoro chcemy gęstość $y_n$ musimy zrobić całki po wszystkich pozostałych wartościach. dla dowolnego $y_i$ całka będzie na przedziale $[0,y_{i+1}]$. Zauważmy, że gęstość nie zależy od żadnej z  tych zmiennych więc możemy ją wyciągnąć przed całki. To co mamy policzyć to $\int_0^{y_n} \int_0^{y_{n-1}} \dots \int_0^{y_2} 1 \ dy_1 \dots \ dy_{n-2}\ dy_{n-1}$. Zacznijmy obliczenia od środka i zauważmy coś. $\int_0^{y_2} 1 \ dy_1 = y_2$. $\int_0^{y_3} y_2 \ dy_2 = \frac{y_3^2}{2}$. Wyciągnijmy $\frac{1}{2}$ przed całki. Mamy $\int_0^{y_4} y_3^2 \ dy_3 = \frac{y_4^3}{3}$. Wyciągnijmy $\frac{1}{3}$. Zauważmy, że będziemy postępować według pewnego schematu. Z każdą całką zwiększamy indeks o $1$, potęgę o $1$ i licznik o $1$ większy niż poprzedni, który wyciągamy przez całkę. W ten sposób otrzymujemy ostatnią całkę: $\int_0^{y_n} y_{n-1}^{n-2} \ dy_{n-1} = \frac{y_n^{n-1}}{n-1}$. Ponownie wyciągnijmy $\frac{1}{n-1}$. W ten sposób wyciągnęliśmy $\frac{1}{2}, \frac{1}{3}, \dots , \frac{1}{n-1}$. Wymnażając wszystkie te ułamki mamy $\frac{1}{(n-1)!}$. Dodatkowo otrzymaliśmy $y_n^{n-1}$. Pamiętając o gęstości którą wyciągnęliśmy na początku mamy wynik:
+$$\lambda^n e^{-\lambda y_n}\frac{y_n^{n-1}}{(n-1)!} $$
+
+
+\end{document}

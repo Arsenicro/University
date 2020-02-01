@@ -1,0 +1,191 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\def\checkmark{\tikz\fill[scale=0.3](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 1}
+\author{Kamil Matuszewski}
+\date{8 października 2015}
+
+\begin{document}
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+
+\begin{center}
+\begin{tabular}{|c *{16}{|c} |c|}\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15\\
+\hline 
+ &\checkmark &  & & \checkmark & \checkmark & \checkmark & \checkmark &  & & & & \checkmark &  & \\
+\hline
+\end{tabular}\\
+\end{center}
+
+\subsection*{Zadanie 2}
+Mamy dane funkcje:
+
+$$\log{n} $$
+$$(\log{n})^n=2^{n\cdot \log{\log{n}}} $$
+$$n^{\log{n}}=2^{\log{n}\log{n}}=2^{log^2{n}} $$
+$$\log{n^n} = n\log{n}$$
+$$3^{\log{n}} = 2^{\log{3}\log{n}} = 2^{\log{n} \log{3}}=n^{\log{3}}$$
+$$n$$
+$$n^2$$
+$$2^{\sqrt{n}} $$
+$$(1,01)^n = 2^{\log{1,01}n}$$
+$$(0,99)^n \underset{n\rightarrow \infty}{=} 0  $$
+$$(n+\frac{1}{n})^n \underset{n\rightarrow \infty}{=} e  $$
+
+Korzystając z wiedzy z wykładu oraz z powyższych równań możemy uporządkować funkcje:
+
+$$(0,99)^n, (n+\frac{1}{n})^n, \log{n}, n, \log{n^n}, 3^{\log{n}}, n^2, n^{\log{n}}, 2^{\sqrt{n}}, (1,01)^n, \log{n}^n$$
+
+
+\subsection*{Zadanie 5}
+Wykażemy, że:
+
+\begin{enumerate}[(a)]
+\item $f=o(g) \Rightarrow f=O(g) $
+\begin{proof}
+$$f(n)=o(g(n)) \overset{def}{\Leftrightarrow} \lim_{n\rightarrow \infty} \frac{f(n)}{g(n)}=0 \overset{def. Cauchy'ego}{\Rightarrow} \forall_{\epsilon>0} \exists_{n_0 > 0} \forall_{n > n_0} |\frac{f(n)}{g(n)} - 0| \leq \epsilon \Leftrightarrow$$
+$$\Leftrightarrow \forall_{\epsilon>0} \exists_{n_0 > 0} \forall_{n > n_0} |\frac{f(n)}{g(n)}| \leq \epsilon \Leftrightarrow \forall_{\epsilon>0} \exists_{n_0 > 0} \forall_{n > n_0} |f(n)| \leq \epsilon \cdot |g(n)| \overset{def}{\Leftrightarrow} f(n)=O(g(n)) $$
+\end{proof}
+\item $f\sim g \Rightarrow f=\Theta(g)$
+
+\begin{proof}
+$$f\sim g \overset{def}{\Leftrightarrow} \lim_{n\rightarrow \infty} \frac{f(n)}{g(n)}=1 \overset{def. Cauchy'ego}{\Rightarrow} \forall_{\epsilon>0} \exists_{n_0 > 0} \forall_{n > n_0} |\frac{f(n)}{g(n)} - 1| \leq \epsilon$$
+To oznacza, że:
+$$-\epsilon \leq \frac{f(n)}{g(n)} - 1 \leq \epsilon$$
+$$1-\epsilon \leq \frac{f(n)}{g(n)}\leq 1+\epsilon$$
+$$(1-\epsilon)g(n) \leq f(n)\leq (1+\epsilon)g(n)$$
+Zachodzi dla każdego $\epsilon>0$, więc w szczególności $\exists_{\epsilon} (1-\epsilon)>0 \wedge (1+\epsilon)>0$.\\
+Niech $(1-\epsilon)=c$ i $(1+\epsilon)=d$. Z powyższego wiemy, że:
+$$\exists_{c>0,d>0,n_0>0} \forall_{n>n_0} c\cdot g(n) \leq f(n) \leq d \cdot g(n) \overset{def}{\Leftrightarrow} f(n)=\Theta(g)$$ 
+\end{proof}
+
+\item $f=O(g) \Leftrightarrow g=\Omega(f)$
+\begin{proof}
+$$f=O(g) \overset{def}{\Leftrightarrow} \exists_{c>0, n_0} \forall_{n>n_0} |f(n)|\leq c|g(n)| \Leftrightarrow \exists_{c>0} g(n)\geq \frac{1}{c} |f(n)| \Leftrightarrow g=\Omega(f)$$
+\end{proof}
+
+\item $f=O(g) \wedge g=O(f) \Leftrightarrow g=\Omega(f)$
+\begin{proof}
+$$f=O(g) \overset{def}{\Leftrightarrow} \exists_{c>0, n_0} \forall_{n>n_0} |f(n)|\leq c|g(n)| $$
+$$g=O(f) \overset{def}{\Leftrightarrow} \exists_{d>0, n_0} \forall_{n>n_0} |g(n)|\leq d|f(n)| $$
+Więc:
+$$\exists_{c>0, d>0, n_0} \forall_{n>n_0} \frac{1}{c}|f(n)|\leq g(n) \leq d|f(n)|\overset{def}{\Leftrightarrow} g=\Theta(f)$$
+\end{proof}
+
+\end{enumerate}
+
+Przechodnie: Wszystkie\\
+Symetryczne: $\sim, \Theta$
+Wynika wprost z definicji.
+
+\clearpage
+\subsection*{Zadanie 6}
+Pokaż, że
+$$e^{1/n} = 1+\frac{1}{n} + O\left(\frac{1}{n^2}\right)$$
+
+\begin{proof}
+$$e^{x}=\sum\limits_{i=0}^{\infty} \frac{x^i}{i!} $$
+$$e^{1/n}=\sum\limits_{i=0}^{\infty} \frac{(\frac{1}{n})^i}{i!} =\sum\limits_{i=0}^{\infty} \frac{1}{n^i i!} = 1+ \frac{1}{n} + \sum\limits_{i=2}^{\infty} \frac{1}{n^i i!}$$
+$$\sum\limits_{i=2}^{\infty} \frac{1}{n^i i!} \leq \sum\limits_{i=2}^{\infty} \frac{1}{n^2 2^i} = \frac{1}{n^2} \sum\limits_{i=2}^{\infty} \frac{1}{ 2^i} \overset{1}{=} \frac{1}{2}\frac{1}{n^2}\Rightarrow \sum\limits_{i=2}^{\infty} \frac{1}{n^i i!} = O\left(\frac{1}{n^2}\right)$$
+Gdzie $1$ wynika ze wzoru na sumę szeregu geometrycznego.
+W takim razie mamy:
+$$e^{1/n}= 1+ \frac{1}{n}+O\left(\frac{1}{n^2}\right)$$
+\end{proof}
+
+\subsection*{Zadanie 7}
+Rozważmy algorytm sortujący n liczb w następujący sposób. Wybierz najmniejszą, postaw na pierwszym miejscu, wybierz najmniejszą z pozostałych i postaw na drugim miejscu, najmniejszą z pozostałych postaw na trzecim miejscu itd. aż do wyczerpania liczb. Określ złożoność czasową powyższej procedury.
+
+Rozważmy najgorszy możliwy przypadek. Wtedy, w pierwszym kroku wykonujemy $n-1$ porównań. W drugim $n-2$, w trzecim $n-3$, aż w końcu w $n$tym wykonujemy $0$ porównań. Ile porównań wykonaliśmy w sumie?
+$$(n-1)+(n-2)+(n-3)+\dots+0=\sum\limits_{i=0}^{n-1} i = \frac{1}{2}(n-1)n = O(n^2)$$
+Złożoność to $O(n^2)$.
+
+\subsection*{Zadanie 8}
+Oceń złożoność czasową pisemnego dodawania i mnożenia liczb długości $n$.
+
+\begin{itemize}
+\item Dodawanie
+Dodajemy do siebie dwie liczby długości $n$. Dodajemy do siebie ich cyfry i ewentualne przeniesienie. Operacją jednostkową jest dodawanie. Dla każdej z $n$ cyfr możemy więc wykonać trzy dodawania. W ten sposób otrzymujemy maksymalnie $2n$ dodawań, mamy więc złożoność $O(n)$.
+
+\item Mnożenie
+Mnożymy dwie liczby długości $n$. Dla każdej z $n$ liczb wykonujemy $n$ mnożeń i w najgorszym wypadku dodatkowo $n$ dodawań. Daje nam to $2n^2$ operacji. Następnie dodajemy do siebie $n$ liczb długości maksymalnie $2n-1$. To daje nam dodatkowo $2n^2-n$ operacji. W sumie mamy maksymalnie $4n^2-n$ operacji, czyli $O(n^2)$.
+
+  
+\end{itemize}
+
+\subsection*{Zadanie 13}
+
+Wykaż, że:
+
+\begin{enumerate}[(a)]
+\item W przedziale $[a,b]$ jest $\floor{b}-\ceil{a}+1$ liczb całkowitych.
+\begin{proof}
+Najmniejsza liczba całkowita w przedziale to $\ceil{a}$, a największa to $\floor{b}$.\\
+Pomiędzy $\ceil{a}$ a $\floor{b}$ jest $\floor{b}-\ceil{a}-1$ liczb, dodatkowo $\ceil{a}$ oraz $\floor{b}$, to daje nam $\floor{b}-\ceil{a}+1$ liczb całkowitych.
+\end{proof}
+
+\item W przedziale $[a,b)$ jest $\ceil{b}-\ceil{a}$ liczb całkowitych.
+\begin{proof}
+Najmniejszą liczbą całkowitą w przedziale jest $\ceil{a}$.
+Co do największej, to mamy dwa przypadki:
+\begin{itemize}
+\item Jeśli $b\in \mathbb{C}$ to największą liczbą w przedziale jest $b-1$, ale $b\in \mathbb{C} \Rightarrow b=\ceil{b}$. Skoro tak to w tym przedziale mamy $\ceil{b} - 1 - \ceil{a} + 1 = \ceil{b} - \ceil{a}$ liczb całkowitych w przedziale. 
+\item Jeśli $b\notin \mathbb{C}$ to największą liczbą w przedziale jest $\floor{b}$, ale wiemy, że $b\notin \mathbb{C} \Rightarrow  \floor{b}=\ceil{b}-1$, mamy więc $\floor{b}-\ceil{a}+1=\ceil{b}-\ceil{a}$ liczb całkowitych w przedziale. 
+\end{itemize}
+\end{proof}
+
+
+\item W przedziale $(a,b]$ jest $\floor{b}-\floor{a}$ liczb całkowitych.
+\begin{proof}
+Największą liczbą całkowitą w przedziale jest $\floor{b}$.
+Co do najmniejszej, to mamy dwa przypadki:
+\begin{itemize}
+\item Jeśli $a\in \mathbb{C}$ to najmniejszą liczbą w przedziale jest $a+1$, ale $a\in \mathbb{C} \Rightarrow a=\floor{a}$. Skoro tak to w tym przedziale mamy $\floor{b} - (\floor{a} + 1) + 1 = \floor{b} - \floor{a}$ liczb całkowitych w przedziale. 
+\item Jeśli $a\notin \mathbb{C}$ to najmniejszą liczbą w przedziale jest $\ceil{a}$, ale wiemy, że $a\notin \mathbb{C} \Rightarrow \ceil{a}=\floor{a}+1$, mamy więc $\floor{b}-\ceil{a}+1=\floor{b}-\floor{a}$ liczb całkowitych w przedziale. 
+\end{itemize}
+\end{proof}
+\clearpage
+\item W przedziale $(a,b)$ jest $\ceil{b}-\floor{a}-1$ liczb całkowitych.
+
+\begin{proof}
+Mamy cztery przypadki (choć bardzo podobne, zadbajmy jednak o jakiś formalizm):
+\begin{itemize}
+\item $a,b \in \mathbb{C}$\\
+Najmniejszą liczbą jest $a+1=\floor{a}+1$. Największą jest $b-1=\ceil{b}-1$. Mamy więc $\ceil{b}-1 - \floor{a} - 1 + 1 = \ceil{b}-\floor{a} - 1$ liczb całkowitych w przedziale.
+
+\item $a,b \notin \mathbb{C}$\\
+Najmniejszą liczbą jest $\ceil{a}=\floor{a}+1$ (bo $a \notin \mathbb{C}$). Największą liczbą jest $\floor{b}=\ceil{b}-1$. Mamy więc $\ceil{b}-1-\floor{a}-1 + 1 = \ceil{b}-\floor{a}-1$ liczb całkowitych w przedziale.
+
+\item $a \in \mathbb{C} \wedge b \notin \mathbb{C}$\\
+Najmniejszą liczbą jest $a+1=\floor{a}+1$. Największą liczbą jest $\floor{b}=\ceil{b}-1$. Mamy więc $\ceil{b}-1 - \floor{a} - 1 + 1 = \ceil{b} - \floor{a} - 1$ liczb całkowitych w przedziale.
+
+\item $a \notin \mathbb{C} \wedge b \in \mathbb{C}$\\
+Najmniejszą liczbą jest $\ceil{a}=\floor{a}+1$.  Największą jest $b-1=\ceil{b}-1$. Mamy więc  $\ceil{b}-1 - \floor{a} - 1 + 1 = \ceil{b} - \floor{a} - 1$ liczb całkowitych w przedziale.
+
+\end{itemize}
+\end{proof}
+
+\end{enumerate}
+
+
+
+\end{document}

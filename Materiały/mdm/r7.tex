@@ -1,0 +1,216 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 6}
+\author{Kamil Matuszewski}
+\date{\today}
+
+
+\begin{document}
+
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+
+\begin{center}
+\begin{tabular}{|c *{13}{|c} |c|}\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15\\
+\hline 
+X & X & X & X & X & X & X & X & X & X & X & D & X & X &N\\
+\hline
+\end{tabular}\\
+Gdzie X-spisane, D-Deklarowane, N-niedeklarowane.
+\end{center}
+
+\subsection*{Zadanie 1}
+Zadanie jest kwestią odpowiedniego pomalowania. Weźmy sobie szachownicę $n$ x $n$, i ponumerujmy wiersze od góry w dół a kolumny od lewej do prawej. Do tego weźmy $m$ pionków. Teraz, wybierzmy $m$ wierszy i pomalujmy je na jakiś kolor. Następnie wybierzmy $m$ kolumn i je też pomalujmy na jakiś kolor. Teraz zauważmy, że powstało nam w ten sposób $m^2$ przecięć kolorów. Na tych przecięciach będziemy ustawiać pionki w określony niżej sposób.\\
+Wybierzmy pomalowany wiersz z największym indeksem i pomalowaną kolumnę z najmniejszym indeksem (pierwsze przecięcie idąc od lewego dolnego rogu). Na tym przecięciu postawmy pierwszy pionek. Zostanie nam $m-1$ pionków. Teraz, analogicznie wybierzmy pomalowany wiersz z największym indeksem mniejszym od wybranego poprzednio, i pomalowaną kolumnę z najmniejszym indeksem większym od wybranego poprzednio, i na przecięciu postawmy kolejnego pionka. Róbmy tak dalej aż zużyjemy wszystkie pionki. Zauważmy, że wtedy nawet jak byśmy chcieli, to nie wybierzemy kolejnego wiersza ani kolejnej kolumny, bo wszystkie zamalowane były wcześniej "wykorzystane". Ustawiając w ten sposób dla m pionków mamy ${n \choose m}^2$ opcji, a więc dla dowolnego m mamy:\\
+$\sum\limits_{i=0}^n {n \choose i}^2$\\
+Zauważmy też, że dla $m>n$ nie możemy tak ustawić pionków, że dla każdych dwóch
+jeden z nich jest na lewo i niżej od drugiego (z zasady szufladkowej dwa pionki musiały by być w tym samym wierszu/kolumnie, co daje nam sprzeczność). Dlatego więc wynik ten jest poprawny i ostateczny.
+
+\includegraphics[scale=1]{aa.png}\\
+\small Przykładowa plansza. Numery na przecięciach to kolejność stawiania pionków.
+
+\subsection*{Zadanie 2}
+Mamy pokazać, że \Large $F_{n+1}=\sum\limits_{i=0}^{n} {n-i \choose i}$. \normalsize Zrobimy to indukcyjnie. Dla $n=0, F_1=1={0 \choose 0}$, dla $n=1, F_2=1={1 \choose 0}+{0 \choose 1}$ więc działa. Teraz założę, że $\forall_{n_0 \leq n}$ działa, sprawdźmy dla n+1.\\
+$F_{n+2}=F_{n+1}+F_{n}$, teraz, z założenia indukcyjnego $F_{n+2}=\sum\limits_{i=0}^{n} {n-i \choose i} + \sum\limits_{i=0}^{n-1} {n-1-i \choose i} = \sum\limits_{i=0}^{n} {n-i \choose i} + \sum\limits_{i=1}^{n} {n-i \choose i-1} = {n \choose 0} + \sum\limits_{i=1}^{n} {n-i \choose i} + \sum\limits_{i=1}^{n} {n-i \choose i-1} = {n \choose 0} + [\sum\limits_{i=1}^{n} {n-i \choose i} + {n-i \choose i-1}] = {n \choose 0} + \sum\limits_{i=1}^{n} {n-i+1 \choose i} = {n+1 \choose 0} + \sum\limits_{i=1}^{n} {n-i+1 \choose i} = \sum\limits_{i=0}^{n} {n-i+1 \choose i} = {0 \choose n+1} + \sum\limits_{i=0}^{n} {n-i+1 \choose i} = \sum\limits_{i=0}^{n+1} {n-i+1 \choose i}$\\
+Czyli wszystko się zgadza. \\
+Teraz część druga:\\
+Twierdzę, że: $\sum_{i=0}^n {n \choose i} F_{m+i} = F_{m+2n}$\\
+Dla n=0, oczywiste.Dla n=1 też. Założę indukcyjnie, że działa $\forall_{n_0 < n}$, sprawdzę dla n:\\
+$\displaystyle \sum_{i=0}^n {n \choose i} F_{m+i} = \sum_{i=0}^n {n-1 \choose i} F_{m+i} + \sum_{i=0}^n {n-1 \choose i-1} F_{m+i} = \sum_{i=0}^n {n-1 \choose i} F_{m+i} + \sum_{i=1}^n {n-1 \choose i-1} F_{m+i} = {n-1 \choose n} \sum_{i=0}^{n-1} {n-1 \choose i} F_{m+i} + \sum_{i=0}^{n-1} {n-1 \choose i} F_{m+i+1} \stackrel{*}{=} 0 + F_{m+2n-2} + F_{m+1+2n-2} = F_{m+2n}$\\
+(*) Oczywiście z założenia, dla dowolnego m i dla n-1, skoro założyliśmy dla dowolnego m to też dla m+1.
+
+\subsection*{Zadanie 3}
+Z włączeń i wyłączeń. Wszystkich możliwych permutacji tego ciągu jest $\frac{(2n)!}{2^n}$, bo w $(2n)!$ bierzemy pod uwagę też różne ustawienia tych samych liczb, stąd musimy podzielić to przez $2^n$. Teraz rozpatrzmy $|A_i|$ jako ustawienie, w którym ite liczby stoją koło siebie. Mamy więc:\\
+$|A_i|=\frac{(2(n-1))!}{2^{n-1}}\cdot (2n-1)=\frac{(2n-1)!}{2^{n-1}}$. Dlaczego? Bo ustawiamy dowolnie n-1 liczb, stąd $\frac{(2(n-1))!}{2^{n-1}}$, a teraz, parę liczb możemy wstawić w $2n-1$ miejscach - pomiędzy kolejnymi liczbami $(2n-3)$, na początku i na końcu.\\
+Podobnie, dla $|A_i \cap A_j|$ mamy $\frac{(2(n-2))!}{2^{n-2}}\cdot (2n-3)(2n-2)=\frac{(2n-2)!}{2^{n-2}}$ (bo par nie możemy rozdzielać). Analogicznie:\\
+$|\bigcap\limits_{i=1}^{j} A_i| = \frac{(2n-j)!}{2^{n-j}}$. Podstawiając pod wzór z włączeń i wyłączeń:\\
+$\frac{(2n)!}{2^n} - \sum\limits_{k=1}^{n} (-1)^{k+1} \cdot {n \choose k} \cdot \frac{(2n-k)!}{2^{n-k}}$
+
+\subsection*{Zadanie 4}
+$a_n=\frac{a_{n-1}+a_{n-2}}{2}$, więc $2a_{n+2}=a_{n+1}+a_{n}$. Anihilatorem tej rekurencji jest $(2E^2-E-1)=(E-1)(E+\frac{1}{2})$. Skoro tak, to:\\
+$ a_n = \alpha + \beta (-\frac{1}{2})^n$\\
+$1=a_0=\alpha+\beta$\\
+$0=a_1=\alpha-\frac{1}{2}\beta$\\
+$\alpha=\frac{1}{3}, \beta=\frac{2}{3}$\\
+$a_n=\frac{1}{3}+\frac{2}{3} (-\frac{1}{2})^n$ 
+
+\clearpage
+\subsection*{Zadanie 5}
+a) $a_{n+2}=2a_{n+1}-a_n+3^n-1$\\
+Anihilatorem $a_{n+2}-2a_{n+1}+a_n$ jest $(E^2-2E+1)=(E-1)^2$, anihilatorem $3^n$ jest $(E-3)$, a anihilatorem $-1$ jest $(E-1)$, więc całość anihiluje $(E-1)^3(E-3)$. Stąd mamy:\\
+$a_n=\alpha \cdot 1^n + \beta \cdot n1^n + \gamma \cdot n^2 1^n + \delta \cdot 3^n$\\
+$0 = a_0 = \alpha + \delta$\\
+$0 = a_1 = \alpha + \beta + \gamma + 3 \delta $\\
+$0 = a_2 = \alpha + 2 \beta + 4 \gamma + 9 \delta $\\
+$2 = a_3 = \alpha + 3 \beta + 9 \gamma + 27 \delta $\\
+Stąd, jedynym rozwiązaniem jest:\\
+$\alpha = -\frac{1}{4}; \beta = 0; \gamma = - \frac{1}{2}; \delta = \frac{1}{4}$ a stąd:\\
+$a_n= - \frac{1}{4} - \frac{1}{2} n^2 + \frac{1}{4} 3^n$
+
+b) $a_{n+2}=4a_{n+1}-4a_n+n2^{n+1}$
+Anihilatorem $a_{n+2}-4a_{n+1}+4a_n$ jest $(E^2-4E+4)=(E-2)^2$, a anihilatorem $n2^{n+1}$ jest $(E-2)^2$, więc anihilator całości to $(E-2)^4$. Stąd:\\
+$a_n=(\alpha + \beta n + \gamma n^2 + \delta n^3)2^n$.
+
+c) $a_{n+2} = 2^{n+1} - a_{n-1} - a_n$, anihilatorem jest $(E-2)(E^2 + E + 1) = (E-2)(E-(-\frac{1}{2}-\frac{\sqrt[]{3} i}{2}))(E-(-\frac{1}{2}+\frac{\sqrt[]{3} i}{2}))$. To oznacza, że:\\
+$a_n=\alpha 2^n + \beta (-\frac{1}{2}-\frac{\sqrt[]{3} i}{2})^n + \gamma (-\frac{1}{2}+\frac{\sqrt[]{3} i}{2})^n$
+
+\subsection*{Zadanie 6}
+Niech $a_0=0; a_1=1; a_2=2; a_n=a_{n-3}$. Anihilatorem $a_n=a_{n-3}$ jest:\\
+$(E^3-1)=(E-1)(E-(\frac{-1-i\sqrt{3}}{2}))(E-(\frac{-1-i\sqrt{3}}{2}))$\\
+Skoro tak, to rozwiązując równanie otrzymujemy:\\
+$a_n=A\cdot 1^n + B\cdot (\frac{-1-i\sqrt{3}}{2})^n + C\cdot (\frac{-1+i\sqrt{3}}{2})^n$\\
+Rozwiązując tą zależność, podstawiając za $n$ kolejno $0,1,2$, po kilku(nastu) linijkach obliczeń, ostatecznie otrzymujemy, że:\\
+\Large$a_n=1\cdot 1^n + (-\frac{i\sqrt{3}}{6}-\frac{1}{2})\cdot (\frac{-1-i\sqrt{3}}{2})^n + (\frac{i\sqrt{3}}{6}-\frac{1}{2})\cdot (\frac{-1+i\sqrt{3}}{2})^n$\normalsize \\
+Teraz, wiedząc jak wygląda mod 3, i wiedząc, że $\lfloor \frac{n}{3} \rfloor = \frac{n- (n mod 3)}{3}$, możemy podstawić nasze $a_n$ jako \Large$\frac{n- (1\cdot 1^n + (-\frac{i\sqrt{3}}{6}-\frac{1}{2})\cdot (\frac{-1-i\sqrt{3}}{2})^n + (\frac{i\sqrt{3}}{6}-\frac{1}{2})\cdot (\frac{-1+i\sqrt{3}}{2})^n)}{3} $\normalsize 
+
+\subsection*{Zadanie 7}
+$a_n$ - ciąg n liter spełniający warunki zadania.\\
+$a_1 = 1$\\
+$a_n = (26^{n-1} - a_{n-1})\cdot 1 + 25\cdot a_{n-1} = 26^{n-1} + 24a_{n-1}$\\
+Bo wybieramy wszystkie możliwe ciągi, odejmujemy od nich ciągi prawidłowe, otrzymując w ten sposób wszystkie nieprawidłowe. Mają one nieparzystą liczbę liter a, więc dopisanie na ntym miejscu kolejnej, da nam ciąg prawidłowy, stąd $(26^{n-1} - a_{n-1})\cdot 1$. Dodatkowo możemy do ciągów prawidłowych na końcu dopisać dowolną literę nie będącą a, czyli $25 \cdot a_{n-1}$
+Anihilatorem tego ciągu jest $(E-24)(E-26)$\\
+Postacią ogólną $a_n$ będzie więc $\alpha 24^n + \beta 26^n$\\
+$ 25 = 24 \alpha + 26 \beta$\\
+$626 = 576 \alpha + 676 \beta$\\
+$\alpha = \frac{1}{2}; \beta = \frac{1}{2}$\\
+$a_n = \frac{1}{2}\cdot 24^n + \frac{1}{2}\cdot 26^n$
+
+\subsection*{Zadanie 8}
+Rozwiążmy zależność daną w zadaniu. Mamy $s_n=s_{n-1}+n2^n$.\\
+Anihilatorem tego jest $(E-1)(E-2)^2$\\
+$2 = s_1 = \alpha + 2\beta + 2\gamma $\\
+$10 = s_2 = \alpha + 4\beta + 8\gamma $\\
+$34 = s_3 = \alpha + 8\beta + 24\gamma$\\
+Jedynym rozwiązaniem jest: $ \alpha = 2; \beta = -2; \gamma = 2$\\
+Więc: $ s_n = 2 + (n-1)2^{n+1}$
+
+\subsection*{Zadanie 9}
+Niech: $c_n$ oznacza wszystkie ciągi prawidłowe, $d_n$ oznacza ciąg prawidłowy z $0$ na końcu, $e_n$ ciąg prawidłowy z $1$ na końcu, $f_n$ - ciąg prawidłowy z $2$ na końcu. Widać, że:\\
+$c_n=d_n+e_n+f_n$\\
+$d_n=d_{n-1}+e_{n-1}+f_{n-1}$ bo możemy wziąć ciąg prawidłowy z 1,2 bądź 0 na końcu i dopisanie 0 daje nam ciąg prawidłowy.\\
+$e_n=d_{n-1}+f_{n-1}$ bo nie możemy do ciągu z $1$ na końcu dopisać $1$.\\
+$f_n=d_{n-1}+e_{n-1}$  bo nie możemy do ciągu z $2$ na końcu dopisać $2$.\\
+Widać też, że $d_1=e_1=f_1=1$, $c_1=3$, $d_2=3$, $e_2=f_2=2$, $c_2=7$. Stąd:\\
+$c_n=d_n+e_n+f_n=d_{n-1}+e_{n-1}+f_{n-1}+d_{n-1}+f_{n-1}+d_{n-1}+e_{n-1}=d_{n-1}+2d_{n-1}+2e_{n-1}+2f_{n-1}=d_{n-1}+2c_{n-1}=d_{n-2}+e_{n-2}+f_{n-2}+2c_{n-1}=c_{n-2}+2c_{n-1}$\\
+Stąd:\\
+$c_n=2c_{n-1}+c_{n-2}$\\
+Anihilatorem jest oczywiście $(E^2-2E-1)=(E-(1-\sqrt{2}))(E-(1+\sqrt{2}))$\\
+Stąd nasze rozwiązania są w postaci:\\
+$c_n=\alpha\cdot (1-\sqrt{2})^n + \beta\cdot (1+\sqrt{2})^n$\\
+Mamy więc pierwsze dwa wyrazy $c_n$, podstawmy pod równanie, i wychodzi nam, że:\\
+$\alpha =  \frac{1-\sqrt{2}}{2}$\\
+$\beta =  \frac{1+\sqrt{2}}{2}$\\
+Zatem:\\
+$c_n= \frac{1-\sqrt{2}}{2}\cdot (1-\sqrt{2})^n + \frac{1+\sqrt{2}}{2}\cdot (1+\sqrt{2})^n$
+
+\subsection*{Zadanie 10}
+Oczywiście $p_1=(1-p)$\\
+$p_2=(1-p)^2 + p^2$
+Weźmy teraz $p_{n+1}$. Na początku rozważmy sytuację, że w poprzednim kroku dostaliśmy 0. Skoro tak, to teraz musimy otrzymać oryginalną wiadomość, więc mamy $(1-p)\cdot p_n$. Ale to nie wszystko, możemy dostać złą wiadomość. To zdarzenie przeciwne, mamy więc $(1-p_n)$. Ale teraz musimy otrzymać negację wiadomości, mamy więc $(1-p_n)\cdot p$. Skoro tak, to:\\
+$p_{n+1} = (1-p)\cdot p_n + (1-p_n)\cdot p$\\
+Teraz, możemy zapisać, że:\\
+$p_{n+1}-p_n\cdot (1-2p)=p$\\
+Teraz, anihilatorem tego jest:\\
+$(E-(1-2p))(E-1)$\\
+Stąd:\\
+$p_n=A\cdot (1-2p)^n + B$\\
+$(1-p)=A(1-2p) + B$\\
+$(1-p)^2+p^2=A(1-2p)^2 + B$\\
+Wynikiem obliczeń jest $A=B=\frac{1}{2}$\\
+W takim razie:\\
+$p_n=\frac{1}{2}\cdot (1-2p)^n + \frac{1}{2}$\\
+
+\subsection*{Zadanie 11}
+Oczywiste jest, że $p_n=1$; $p_0=0$\\
+$p_k=p\cdot p_{k+1} + (1-p)\cdot p_{k-1}$\\
+Bo jeśli wygra z prawdopodobieństwem $p$ to musi wygrać mając $k+1$ monet, jeśli przegra z prawdopodobieństwem $(1-p)$ musi wygrać mając $p_{k-1}$ monet.\\
+Teraz po przekształceniach(k=k-1):\\
+$p\cdot p_k + (1-p)\cdot p_{k-2}-p_{k-1}=0$\\
+$p_k + \frac{1-p}{p} \cdot p_{k-2}-\frac{1}{p}\cdot p_{k-1}=0$\\
+Anihilatorem jest więc $(E^2-\frac{1}{p}E+\frac{1-p}{p})=(E-1)(E-(\frac{1}{p}-p))$\\
+$p_k=\alpha \cdot (1)^k + \beta \cdot (\frac{1}{p}-p)^k $\\
+$\alpha+\beta=0$\\
+$\alpha+\beta(\frac{1}{p}-1)^n=1$\\
+Po rachunkach wychodzi:\\
+\Large
+$\alpha=\frac{1}{1-(\frac{1}{p}-1)^n}; \beta=-\frac{1}{1-(\frac{1}{p}-1)^n}$
+\normalsize \\
+Więc wzór ogólny to:\\
+$p_k=\frac{1}{1-(\frac{1}{p}-1)^n} + \frac{-1}{1-(\frac{1}{p}-1)^n} \cdot (\frac{1}{p}-p)^k $\\
+
+
+\subsection*{Zadanie 13}
+a)\\
+$b_n=na_n$\\
+$B(x)= \sum\limits_{k=1}^{\infty}k\cdot a_k \cdot x^k = x\sum\limits_{k=1}^{\infty}k\cdot a_k \cdot x^{k-1} = x\sum\limits_{k=1}^{\infty} (a_k \cdot x^k)' = xA(x)$\\
+b)\\
+$c_n=\frac{a_n}{n}, c_0=0$\\
+$C(x)= \sum\limits_{k=1}^{\infty}a_k\cdot \frac{x^k}{k} = \int\limits_0^x \sum\limits_{k=1}^{\infty}a_k \cdot t^{k-1} dt = \int\limits_0^x \frac{1}{t} \sum\limits_{k=1}^{\infty}a_k \cdot t^k dt = \int\limits_0^x \frac{A(t)-a_0}{t}$\\
+c)\\
+$s_n=a_0+a_1+a_2+\ldots+a_n$\\
+$S(x)=\sum\limits_{n=0}^\infty [\sum\limits_{k=0}^n a_k\cdot 1]x^n = (\sum\limits_{n=0}^\infty a_n x^n) \cdot (\sum\limits_{k=0}^\infty x^k) = A(x)\cdot \frac{1}{1-x} = \frac{A(x)}{1-x}$\\
+d)\\
+$d_n=\left\{\begin{matrix}
+a_n &gdy  &n=2k \\ 
+0 &gdy  &n=2k+1 
+\end{matrix}\right.$\\
+$D(x)=[(a_0\cdot x^0+a_1\cdot x^1+a_2\cdot x^2 + \ldots) + (a_0\cdot x^0-a_1\cdot x^1+a_2\cdot x^2 + \ldots)] \cdot \frac{1}{2} = [A(x)+A(-x)]\cdot \frac{1}{2} = \frac{A(x)+A(-x)}{2}$\\
+
+\clearpage
+\subsection*{Zadanie 14}
+a) i b)\\
+Zauważmy, że Z 13a):\\
+$\sum_{n=0}^{\infty} n x^n = x (\sum_{n=0}^{\infty} x^n)' = x (\frac 1 {1 - x})' = \frac x {(1-x)^2}$\\
+$\sum_{n=0}^{\infty} n^2 x^n = x (\sum_{n=0}^{\infty} n x^n)' = x (\frac x {(1-x)^2})' = \frac {x(x+1)} {(1-x)^3}$\\
+$\sum_{n=0}^{\infty} n^3 x^n = x (\sum_{n=0}^{\infty} n^2 x^n)' = x (\frac {x(x+1)} {(1-x)^3})' = \frac {-x(x^2 + 4x +1)} {(1-x)^4}$\\
+c)\\
+Twierdzę, że $A_k(x) = \frac{1}{(1-x)^{k+1}}$\\
+Dowód będzie indukcją po k. Dla $k = 0$ jest $a_n = {n \choose 0} = 1$, więc wzór zachodzi.\\
+$A_k(x) = \sum\limits_{n=0}^{\infty} {n+k \choose k} x^n = \sum\limits_{n=0}^{\infty} {n+k-1 \choose k} x^n + \sum\limits_{n=0}^{\infty} {n+k-1 \choose k-1} x^n \stackrel{zal}{=} x \sum\limits_{n=0}^{\infty} {n+k-1 \choose k} x^{n-1} + A_{k-1}(x) \stackrel{(a)}{=} x x^{-1}{k-1 \choose k} + x \sum\limits_{n=1}^{\infty} {n+k-1 \choose k} x^{n-1} + A_{k-1}(x) \stackrel{(b)}{=} x \sum\limits_{n=0}^{\infty} {n+k \choose k} x^n + A_{k-1}(x) = x \cdot A_k(x) + A_{k-1}(x)$\\
+$(a)$ - wyciągamy pierwszy wyraz\\
+$(b)$ - zmniejszamy n, wszędzie wpisujemy n+1, stąd mamy sumę od 0\\
+$A_k(x) = A_{k-1}(x) + x\cdot A_{k}(x)$\\
+$A_k(x) - x\cdot A_{k}(x) = A_{k-1}(x)$\\
+$A_k(x) (1 - x) = A_{k-1}(x)$\\
+$A_k(x) = \frac{A_{k-1}(x)}{1-x} \stackrel{zal}{=} \frac{1}{(1-x)(1-x)^{k}} = \frac{1}{(1-x)^{k+1}}$\\
+
+
+
+\end{document}

@@ -1,0 +1,103 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\def\checkmark{\tikz\fill[scale=0.3](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 10}
+\author{Kamil Matuszewski}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+
+\begin{center}
+\begin{tabular}{|c *{13}{|c} |c|}\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15\\
+\hline 
+ &\checkmark &\checkmark &\checkmark & &\checkmark & & & & &\checkmark & & & &\\
+\hline
+\end{tabular}\\
+\end{center}
+
+
+
+\subsection*{Zadanie 2}
+
+\begin{enumerate}[(a)]
+\item Nie istnieje, bo z lematu o uściskach dłoni, suma stopni wierzchołków musi być podzielna przez 2. 
+\item Nie istnieje. Weźmy wierzchołek o stopniu 4, wszystkich wierzchołków jest 5, więc ten musi się łączyć z każdym innym. Teraz weźmy wierzchołek o stopniu 3, łączy się on z wierzchołkiem o stopniu 4, i musi łączyć się jeszcze z dwoma innymi wierzchołkami. Ale wszystkie pozostałe łączą się z wierzchołkiem o stopniu 4, i mają stopień 1, więc nie mogą mieć więcej krawędzi, stąd taki graf nie ma prawa istnieć.
+\item Weźmy dowolny graf dwudzielny o 5 wierzchołkach. Każdy wierzchołek musi mieć stopień 2, czyli łączyć się dokładnie z dwoma wierzchołkami z drugiej podgrupy. Skoro tak to jedynym sposobem podzielenia wierzchołków jest stosunek $3-2($lub $2-3)$ (bo inaczej nie możemy poprowadzić dwóch krawędzi do drugiej podgrupy). Ale w takim razie dla jednego z wierzchołków z podgrupy 3-elementowej nie wystarczy elementów z podgrupy 2 elementowej, a skoro tak, to mamy sprzeczność z tym, że stopień każdego z wierzchołków to 2.
+\end{enumerate}
+
+\clearpage
+\subsection*{Zadanie 3}
+
+\begin{proof}
+
+Weźmy dowolne dwie krawędzie z grafu $G$ i nazwijmy je odpowiednio $a$ oraz $b$. Załóżmy też, że $d(G)>3$. Rozpatrzmy dwa przypadki.
+
+$1^\circ$ $d(a,b)>1$
+	
+To oznacza, że w grafie G nie istnieje krawędź między a i b. Wtedy w grafie $\hat{G}$ ta krawędź istnieje, więc $d'(a,b)=1$.
+
+$2^\circ$ $d(a,b)=1$
+
+Wtedy między $a$ i $b$ w $G$ istnieje krawędź, więc w $\hat{G}$ tej krawędzi nie będzie. Pokażę, że w $G$ istnieje wierzchołek $w$ taki, że $d(a,w)>1$ $\cap$ $d(b,w)>1$. To oznacza, że:
+
+$$\exists_w (a,w)\not\in E \wedge (b,w) \not\in E$$
+
+Załóżmy, że nie ma takiego wierzchołka. Wtedy:
+$$\neg \left(\exists_w (a,w)\not\in E \wedge (b,w) \not\in E\right) $$
+$$\forall_w (a,w) \in E \vee (b,w) \in E $$
+To by oznaczało, że wierzchołki $a$ i $b$ w sumie łączą się z każdym innym wierzchołkiem. Ale to by oznaczało, że dla dowolnych wierzchołków $x$ i $y$ w grafie $G$, z $x$ mogę dotrzeć do $y$ w maksymalnie trzech krokach (zależnie od tego w których miejscach leżą $x$ i $y$): 
+$$(x-a-b-y)/(x-b-a-y)/(x-a-y)/(x-b-y)/(x-y)$$ 
+Czyli dla dowolnych $x$ i $y$ $d(x,y)\leq 3$, ale wiemy, że $d(G)>3$, więc mamy sprzeczność.\\
+Stąd istnieje wierzchołek $w$ taki, że $d(a,w)>1$ $\wedge$ $d(b,w)>1$, a skoro tak, to dla $\hat{G}$ mamy $d(a,b)=2$ $$(a-w-b)$$\\
+Pokazaliśmy,że dla dowolnych $a$ i $b$, w $\hat{G}$ $d'(a,b)=1$ lub $d(a,b)=2$, czyli $d(\hat{G})<3$ 
+
+\end{proof}
+
+\subsection*{Zadanie 4}
+
+\begin{proof}
+
+Weźmy wierzchołek $v$ o stopniu $n-2$ i poprowadźmy $n-2$ krawędzie. Wtedy ten wierzchołek jest połączony z $n-2$ innymi wierzchołkami. Zostaje nam jeden wierzchołek. Musi być on odległy od $v$ o $2$. Nazwijmy ten wierzchołek $w$. Połączmy go z dowolnym sąsiadem $v$. Teraz, od wszystkich pozostałych sąsiadów $v$, $w$ jest odległy o 3. A $d(G)=2$. Skoro tak, to musimy stworzyć dodatkowe krawędzie do pozostałych $n-3$ sąsiadów $v$. Możemy te krawędzie prowadzić bezpośrednio z $w$, bądź z wierzchołka który jest już sąsiadem $w$. Tak czy inaczej, dodajemy $(n-3)$ krawędzie. Stąd, sumaryczna liczba krawędzi to $(n-2)+1+(n-3)=2n-4$. Oczywiście, możemy dołożyć więcej krawędzi pomiędzy sąsiadami $v$, ale nie wpłynie nam to na nierówność $$m\geq 2n-4$$A to jest to co mieliśmy pokazać.
+
+\end{proof}
+
+\subsection*{Zadanie 6}
+
+\begin{proof}
+
+Weźmy dowolne drzewo i załóżmy, że istnieją w nim drogi rozłączne $a \leadsto b$ i $c \leadsto d$, oraz $a \leadsto c$ i $b \leadsto d$. Skoro tak, to z wierzchołka $a$ możemy dotrzeć dwiema drogami do $c$: $$a\leadsto c$$ oraz $$a\leadsto b\leadsto d\leadsto c$$ Skoro droga $b-d$ jest rozłączna z drogą $a \leadsto c$ to na drodze $a \leadsto c$ nie ma ani $b$ ani $d$. Skoro tak, to te dwie drogi są rozłączne, więc w tym grafie istnieje cykl - skoro tak, to graf nie jest drzewem, mamy więc sprzeczność. 
+
+\end{proof}
+
+\subsection*{Zadanie 11}
+
+\begin{proof}
+
+Z tw. Cayleya (z wykładu) wiemy, że drzew na zbiorze wierzchołków $\lbrace 1,\dots,n\rbrace$ jest $n^{n-2}$. Skoro tak, to na zbiorze $\lbrace 2,\dots,n\rbrace$ jest ich $(n-1)^{n-3}$. Teraz weźmy drzewo o $n$ wierzchołkach, i zabierzmy z niego liść o indeksie $1$. Powstało nam $n-1$ wierzchołkowe drzewo. Wiemy, że wszystkich takich drzew jest $(n-1)^{n-3}$. Teraz dostawmy liść z powrotem. Wiemy, że musiał on być połączony z którymś z $n-1$ wierzchołków. Skoro tak, to ogólna liczba sposobów stworzenia $n$ wierzchołkowego drzewa z liściem o indeksie $1$ to $(n-1)\cdot (n-1)^{n-3} = (n-1)^{n-2}$. Skoro tak, to prawdopodobieństwo to:$$\frac{(n-1)^{n-2}}{n^{n-2}} = \left(\frac{n-1}{n}\right)^{n-2}$$ 
+$$\lim\limits_{n\rightarrow \infty} \left(\frac{n-1}{n}\right)^{n-2} = \lim\limits_{n\rightarrow \infty} \left(1 + \frac{1}{-n}\right)^{n-2} = \lim\limits_{n\rightarrow \infty} \left(\left(1 + \frac{1}{-n}\right)^{-n}\right)^{\frac{n-2}{-n}} =  e^{\lim\limits_{n\rightarrow \infty} \frac{n-2}{-n}} = e^{-1} =\frac{1}{e}$$
+
+\end{proof}
+
+\end{document}

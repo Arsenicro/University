@@ -1,0 +1,134 @@
+\documentclass[a4paper]{article}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{titlesec}
+\usepackage{polski}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\def\checkmark{\tikz\fill[scale=0.3](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\titlespacing*{\subsection}
+{0ex}{10ex}{3ex}
+
+\title{Lista 12}
+\author{Kamil Matuszewski}
+\date{16 stycznia 2016}
+
+\begin{document}
+
+\maketitle
+\setlength{\parindent}{0.5ex}
+\setlength{\parskip}{1.5ex}
+\newcommand{\R}{\mathbb{R}}
+
+\begin{center}
+\begin{tabular}{|c *{7}{|c} |c|}\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7\\
+\hline 
+\checkmark &\checkmark &\checkmark &\checkmark & \checkmark &\checkmark &\checkmark \\
+\hline
+\end{tabular}\\
+\end{center}
+
+\subsection*{Zadanie 1}
+Chcielibyśmy policzyć całkę $\int_{a}^{b} f(x) dx$, ale możemy liczyć tylko całkę $\int_{0}^{1}$. W rzeczywistości wystarczy wykorzystać całkowanie przez podstawienie, aby policzyć odpowiednio zmodyfikowaną całkę.
+$$\int_{a}^{b} f(x) dx= \left\{\begin{matrix}
+y=\frac{x-a}{b-a} \\ 
+dy=\frac{1}{b-a} dx\\
+\end{matrix}\right. = \int_{0}^{1} f(y)\cdot (b-a) dy$$
+A to jest to co chcieliśmy zrobić.
+
+\subsection*{Zadanie 2}
+Chcielibyśmy pokazać, że kwadratura w postaci $Q_n(f)=\sum\limits_{k=0}^{n}A_kf(x_k)$ ma rząd $\geq$ n+1 $\Leftrightarrow$ gdy jest kwadraturą interpolacyjną.
+
+Kwadratura interpolacyjna $\Rightarrow$ rząd $n+1$
+\begin{proof}
+Weźmy dowolny wielomian W stopnia $n$. Z jednej strony mamy:
+$$I(x)=\int_a^b W(x)$$
+Wiemy, że kwadratura jest interpolacyjna, więc zachodzi:
+$$\sum\limits_{k=0}^{n}A_kf(x_k) = \int_a^b L_n(x) $$
+Gdzie $L_n$ jest wielomianem Lagrange'a stopnia n. Z jednoznaczności interpolacji, wiemy, że $L_n$ interpolujący wielomian stopnia n w n+1 punktach musi być wielomianem $W$. Stąd, z drugiej strony mamy: $$ \int_a^b L_n(x) = \int_a^b W(x)$$
+Wiemy też, że $R(x)=\int_a^b W(x) - \int_a^b L_n(x) = 0$, tak więc kwadratura jest rzędu co najmniej n+1.
+\end{proof}
+\clearpage
+Rząd kwadratury co najmniej $n+1$ $\Rightarrow$ Kwadratura interpolacyjna
+\begin{proof}
+Załóżmy, że rząd kwadratury jest co najmniej n+1. Rozważmy wielomian Lagrange'a w węzłach kwadratury.
+Dla dowolnego $f(x)$, zachodzi $$f(x)=L_n(x)=\sum\limits_{i=0}^n f(x_i) \lambda_i$$ gdzie $$\lambda_i(x) = \prod_{k=0 \wedge k\neq i}^n \frac{x-x_k}{x_i-x_k}$$
+Jak łatwo zauważyć, $\lambda_i(x_k)=0$ gdy $i\neq k$ oraz $\lambda_i(x_k)=1$ gdy $i = k$.\\
+Zapiszmy teraz naszą kwadraturę rzędu co najmniej n+1 od wielomianu $\lambda_i$, wykorzystując powyższą obserwację.
+$$Q(\lambda_i)=\int_a^b \lambda_i = \sum\limits_{k=0}^n A_k \lambda_i(x_k)=A_i$$
+Bo stopień $\lambda_i$ pozwala na zapisanie tej całki w postaci kwadratury bez żadnej reszty. Teraz, rozpatrzmy kwadraturę naszej pierwotnej funkcji, wykorzystując to co zapisaliśmy powyżej.
+$$Q(f) = \int_a^b f(x) = \sum\limits_{k=0}^n A_k f(x_k)$$
+Gdzie $A_k=\int_a^b \lambda_k(x) dx$\\
+Co oznacza, że mamy do czynienia z kwadraturą interpolacyjną.
+
+\end{proof}
+\subsection*{Zadanie 3}
+Chcielibyśmy pokazać, że rząd kwadratury w postaci $Q_n(f)=\sum\limits_{k=0}^{n}A_kf(x_k)$ nie przekracza 2n+2.\\
+W tym celu zbudujemy wielomian rzędu 2n+2 dla którego nie zachodzi $\int_a^b f(x) = \sum\limits_{k=0}^{n}A_kf(x_k)$\\
+Weźmy funkcję $f(x)=\left( (x-x_0)\dots(x-x_n) \right)^2$\\
+Jest ona rzędu $2n+2$. Teraz mamy:
+$$\int_a^b f(x) > 0 $$
+Bo dla dowolnego x $f(x)\geq 0$, dla większości x zachodzi $f(x)>0$ (równość zachodzi tylko dla miejsc zerowych).\\
+Z drugiej strony mamy:
+$$\sum\limits_{k=0}^{n}A_kf(x_k) = 0$$
+Bo $x_k$ są miejscami zerowymi wielomianu. Widać więc, że ta kwadratura nie jest dokładna (powyższa równość nie zachodzi).
+\clearpage
+\subsection*{Zadanie 4}
+Chcielibyśmy uprościć wzór interpolacyjny Lagrange'a, dla węzłów równoodległych. Nasz wzór interpolacyjny wygląda tak:
+$$\sum\limits_{i=0}^n y_i \prod_{j=0 \wedge j\neq i}^n \frac{x-x_j}{x_i-x_j} $$
+Podstawiając $x_k=a+\frac{b-a}{n} k$ mamy:
+$$\sum\limits_{i=0}^n y_i \prod_{j=0 \wedge j\neq i}^n \frac{x-(a+\frac{b-a}{n} j)}{(a+\frac{b-a}{n} i)-(a+\frac{b-a}{n} j)} = \sum\limits_{i=0}^n y_i \prod_{j=0 \wedge j\neq i}^n \frac{x-a-\frac{b-a}{n} j}{\frac{b-a}{n} (i - j)} $$
+Jeśli wprowadzimy $h=\frac{b-a}{n}$ otrzymamy:
+$$\sum\limits_{i=0}^n y_i \prod_{j=0 \wedge j\neq i}^n \frac{x-a-h j}{h (i - j)}$$
+Dzięki temu licząc ten iloczyn nie musimy znać x'ów. Wartość iloczynu zależy tylko od przedziału na którym liczymy. Przy liczeniu wielu funkcji na tym samym przedziale może się to okazać przydatne.
+
+\subsection*{Zadanie 5}
+Najpierw, współczynniki metody N-C to $\int_a^b \frac{x-a-h j}{h (i - j)}$. Nas jednak interesuje x, taki, że $x=a+th$. Musimy więc całkować po zmiennej t, a to wiąże się z podstawieniem a za razem i zmianą granicy całkowania.
+$$\int_a^b L_n(x) dx = \int_a^b  \sum\limits_{k=0}^n f(x_k) \prod_{j=0 \wedge j\neq k}^n \frac{x-a-h j}{h (k - j)}$$
+Wiemy, że $x=a+th \Rightarrow t=\frac{x-a}{h}$. Dla $a=x_0$ $t=0$, dla $x_1$ $t=1$, $\dots$, dla $b=x_n$ $t=n$, a $dt=(\frac{x-a}{h})'=\frac{1}{h}dx \Rightarrow dx=hdt$ tak więc:
+$$\int_a^b L_n(x) dx = \int_0^n  \sum\limits_{k=0}^n f(x_k=a+kh) \prod_{j=0 \wedge j\neq k}^n \frac{a+th-a-h j}{h (k - j)} hdt = \sum\limits_{k=0}^n f(x_i)h \int_0^n  \prod_{j=0 \wedge j\neq k}^n \frac{t - j}{k - j} dt$$
+Tak więc, $$A_k=h \int_0^n  \prod_{j=0 \wedge j\neq k}^n \frac{t - j}{k - j} dt$$
+
+Teraz, twierdzę, że $A_k=A_{n-k}$.
+\begin{proof}
+$$A_k=h \int_0^n  \prod_{j=0 \wedge j\neq k}^n \frac{t - j}{k - j} dt$$
+$v=n-t$, $dt=-dv$
+$$A_k=-h \int_n^0  \prod_{j=0 \wedge j\neq k}^n \frac{n-v - j}{k - j} dv $$
+$$A_k=h \int_0^n  \prod_{j=0 \wedge j\neq k}^n \frac{n - j - v}{(n - j) - (n - k)} dv $$
+$v'=n-j$
+$$A_k=h \int_0^n  \prod_{v'=0 \wedge v'\neq (n-k)}^n  \frac{v' - v}{v' - (n-k)} dv  $$
+$$A_k=h \int_0^n  \prod_{v'=0 \wedge v'\neq (n-k)}^n  \frac{v - v'}{(n-k)-v'} dv  $$
+$$A_k=h \int_0^n  \prod_{v'=0 \wedge v'\neq (n-k)}^n  \frac{t - v'}{(n-k)-v'} dt  = A_{n-k}$$
+$$A_k=A_{n-k}$$
+
+(Dla ułatwienia zapis ten jest równoważny z tym, gdy j'=v' a k'=n-k)
+$$A_k=h \int_0^n  \prod_{j'=0 \wedge j'\neq k'}^n  \frac{t - j'}{k'-j'} dt  = A_{k'}=A_{n-k}$$
+\end{proof}
+
+\subsection*{Zadanie 6}
+Pokaż, że $\frac{A_k}{b-a}$ dla $k=0,\dots,n$ są wymierne.\\
+\begin{proof}
+$$A_k=h \int_0^n  \prod_{j=0 \wedge j\neq k}^n \frac{t - j}{k - j} dt$$
+$$\frac{A_k}{b-a} = \frac{h}{b-a} \int_0^n  \prod_{j=0 \wedge j\neq k}^n \frac{t - j}{k - j} dt = \frac{1}{n} \int_0^n  \prod_{j=0 \wedge j\neq k}^n \frac{t - j}{k - j} dt $$
+Teraz, $\frac{1}{k-j}$ nas nie interesuje. W rzeczywistości po policzeniu iloczynu z tego ułamka, wyjdzie nam jakaś liczba $\frac{1}{a}$, gdzie a jest liczbą całkowitą, więc to jest wymierne. Podobnie, $\frac{1}{n}$. Musimy jedynie sprawdzić, czy nasza całka $ \int_0^n  \prod_{j=0 \wedge j\neq k}^n (t - j) dt$ jest liczbą wymierną.
+Rozpiszmy to sobie wprost. Mamy:
+$$\int_0^n \left( t(t-1)(t-2)\dots(t-k-1)(t-k+1)\dots(t-n) \right) dt$$
+Możemy to zapisać w bazie wielomianowej:
+$$\int_0^n \left( a_{n-1} t^{n-1} + a_{n-2} t^{n-2} + \dots a_0 \right) dt= \int_0^n a_{n-1}t^{n-1} dt+\dots + \int_0^n a_0 dt= -a_{n-1}\frac{n^n}{n} -a_{n-2}\frac{n^{n-1}}{n-1} \dots -a_0\frac{n^1}{1}$$
+Skoro wszystkie $n$ i $a_i$ są całkowite, to cała całka jest wymierna. Skoro tak to całe wyrażenie jest wymierne.
+\end{proof}
+
+\subsection*{Zadanie 7}
+Jakieś gówniane obliczenia, nie robię.
+
+\end{document}
